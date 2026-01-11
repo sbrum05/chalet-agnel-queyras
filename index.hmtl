@@ -463,7 +463,7 @@
                 </ul>
             </div>
             <div>
-                <img src="https://raw.githubusercontent.com/placeholder/800x600" alt="Chalet Agnel extérieur" class="description-image">
+                <img src="https://github.com/sbrum45-boop/chalet-agnel-queyras/blob/main/chalet%20agnel%20face.jpg?raw=true" alt="Chalet Agnel extérieur" class="description-image">
             </div>
         </div>
     </section>
@@ -510,34 +510,34 @@
         <h2>Découvrez le Chalet</h2>
         <div class="gallery">
             <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="https://raw.githubusercontent.com/placeholder/600x400" alt="Cuisine et salon moderne avec poêle à granulés">
+                <img src="https://github.com/sbrum45-boop/chalet-agnel-queyras/blob/main/chalet%20agnel%20cuisine.jpg?raw=true" alt="Cuisine et salon moderne avec poêle à granulés">
             </div>
             <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="https://raw.githubusercontent.com/placeholder/600x400" alt="Poêle à granulés design">
+                <img src="https://github.com/sbrum45-boop/chalet-agnel-queyras/blob/main/chalet%20agnel%20poele%20%C3%A0%20granul%C3%A9s.jpg?raw=true" alt="Poêle à granulés design">
             </div>
             <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="https://raw.githubusercontent.com/placeholder/600x400" alt="Chambre principale avec balcon">
+                <img src="https://github.com/sbrum45-boop/chalet-agnel-queyras/blob/main/chalet%20agnel%20chambre1.jpg?raw=true" alt="Chambre principale avec balcon">
             </div>
             <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="https://raw.githubusercontent.com/placeholder/600x400" alt="Salle de bain moderne">
+                <img src="https://github.com/sbrum45-boop/chalet-agnel-queyras/blob/main/chalet%20agnel%20salle%20de%20bain%20bas.jpg?raw=true" alt="Salle de bain moderne">
             </div>
             <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="https://raw.githubusercontent.com/placeholder/600x400" alt="Chambre avec vue montagne">
+                <img src="https://github.com/sbrum45-boop/chalet-agnel-queyras/blob/main/chalet%20agnel%20chambre2.jpg?raw=true" alt="Chambre avec vue montagne">
             </div>
             <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="https://raw.githubusercontent.com/placeholder/600x400" alt="Chambre lits superposés">
+                <img src="https://github.com/sbrum45-boop/chalet-agnel-queyras/blob/main/chalet%20agnel%20enfants.jpg?raw=true" alt="Chambre lits superposés">
             </div>
             <div class="gallery-item" onclick="openLightbox(this)">
                 <img src="https://raw.githubusercontent.com/placeholder/600x400" alt="Douche italienne marbre">
             </div>
             <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="https://raw.githubusercontent.com/placeholder/600x400" alt="Salle de bain double vasque">
+                <img src="https://github.com/sbrum45-boop/chalet-agnel-queyras/blob/main/chalet%20agnel%20salle%20de%20bain%20haut.jpg?raw=true" alt="Salle de bain double vasque">
             </div>
             <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="https://raw.githubusercontent.com/placeholder/600x400" alt="Vue extérieure du chalet enneigé">
+                <img src="https://github.com/sbrum45-boop/chalet-agnel-queyras/blob/main/chalet%20agnel%20face.jpg?raw=true" alt="Vue extérieure du chalet enneigé">
             </div>
             <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="https://raw.githubusercontent.com/placeholder/600x400" alt="Façade du chalet en mélèze">
+                <img src="https://github.com/sbrum45-boop/chalet-agnel-queyras/blob/main/chalet%20agnel%20face2.jpg?raw=true" alt="Façade du chalet en mélèze">
             </div>
         </div>
     </section>
