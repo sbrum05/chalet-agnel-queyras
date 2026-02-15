@@ -220,6 +220,88 @@
             letter-spacing: 2px;
         }
 
+        /* Introduction Section */
+        .intro-section {
+            background: var(--light);
+            text-align: center;
+        }
+
+        .intro-section .intro-text {
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 1.3rem;
+            line-height: 2;
+            color: var(--text);
+            font-style: italic;
+            padding: 0 2rem;
+        }
+
+        /* Detailed Description */
+        .detailed-description {
+            background: white;
+        }
+
+        .description-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .description-card {
+            background: var(--light);
+            padding: 3rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .description-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .description-card h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .description-card .icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+        }
+
+        .description-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text);
+        }
+
+        .description-card ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .description-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 1.05rem;
+        }
+
+        .description-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
         /* Gallery */
         .gallery {
             display: grid;
@@ -290,50 +372,54 @@
             color: var(--primary);
         }
 
-        /* Description */
-        .description-content {
+        /* Quick Info */
+        .quick-info {
+            background: white;
+        }
+
+        .info-boxes {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
         }
 
-        .description-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        .description-text h3 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
-        }
-
-        .description-text ul {
-            list-style: none;
-            margin: 2rem 0;
-        }
-
-        .description-text li {
-            padding: 0.5rem 0;
-            padding-left: 2rem;
-            position: relative;
-        }
-
-        .description-text li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-weight: bold;
-        }
-
-        .description-image {
-            width: 100%;
+        .info-box {
+            background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
+            color: white;
+            padding: 2.5rem;
             border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            height: 500px;
-            object-fit: cover;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .info-box .number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .info-box h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .info-box p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .price-info {
+            background: var(--accent);
+            color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 500;
         }
 
         /* Contact */
@@ -407,17 +493,6 @@
             to {
                 transform: translateX(0);
             }
-        }
-
-        .price-info {
-            background: var(--accent);
-            color: white;
-            padding: 1.5rem 2rem;
-            border-radius: 10px;
-            margin: 2rem 0;
-            text-align: center;
-            font-size: 1.3rem;
-            font-weight: 500;
         }
 
         /* Lightbox */
@@ -537,17 +612,22 @@
                 font-size: 2rem;
             }
 
-            .description-content {
+            .intro-section .intro-text {
+                font-size: 1.1rem;
+                padding: 0 1rem;
+            }
+
+            .description-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
 
-            .description-image {
-                height: 300px;
+            .description-card {
+                padding: 2rem;
             }
 
-            .description-text h3 {
-                font-size: 1.6rem;
+            .description-card h3 {
+                font-size: 1.5rem;
             }
 
             .price-info {
@@ -581,6 +661,11 @@
             .feature-card {
                 padding: 2rem;
             }
+
+            .info-boxes {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -596,8 +681,9 @@
             </div>
             <ul id="navMenu">
                 <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#decouvrir">Découvrir</a></li>
+                <li><a href="#description">Le Chalet</a></li>
                 <li><a href="#galerie">Galerie</a></li>
-                <li><a href="#chalet">Le Chalet</a></li>
                 <li><a href="#equipements">Équipements</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -614,67 +700,94 @@
         </div>
     </section>
 
-    <!-- Description -->
-    <section id="chalet">
-        <h2>Un Écrin de Confort dans les Alpes</h2>
-        <div class="description-content">
-            <div class="description-text">
-                <h3>Bienvenue au Chalets Agnel</h3>
-                <p>Découvrez notre chalet neuf entièrement construit en mélèze, alliant authenticité alpine et confort moderne. Situé à La Rua, à Molines-en-Queyras, le Chalet Agnel vous offre une expérience unique au cœur des Hautes-Alpes.</p>
-                
-                <div class="price-info">
-                    Location à la semaine : 1 450€ - 3 000€
-                </div>
+    <!-- Introduction -->
+    <section id="decouvrir" class="intro-section">
+        <h2>Bienvenue au Cœur du Parc Naturel du Queyras</h2>
+        <p class="intro-text">
+            Nichés au cœur du parc naturel du Queyras, les chalets Agnel vous accueillent dans une atmosphère authentique et raffinée, où le confort moderne se mêle à la douceur de la montagne.
+        </p>
+    </section>
 
-                <ul>
-                    <li>4 chambres spacieuses et lumineuses</li>
-                    <li>Capacité d'accueil : 8 personnes</li>
-                    <li>Construction neuve en mélèze authentique</li>
-                    <li>Tout équipé pour votre confort</li>
-                    <li>À seulement 1,8 km de la station de ski Molines/Saint-Véran</li>
-                    <li>Disponible toute l'année</li>
-                </ul>
+    <!-- Quick Info -->
+    <section class="quick-info">
+        <h2>En Bref</h2>
+        <div class="info-boxes">
+            <div class="info-box">
+                <div class="number">4</div>
+                <h3>Chambres</h3>
+                <p>Tout confort</p>
             </div>
-            <div>
-                <img src="https://github.com/sbrum45-boop/chalet-agnel-queyras/blob/main/chalet%20agnel%20face.jpg?raw=true" alt="Chalet Agnel extérieur" class="description-image">
+            <div class="info-box">
+                <div class="number">8</div>
+                <h3>Personnes</h3>
+                <p>Capacité d'accueil</p>
             </div>
+            <div class="info-box">
+                <div class="number">1,8</div>
+                <h3>Kilomètres</h3>
+                <p>Des pistes de ski</p>
+            </div>
+            <div class="info-box">
+                <div class="number">★★★★★</div>
+                <h3>Grand Confort</h3>
+                <p>Équipements premium</p>
+            </div>
+        </div>
+        <div class="price-info">
+            Location à la semaine : 1 450€ - 3 000€ selon saison
         </div>
     </section>
 
-    <!-- Features -->
-    <section id="equipements" class="features">
-        <h2>Équipements & Services</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🔥</div>
-                <h3>Chauffage Premium</h3>
-                <p>Poêle à granulés et chauffage au sol pour un confort optimal toute l'année</p>
+    <!-- Detailed Description -->
+    <section id="description" class="detailed-description">
+        <h2>Votre Havre de Paix Alpin</h2>
+        <div class="description-grid">
+            <div class="description-card">
+                <h3><span class="icon">🏡</span> Espace de Vie</h3>
+                <p>Dès l'entrée, la grande pièce à vivre invite au partage et à la détente. Le salon, la salle à manger et la cuisine ouverte composent un espace lumineux et convivial, prolongé par une belle terrasse extérieure en mélèze, idéale pour profiter de l'air pur et des paysages alpins.</p>
+                <p style="margin-top: 1rem;">Après une journée au grand air, retrouvez-vous autour du poêle à pellets, ou devant la TV OLED 65 pouces, pour des soirées cocooning inoubliables.</p>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">📶</div>
-                <h3>WiFi</h3>
-                <p>Connexion internet pour rester connecté en pleine montagne</p>
+
+            <div class="description-card">
+                <h3><span class="icon">🍽️</span> Cuisine Équipée</h3>
+                <p>La cuisine, entièrement équipée avec des appareils de qualité, a été pensée pour les gourmets comme pour les grandes tablées.</p>
+                <ul>
+                    <li>Électroménager SMEG</li>
+                    <li>Four à pyrolyse</li>
+                    <li>Plaque à induction</li>
+                    <li>Lave-vaisselle</li>
+                    <li>Machine Nespresso</li>
+                    <li>Raclette & fondue</li>
+                </ul>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">🏔️</div>
-                <h3>Proximité Pistes</h3>
-                <p>À 1,8 km de la station de ski Molines/Saint-Véran</p>
+
+            <div class="description-card">
+                <h3><span class="icon">🛏️</span> Chambres Confort</h3>
+                <p>Les chambres offrent un véritable havre de repos. Literie Bultex 5 étoiles 160×200, beaux volumes et rangements soignés garantissent des nuits réparatrices.</p>
+                <ul>
+                    <li>2 chambres à l'étage avec balcon et vue montagne</li>
+                    <li>1 chambre au rez-de-chaussée lit 160×200</li>
+                    <li>1 chambre avec lits superposés</li>
+                    <li>Vue sur la nature depuis chaque chambre</li>
+                </ul>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">🚗</div>
-                <h3>Parking Privé</h3>
-                <p>4 places de parking sécurisées</p>
+
+            <div class="description-card">
+                <h3><span class="icon">🚿</span> Salles de Bain</h3>
+                <p>Les salles de bain, élégantes et fonctionnelles, disposent de douches à l'italienne et de doubles vasques, pour un confort optimal, même en tribu.</p>
+                <ul>
+                    <li>Douches à l'italienne</li>
+                    <li>Doubles vasques</li>
+                    <li>Finitions modernes</li>
+                    <li>2 WC séparés (étage & RDC)</li>
+                </ul>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">🏡</div>
-                <h3>Équipement Complet</h3>
-                <p>Lave-linge, cuisine équipée, tout le nécessaire pour votre séjour</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🌲</div>
-                <h3>Mélèze Authentique</h3>
-                <p>Construction neuve en bois noble des Alpes</p>
-            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 4rem; max-width: 900px; margin-left: auto; margin-right: auto;">
+            <p style="font-size: 1.2rem; line-height: 2; color: var(--text); font-style: italic;">
+                Pensé pour accueillir familles et amis en toute sérénité, le chalet Agnel est une invitation à ralentir, à se retrouver et à vivre pleinement l'expérience unique du Queyras, été comme hiver.
+            </p>
         </div>
     </section>
 
@@ -723,6 +836,58 @@
             </div>
             <div class="gallery-item" onclick="openLightbox(this)">
                 <img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/Chalets_Agnel_Molines_Saint_V%C3%A9ran.jpg?raw=true" alt="2 chalets Agnel Molines en Queyras Saint-Véran">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="equipements" class="features">
+        <h2>Équipements & Services</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔥</div>
+                <h3>Chauffage Premium</h3>
+                <p>Poêle à granulés et chauffage au sol pour un confort optimal toute l'année</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📺</div>
+                <h3>TV OLED 65"</h3>
+                <p>Écran OLED 65 pouces pour vos soirées cinéma en famille</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📶</div>
+                <h3>WiFi Haut Débit</h3>
+                <p>Connexion internet pour rester connecté en pleine montagne</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏔️</div>
+                <h3>Proximité Pistes</h3>
+                <p>À 1,8 km de la station de ski Molines/Saint-Véran</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚗</div>
+                <h3>Parking Privé</h3>
+                <p>4 places de parking sécurisées</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛏️</div>
+                <h3>Literie 5 Étoiles</h3>
+                <p>Matelas Bultex 5 étoiles pour un sommeil parfait</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🍽️</div>
+                <h3>Cuisine SMEG</h3>
+                <p>Électroménager haut de gamme, induction, four pyrolyse</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌲</div>
+                <h3>Mélèze Authentique</h3>
+                <p>Construction neuve en bois noble des Alpes</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">☕</div>
+                <h3>Machine Nespresso</h3>
+                <p>Café de qualité pour bien commencer la journée</p>
             </div>
         </div>
     </section>
