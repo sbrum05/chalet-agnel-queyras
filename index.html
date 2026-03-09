@@ -835,16 +835,35 @@
             background: rgba(0,0,0,0.95);
             align-items: center;
             justify-content: center;
+            flex-direction: column;
+            gap: 1.2rem;
         }
 
         .lightbox.active { display: flex; }
 
         .lightbox img {
             max-width: 90%;
-            max-height: 90vh;
+            max-height: 80vh;
             object-fit: contain;
             border-radius: 10px;
         }
+
+        .lightbox-caption {
+            color: white;
+            font-size: 1rem;
+            font-style: italic;
+            letter-spacing: 0.5px;
+            text-align: center;
+            max-width: 80%;
+            opacity: 0.85;
+            font-family: 'Georgia', serif;
+            padding: 0.5rem 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 1rem;
+            display: none;
+        }
+
+        .lightbox-caption.visible { display: block; }
 
         .lightbox-close {
             position: absolute;
@@ -1221,32 +1240,32 @@
                     <div class="trail-gallery" id="trailGallery">
                         <!-- Photo 1 : grande (à remplacer par vos photos) -->
                         <div class="trail-gallery-item" onclick="openLightbox(this)">
-                            <img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/cabane%20Clos%20l'Henry%202.jpeg?raw=true" alt="Cabane du Clot l'Henry dans sa clairière fleurie avec vue sur les sommets enneigés, Molines-en-Queyras">
+                            <img src="cabane_Clos_l_Henry_2.jpeg" alt="Cabane du Clot l'Henry dans sa clairière fleurie avec vue sur les sommets enneigés, Molines-en-Queyras">
                             <div class="overlay"><span>🔍</span></div>
                         </div>
                         <!-- Photo 2 -->
                         <div class="trail-gallery-item" onclick="openLightbox(this)">
-                            <img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/cabane%20Clos%20l'Henry%201.jpeg?raw=true" alt="Cabane du Clot l'Henry entourée de pissenlit, mélézin du Queyras">
+                            <img src="cabane_Clos_l_Henry_1.jpeg" alt="Cabane du Clot l'Henry entourée de pissenlit, mélézin du Queyras">
                             <div class="overlay"><span>🔍</span></div>
                         </div>
                         <!-- Photo 3 -->
                         <div class="trail-gallery-item" onclick="openLightbox(this)">
-                            <img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/cabane%20Clos%20l'Henry%203.jpeg?raw=true" alt="Plaque sculptée Cabane de Clot b'Henry, message des habitants de Molines">
+                            <img src="cabane_Clos_l_Henry_3.jpeg" alt="Plaque sculptée Cabane de Clot b'Henry, message des habitants de Molines">
                             <div class="overlay"><span>🔍</span></div>
                         </div>
                         <!-- Photo 4 -->
                         <div class="trail-gallery-item" onclick="openLightbox(this)">
-                            <img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/cabane%20Clos%20l'Henry%204.jpeg?raw=true" alt="Intérieur de la cabane du Clot l'Henry : poêle, couchages et murs en pierre">
+                            <img src="cabane_Clos_l_Henry_4.jpeg" alt="Intérieur de la cabane du Clot l'Henry : poêle, couchages et murs en pierre">
                             <div class="overlay"><span>🔍</span></div>
                         </div>
                         <!-- Photo 5 -->
                         <div class="trail-gallery-item" onclick="openLightbox(this)">
-                            <img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/Descente%20col%20du%20pr%C3%A9%20fromage%20sur%20la%20Rua.jpeg?raw=true" alt="Descente du col des Prés de Fromage vers le hameau de La Rua, Molines-en-Queyras">
+                            <img src="Descente_col_du_pré_fromage_sur_la_Rua.jpeg" alt="Descente du col des Prés de Fromage vers le hameau de La Rua, Molines-en-Queyras">
                             <div class="overlay"><span>🔍</span></div>
                         </div>
                         <!-- Photo 6 -->
                         <div class="trail-gallery-item" onclick="openLightbox(this)">
-                            <img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/descente%20col%20du%20pr%C3%A9%20fromage.jpeg?raw=true" alt="Panorama depuis le col des Prés de Fromage sur la vallée de Molines et les sommets du Queyras">
+                            <img src="descente_col_du_pré_fromage.jpeg" alt="Panorama depuis le col des Prés de Fromage sur la vallée de Molines et les sommets du Queyras">
                             <div class="overlay"><span>🔍</span></div>
                         </div>
                     </div>
@@ -1339,11 +1358,11 @@
                         <h4>🗺️ Carte &amp; Profil du Parcours</h4>
                         <div class="maps-grid">
                             <div class="map-item" onclick="openLightbox(this)">
-                                <img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/parcours%20randonn%C3%A9e%20col%20pr%C3%A9%20fromage%202D.webp?raw=true" alt="Carte 2D du parcours Col des Prés de Fromage depuis La Rua - 6,5km / 500m dénivelé">
+                                <img src="parcours_randonnée_col_pré_fromage_2D.webp" alt="Carte 2D du parcours Col des Prés de Fromage depuis La Rua - 6,5km / 500m dénivelé">
                                 <div class="map-label">Vue satellite 2D · Trace GPS</div>
                             </div>
                             <div class="map-item" onclick="openLightbox(this)">
-                                <img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/photo%203D%20col%20pr%C3%A9%20fromage%20la%20rua.webp?raw=true" alt="Vue 3D du parcours Col des Prés de Fromage au départ de La Rua - 8,11km / 501m dénivelé">
+                                <img src="photo_3D_col_pré_fromage_la_rua.webp" alt="Vue 3D du parcours Col des Prés de Fromage au départ de La Rua - 8,11km / 501m dénivelé">
                                 <div class="map-label">Vue 3D · Profil altimétrique</div>
                             </div>
                         </div>
@@ -1387,6 +1406,7 @@
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
         <span class="lightbox-close">&times;</span>
         <img id="lightbox-img" src="" alt="">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
     </div>
 
     <!-- Footer -->
@@ -1443,8 +1463,36 @@
             const img = element.querySelector('img');
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+
             lightboxImg.src = img.src;
             lightboxImg.alt = img.alt;
+
+            // Afficher la légende uniquement pour les photos de randonnée
+            const isTrailPhoto = element.closest('#trailGallery') || element.closest('.maps-grid');
+            if (isTrailPhoto) {
+                // Extraire le nom de fichier sans extension et formater
+                const filename = img.src.split('/').pop().split('?')[0];
+                const nameWithoutExt = filename.replace(/\.[^.]+$/, '');
+                const label = nameWithoutExt
+                    .replace(/_/g, ' ')
+                    .replace(/%20/g, ' ')
+                    .replace(/%C3%A9/g, 'é')
+                    .replace(/%C3%A8/g, 'è')
+                    .replace(/%C3%AA/g, 'ê')
+                    .replace(/%C3%B4/g, 'ô')
+                    .replace(/%C3%A0/g, 'à')
+                    .replace(/%C3%B9/g, 'ù')
+                    .replace(/%C3%A7/g, 'ç')
+                    // Majuscule en début
+                    .replace(/^./, c => c.toUpperCase());
+                lightboxCaption.textContent = label;
+                lightboxCaption.classList.add('visible');
+            } else {
+                lightboxCaption.textContent = '';
+                lightboxCaption.classList.remove('visible');
+            }
+
             lightbox.classList.add('active');
         }
 
