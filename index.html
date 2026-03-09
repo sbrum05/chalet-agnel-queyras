@@ -98,10 +98,10 @@
         .trail-gallery-item:not(:first-child) { height: 200px; }
         .trail-gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; display: block; }
         .trail-gallery-item:hover img { transform: scale(1.08); }
-        .trail-gallery-item .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0); transition: background 0.3s; display: flex; align-items: center; justify-content: center; }
-        .trail-gallery-item:hover .overlay { background: rgba(0,0,0,0.25); }
-        .trail-gallery-item .overlay span { color: white; font-size: 2rem; opacity: 0; transition: opacity 0.3s; }
-        .trail-gallery-item:hover .overlay span { opacity: 1; }
+        .trail-gallery-item .overlay { position: absolute; inset: 0; background: linear-gradient(transparent 40%, rgba(0,0,0,0.7) 100%); opacity: 0; transition: opacity 0.3s; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 0 0.8rem 0.8rem; }
+        .trail-gallery-item:hover .overlay { opacity: 1; }
+        .trail-gallery-item .overlay span { color: white; font-size: 1.6rem; margin-bottom: 0.3rem; }
+        .trail-gallery-item .overlay .img-caption { color: white; font-size: 0.75rem; font-style: italic; font-family: 'Georgia', serif; text-align: center; line-height: 1.3; text-shadow: 0 1px 3px rgba(0,0,0,0.9); }
         .trail-steps { background: var(--trail-light); border-radius: 15px; padding: 2.5rem; margin: 2.5rem 0; }
         .trail-steps h4 { font-size: 1.4rem; color: var(--primary); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
         .steps-list { list-style: none; position: relative; }
@@ -147,7 +147,7 @@
         .lightbox { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); align-items: center; justify-content: center; flex-direction: column; gap: 1.2rem; }
         .lightbox.active { display: flex; }
         .lightbox img { max-width: 90%; max-height: 80vh; object-fit: contain; border-radius: 10px; }
-        .lightbox-caption { color: white; font-size: 1rem; font-style: italic; letter-spacing: 0.5px; text-align: center; max-width: 80%; opacity: 0.85; font-family: 'Georgia', serif; padding: 0.8rem 1.5rem 0; border-top: 1px solid rgba(255,255,255,0.2); display: none; }
+        .lightbox-caption { color: white; font-size: 1.4rem; font-style: italic; letter-spacing: 1px; text-align: center; max-width: 80%; font-family: 'Georgia', serif; padding: 0.8rem 1.5rem 0; border-top: 1px solid rgba(255,255,255,0.25); display: none; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
         .lightbox-caption.visible { display: block; }
         .lightbox-close { position: absolute; top: 2rem; right: 2rem; color: white; font-size: 3rem; cursor: pointer; transition: color 0.3s; }
         .lightbox-close:hover { color: var(--accent); }
@@ -338,27 +338,27 @@
                     <div class="trail-gallery" id="trailGallery">
                         <div class="trail-gallery-item" onclick="openLightbox(this)">
                             <img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/cabane%20Clos%20l%27Henry%202.jpeg?raw=true" alt="Cabane du Clot l'Henry dans sa clairière fleurie avec vue sur les sommets enneigés, Molines-en-Queyras">
-                            <div class="overlay"><span>🔍</span></div>
+                            <div class="overlay"><span>🔍</span><span class="img-caption">Cabane du Clot l'Henry 2</span></div>
                         </div>
                         <div class="trail-gallery-item" onclick="openLightbox(this)">
                             <img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/cabane%20Clos%20l%27Henry%201.jpeg?raw=true" alt="Cabane du Clot l'Henry entourée de pissenlit, mélézin du Queyras">
-                            <div class="overlay"><span>🔍</span></div>
+                            <div class="overlay"><span>🔍</span><span class="img-caption">Cabane du Clot l'Henry 1</span></div>
                         </div>
                         <div class="trail-gallery-item" onclick="openLightbox(this)">
                             <img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/cabane%20Clos%20l%27Henry%203.jpeg?raw=true" alt="Plaque sculptée Cabane de Clot l'Henry, message des habitants de Molines">
-                            <div class="overlay"><span>🔍</span></div>
+                            <div class="overlay"><span>🔍</span><span class="img-caption">Cabane du Clot l'Henry 3</span></div>
                         </div>
                         <div class="trail-gallery-item" onclick="openLightbox(this)">
                             <img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/cabane%20Clos%20l%27Henry%204.jpeg?raw=true" alt="Intérieur de la cabane du Clot l'Henry : poêle, couchages et murs en pierre">
-                            <div class="overlay"><span>🔍</span></div>
+                            <div class="overlay"><span>🔍</span><span class="img-caption">Cabane du Clot l'Henry 4</span></div>
                         </div>
                         <div class="trail-gallery-item" onclick="openLightbox(this)">
                             <img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/Descente%20col%20du%20pr%C3%A9%20fromage%20sur%20la%20Rua.jpeg?raw=true" alt="Descente du col des Prés de Fromage vers le hameau de La Rua, Molines-en-Queyras">
-                            <div class="overlay"><span>🔍</span></div>
+                            <div class="overlay"><span>🔍</span><span class="img-caption">Descente col du pré fromage sur la Rua</span></div>
                         </div>
                         <div class="trail-gallery-item" onclick="openLightbox(this)">
                             <img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/descente%20col%20du%20pr%C3%A9%20fromage.jpeg?raw=true" alt="Panorama depuis le col des Prés de Fromage sur la vallée de Molines et les sommets du Queyras">
-                            <div class="overlay"><span>🔍</span></div>
+                            <div class="overlay"><span>🔍</span><span class="img-caption">Descente col du pré fromage</span></div>
                         </div>
                     </div>
 
@@ -453,7 +453,7 @@
         <h2>Réservez Votre Séjour</h2>
         <p style="font-size: 1.2rem; margin-bottom: 2rem;">Contactez-nous pour connaître nos disponibilités et tarifs</p>
         <div class="contact-info">
-            <div class="contact-item"><h3>Email</h3><a href="mailto:contact@chalets-agnel-queyras.fr">contact@chalets-agnel-queyras.fr</a></div>
+            <div class="contact-item"><h3>Email</h3><a href="/cdn-cgi/l/email-protection#2e4d41405a4f4d5a6e4d464f424b5a5d034f49404b42035f5b4b575c4f5d00485c"><span class="__cf_email__" data-cfemail="bbd8d4d5cfdad8cffbd8d3dad7decfc896dadcd5ded796cacedec2c9dac895ddc9">[email&#160;protected]</span></a></div>
             <div class="contact-item"><h3>Adresse</h3><p>32 Rue de Saint Romain<br>La Rua, Molines-en-Queyras<br>05350 Hautes-Alpes</p></div>
             <div class="contact-item"><h3>Tarifs</h3><p>Location à la semaine<br>1 450€ - 3 000€<br><small>Selon saison</small></p></div>
         </div>
@@ -470,7 +470,7 @@
         <p>&copy; 2026 Chalets Agnel - Tous droits réservés | Location Grand Confort & Randonnées dans le Queyras</p>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
         const menuOverlay = document.getElementById('menuOverlay');
@@ -538,14 +538,3 @@
 
             lightbox.classList.add('active');
         }
-
-        function closeLightbox() {
-            document.getElementById('lightbox').classList.remove('active');
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeLightbox();
-        });
-    </script>
-</body>
-</html>
