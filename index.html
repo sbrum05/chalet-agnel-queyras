@@ -18,6 +18,8 @@
         }
         body { font-family: 'Georgia', serif; color: var(--text); line-height: 1.6; overflow-x: hidden; }
         body.menu-open { overflow: hidden; }
+
+        /* Header & Nav */
         header { position: fixed; width: 100%; top: 0; z-index: 1000; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); box-shadow: 0 2px 20px rgba(0,0,0,0.1); transition: all 0.3s ease; }
         nav { max-width: 1400px; margin: 0 auto; padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 1.8rem; font-weight: bold; color: var(--primary); letter-spacing: 2px; z-index: 1001; }
@@ -25,6 +27,8 @@
         nav ul { display: flex; list-style: none; gap: 2.5rem; }
         nav a { text-decoration: none; color: var(--primary); font-weight: 500; transition: color 0.3s; font-size: 1rem; }
         nav a:hover { color: var(--accent); }
+
+        /* Hamburger */
         .hamburger { display: none; flex-direction: column; cursor: pointer; z-index: 1001; width: 30px; height: 24px; position: relative; }
         .hamburger span { width: 100%; height: 3px; background: var(--primary); border-radius: 3px; transition: all 0.3s ease; position: absolute; }
         .hamburger span:nth-child(1) { top: 0; }
@@ -35,16 +39,24 @@
         .hamburger.active span:nth-child(3) { bottom: 50%; transform: translateY(50%) rotate(-45deg); }
         .mobile-menu-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 999; opacity: 0; transition: opacity 0.3s ease; }
         .mobile-menu-overlay.active { opacity: 1; }
-        .hero { height: 100vh; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.3)), url('https://github.com/sbrum45-boop/chalet-agnel-queyras/blob/main/chalet%20agnel%20face.jpg?raw=true'); background-size: cover; background-position: center; background-attachment: fixed; display: flex; align-items: center; justify-content: center; text-align: center; color: white; }
+
+        /* Hero */
+        .hero { height: 100vh; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.3)), url('https://raw.githubusercontent.com/sbrum45-boop/chalet-agnel-queyras/main/chalet%20agnel%20face.jpg'); background-size: cover; background-position: center; background-attachment: fixed; display: flex; align-items: center; justify-content: center; text-align: center; color: white; }
         .hero-content { max-width: 800px; padding: 2rem; animation: fadeInUp 1s ease; }
         .hero h1 { font-size: 4rem; margin-bottom: 1rem; font-weight: 300; letter-spacing: 3px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
         .hero p { font-size: 1.5rem; margin-bottom: 2rem; font-weight: 300; }
         .cta-button { display: inline-block; padding: 1rem 3rem; background: var(--accent); color: white; text-decoration: none; border-radius: 50px; font-size: 1.1rem; transition: all 0.3s; box-shadow: 0 4px 15px rgba(212,175,55,0.4); }
         .cta-button:hover { transform: translateY(-3px); box-shadow: 0 6px 25px rgba(212,175,55,0.6); }
+
+        /* Sections */
         section { padding: 6rem 2rem; max-width: 1400px; margin: 0 auto; }
         h2 { font-size: 3rem; margin-bottom: 3rem; text-align: center; color: var(--primary); font-weight: 300; letter-spacing: 2px; }
+
+        /* Intro */
         .intro-section { background: var(--light); text-align: center; }
         .intro-section .intro-text { max-width: 900px; margin: 0 auto; font-size: 1.3rem; line-height: 2; color: var(--text); font-style: italic; padding: 0 2rem; }
+
+        /* Description */
         .detailed-description { background: white; }
         .description-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; margin-top: 3rem; }
         .description-card { background: var(--light); padding: 3rem; border-radius: 15px; border-left: 4px solid var(--accent); box-shadow: 0 5px 20px rgba(0,0,0,0.08); transition: transform 0.3s, box-shadow 0.3s; }
@@ -55,17 +67,23 @@
         .description-card ul { list-style: none; margin-top: 1rem; }
         .description-card li { padding: 0.5rem 0; padding-left: 1.5rem; position: relative; font-size: 1.05rem; }
         .description-card li:before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: bold; }
+
+        /* Gallery */
         .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
         .gallery-item { position: relative; overflow: hidden; border-radius: 10px; height: 300px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.3s; }
         .gallery-item:hover { transform: scale(1.05); }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
         .gallery-item:hover img { transform: scale(1.1); }
+
+        /* Features */
         .features { background: var(--light); }
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-top: 3rem; }
         .feature-card { background: white; padding: 2.5rem; border-radius: 15px; text-align: center; box-shadow: 0 5px 25px rgba(0,0,0,0.08); transition: transform 0.3s; }
         .feature-card:hover { transform: translateY(-10px); }
         .feature-icon { font-size: 3rem; margin-bottom: 1.5rem; color: var(--accent); }
         .feature-card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary); }
+
+        /* Quick info */
         .quick-info { background: white; }
         .info-boxes { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem; }
         .info-box { background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%); color: white; padding: 2.5rem; border-radius: 15px; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.15); }
@@ -73,25 +91,31 @@
         .info-box h3 { font-size: 1.3rem; margin-bottom: 0.5rem; color: white; }
         .info-box p { font-size: 1rem; opacity: 0.9; }
         .price-info { background: var(--accent); color: white; padding: 1.5rem 2rem; border-radius: 10px; margin: 2rem 0; text-align: center; font-size: 1.3rem; font-weight: 500; }
+
+        /* Randonnées */
         .randonnees-section { background: var(--trail-light); max-width: 100%; padding: 6rem 2rem; }
         .randonnees-inner { max-width: 1400px; margin: 0 auto; }
         .randonnees-section h2 { color: var(--primary); }
         .section-intro { text-align: center; max-width: 800px; margin: 0 auto 4rem; font-size: 1.15rem; color: #555; line-height: 1.9; }
+
         .trail-article { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.1); margin-bottom: 4rem; }
         .trail-header { background: linear-gradient(135deg, var(--trail-green) 0%, #2d5a3d 100%); color: white; padding: 3rem 4rem; position: relative; overflow: hidden; }
         .trail-header::before { content: "🥾"; position: absolute; right: 3rem; top: 50%; transform: translateY(-50%); font-size: 8rem; opacity: 0.15; }
         .trail-badge { display: inline-block; background: rgba(255,255,255,0.2); color: white; padding: 0.4rem 1.2rem; border-radius: 50px; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(255,255,255,0.3); }
         .trail-header h3 { font-size: 2.2rem; font-weight: 400; margin-bottom: 0.5rem; letter-spacing: 1px; }
         .trail-header .trail-subtitle { font-size: 1.1rem; opacity: 0.85; font-style: italic; }
+
         .trail-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0; border-bottom: 1px solid #eee; }
         .stat-item { padding: 1.8rem 1.5rem; text-align: center; border-right: 1px solid #eee; }
         .stat-item:last-child { border-right: none; }
         .stat-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
         .stat-value { font-size: 1.5rem; font-weight: bold; color: var(--trail-green); display: block; }
         .stat-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-top: 0.2rem; }
+
         .trail-body { padding: 3rem 4rem; }
         .trail-body p { font-size: 1.1rem; line-height: 1.9; color: #444; margin-bottom: 1.5rem; }
         .trail-body p:first-child::first-letter { font-size: 3.5rem; float: left; line-height: 0.8; margin-right: 0.15em; margin-top: 0.1em; color: var(--trail-green); font-weight: bold; }
+
         .trail-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin: 2.5rem 0; }
         .trail-gallery-item { position: relative; overflow: hidden; border-radius: 10px; cursor: pointer; }
         .trail-gallery-item:first-child { grid-column: span 2; grid-row: span 2; height: 420px; }
@@ -102,6 +126,7 @@
         .trail-gallery-item:hover .overlay { opacity: 1; }
         .trail-gallery-item .overlay span { color: white; font-size: 1.6rem; margin-bottom: 0.3rem; }
         .trail-gallery-item .overlay .img-caption { color: white; font-size: 0.75rem; font-style: italic; font-family: 'Georgia', serif; text-align: center; line-height: 1.3; text-shadow: 0 1px 3px rgba(0,0,0,0.9); }
+
         .trail-steps { background: var(--trail-light); border-radius: 15px; padding: 2.5rem; margin: 2.5rem 0; }
         .trail-steps h4 { font-size: 1.4rem; color: var(--primary); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
         .steps-list { list-style: none; position: relative; }
@@ -112,6 +137,7 @@
         .step-dot.end { background: var(--primary); }
         .step-text { padding-top: 0.4rem; font-size: 1rem; line-height: 1.6; color: #444; }
         .step-text strong { color: var(--primary); display: block; margin-bottom: 0.2rem; }
+
         .trail-info-box { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2.5rem 0; }
         .info-card { border-radius: 12px; padding: 1.8rem; }
         .info-card.green { background: var(--trail-green); color: white; }
@@ -120,6 +146,7 @@
         .info-card ul { list-style: none; }
         .info-card li { padding: 0.35rem 0; padding-left: 1.2rem; position: relative; font-size: 0.95rem; line-height: 1.5; }
         .info-card li::before { content: "→"; position: absolute; left: 0; opacity: 0.7; }
+
         .trail-maps { margin: 2.5rem 0; }
         .trail-maps h4 { font-size: 1.4rem; color: var(--primary); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
         .maps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -127,11 +154,15 @@
         .map-item img { width: 100%; height: 260px; object-fit: cover; display: block; transition: transform 0.4s ease; }
         .map-item:hover img { transform: scale(1.03); }
         .map-label { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.65)); color: white; padding: 1.5rem 1rem 0.8rem; font-size: 0.9rem; letter-spacing: 0.5px; }
+
         .strava-btn { display: inline-flex; align-items: center; gap: 0.8rem; background: #FC4C02; color: white; text-decoration: none; padding: 1rem 2rem; border-radius: 50px; font-size: 1rem; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 15px rgba(252,76,2,0.35); margin-top: 1rem; }
         .strava-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(252,76,2,0.5); }
         .strava-btn svg { width: 24px; height: 24px; fill: white; }
+
         .trail-footer { padding: 2rem 4rem; background: #f9f9f9; border-top: 1px solid #eee; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
         .trail-footer-text { font-size: 0.95rem; color: #777; font-style: italic; }
+
+        /* Contact */
         .contact { background: var(--primary); color: white; text-align: center; }
         .contact h2 { color: white; }
         .contact-info { display: flex; justify-content: center; gap: 4rem; margin-top: 3rem; flex-wrap: wrap; }
@@ -139,11 +170,10 @@
         .contact-item h3 { color: var(--accent); margin-bottom: 1rem; font-size: 1.3rem; }
         .contact-item a { color: white; text-decoration: none; font-size: 1.2rem; transition: color 0.3s; }
         .contact-item a:hover { color: var(--accent); }
-        footer { background: var(--primary); color: rgba(255,255,255,0.7); text-align: center; padding: 2rem; border-top: 1px solid rgba(255,255,255,0.1); }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes slideInRight { from { transform: translateX(100%); } to { transform: translateX(0); } }
 
-        /* Lightbox — MODIFIÉ : ajout légende */
+        footer { background: var(--primary); color: rgba(255,255,255,0.7); text-align: center; padding: 2rem; border-top: 1px solid rgba(255,255,255,0.1); }
+
+        /* Lightbox */
         .lightbox { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); align-items: center; justify-content: center; flex-direction: column; gap: 1.2rem; }
         .lightbox.active { display: flex; }
         .lightbox img { max-width: 90%; max-height: 80vh; object-fit: contain; border-radius: 10px; }
@@ -152,6 +182,10 @@
         .lightbox-close { position: absolute; top: 2rem; right: 2rem; color: white; font-size: 3rem; cursor: pointer; transition: color 0.3s; }
         .lightbox-close:hover { color: var(--accent); }
 
+        /* Animations */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Responsive */
         @media (max-width: 768px) {
             .hamburger { display: flex; }
             .mobile-menu-overlay { display: block; }
@@ -278,20 +312,20 @@
     <section id="galerie">
         <h2>Découvrez le Chalet</h2>
         <div class="gallery">
-            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://github.com/sbrum45-boop/chalet-agnel-queyras/blob/main/chalet%20agnel%20cuisine.jpg?raw=true" alt="Cuisine et salon moderne avec poêle à granulés"></div>
-            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://github.com/sbrum45-boop/chalet-agnel-queyras/blob/main/chalet%20agnel%20poele%20%C3%A0%20granul%C3%A9s.jpg?raw=true" alt="Poêle à granulés design"></div>
-            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://github.com/sbrum45-boop/chalet-agnel-queyras/blob/main/chalet%20agnel%20chambre1.jpg?raw=true" alt="Chambre principale avec balcon"></div>
-            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://github.com/sbrum45-boop/chalet-agnel-queyras/blob/main/chalet%20agnel%20salle%20de%20bain%20bas.jpg?raw=true" alt="Salle de bain moderne"></div>
-            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://github.com/sbrum45-boop/chalet-agnel-queyras/blob/main/chalet%20agnel%20chambre2.jpg?raw=true" alt="Chambre avec vue montagne"></div>
-            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://github.com/sbrum45-boop/chalet-agnel-queyras/blob/main/chalet%20agnel%20enfants.jpg?raw=true" alt="Chambre lits superposés"></div>
-            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://github.com/sbrum45-boop/chalet-agnel-queyras/blob/main/chalet%20agnel%20douche%20bas.jpg?raw=true" alt="Douche italienne marbre"></div>
-            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://github.com/sbrum45-boop/chalet-agnel-queyras/blob/main/chalet%20agnel%20salle%20de%20bain%20haut.jpg?raw=true" alt="Salle de bain double vasque"></div>
-            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://github.com/sbrum45-boop/chalet-agnel-queyras/blob/main/chalet%20agnel%20face.jpg?raw=true" alt="Vue extérieure du chalet enneigé"></div>
-            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://github.com/sbrum45-boop/chalet-agnel-queyras/blob/main/chalet%20agnel%20face2.jpg?raw=true" alt="Façade du chalet en mélèze"></div>
-            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/Chalet%20Agnel%20neuf%20Molines%20en%20Queyras%20La%20Rua%20pi%C3%A8ce%20%C3%A0%20vivre.jpg?raw=true" alt="Pièce à vivre"></div>
-            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/Chalet%20Agnel%20neuf%20Molines%20en%20Queyras%20La%20Rua%20%C3%A0%20louer%20salon.jpg?raw=true" alt="Salon chalet"></div>
-            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/chalet%20neuf%20Molines%20en%20Queyras%20La%20Rua%20%C3%A0%20louer%20Chambre%201.jpg?raw=true" alt="Chambre 1"></div>
-            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/Chalets_Agnel_Molines_Saint_V%C3%A9ran.jpg?raw=true" alt="2 chalets Agnel Molines en Queyras Saint-Véran"></div>
+            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://raw.githubusercontent.com/sbrum45-boop/chalet-agnel-queyras/main/chalet%20agnel%20cuisine.jpg" alt="Cuisine et salon moderne avec poêle à granulés"></div>
+            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://raw.githubusercontent.com/sbrum45-boop/chalet-agnel-queyras/main/chalet%20agnel%20poele%20%C3%A0%20granul%C3%A9s.jpg" alt="Poêle à granulés design"></div>
+            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://raw.githubusercontent.com/sbrum45-boop/chalet-agnel-queyras/main/chalet%20agnel%20chambre1.jpg" alt="Chambre principale avec balcon"></div>
+            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://raw.githubusercontent.com/sbrum45-boop/chalet-agnel-queyras/main/chalet%20agnel%20salle%20de%20bain%20bas.jpg" alt="Salle de bain moderne"></div>
+            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://raw.githubusercontent.com/sbrum45-boop/chalet-agnel-queyras/main/chalet%20agnel%20chambre2.jpg" alt="Chambre avec vue montagne"></div>
+            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://raw.githubusercontent.com/sbrum45-boop/chalet-agnel-queyras/main/chalet%20agnel%20enfants.jpg" alt="Chambre lits superposés"></div>
+            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://raw.githubusercontent.com/sbrum45-boop/chalet-agnel-queyras/main/chalet%20agnel%20douche%20bas.jpg" alt="Douche italienne marbre"></div>
+            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://raw.githubusercontent.com/sbrum45-boop/chalet-agnel-queyras/main/chalet%20agnel%20salle%20de%20bain%20haut.jpg" alt="Salle de bain double vasque"></div>
+            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://raw.githubusercontent.com/sbrum45-boop/chalet-agnel-queyras/main/chalet%20agnel%20face.jpg" alt="Vue extérieure du chalet enneigé"></div>
+            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://raw.githubusercontent.com/sbrum45-boop/chalet-agnel-queyras/main/chalet%20agnel%20face2.jpg" alt="Façade du chalet en mélèze"></div>
+            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://raw.githubusercontent.com/sbrum05/chalet-agnel-queyras/main/Chalet%20Agnel%20neuf%20Molines%20en%20Queyras%20La%20Rua%20pi%C3%A8ce%20%C3%A0%20vivre.jpg" alt="Pièce à vivre"></div>
+            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://raw.githubusercontent.com/sbrum05/chalet-agnel-queyras/main/Chalet%20Agnel%20neuf%20Molines%20en%20Queyras%20La%20Rua%20%C3%A0%20louer%20salon.jpg" alt="Salon chalet"></div>
+            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://raw.githubusercontent.com/sbrum05/chalet-agnel-queyras/main/chalet%20neuf%20Molines%20en%20Queyras%20La%20Rua%20%C3%A0%20louer%20Chambre%201.jpg" alt="Chambre 1"></div>
+            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://raw.githubusercontent.com/sbrum05/chalet-agnel-queyras/main/Chalets_Agnel_Molines_Saint_V%C3%A9ran.jpg" alt="2 chalets Agnel Molines en Queyras Saint-Véran"></div>
         </div>
     </section>
 
@@ -334,30 +368,29 @@
                 <div class="trail-body" itemprop="articleBody">
                     <p>Partez directement depuis le chalet, longer l'Aigue Blanche depuis le Pont des Achins, et rejoignez l'un des itinéraires les plus bucoliques du Queyras. Cette randonnée en boucle vous conduit à travers les mélézins dorés du Bois de Saint-Simon jusqu'à la cabane du Clot l'Henry, petite merveille du patrimoine pastoral restaurée avec amour par les habitants de Molines, avant d'atteindre le col des Prés de Fromage et ses panoramas à couper le souffle.</p>
 
-                    <!-- Galerie photos — apostrophes encodées en %27 -->
                     <div class="trail-gallery" id="trailGallery">
                         <div class="trail-gallery-item" onclick="openLightbox(this)">
-                            <img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/cabane%20Clos%20l%27Henry%202.jpeg?raw=true" alt="Cabane du Clot l'Henry dans sa clairière fleurie avec vue sur les sommets enneigés, Molines-en-Queyras">
+                            <img src="https://raw.githubusercontent.com/sbrum05/chalet-agnel-queyras/main/cabane%20Clos%20l%27Henry%202.jpeg" alt="Cabane du Clot l'Henry dans sa clairière fleurie avec vue sur les sommets enneigés">
                             <div class="overlay"><span>🔍</span><span class="img-caption">Cabane du Clot l'Henry</span></div>
                         </div>
                         <div class="trail-gallery-item" onclick="openLightbox(this)">
-                            <img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/cabane%20Clos%20l%27Henry%201.jpeg?raw=true" alt="Cabane du Clot l'Henry entourée de pissenlit, mélézin du Queyras">
+                            <img src="https://raw.githubusercontent.com/sbrum05/chalet-agnel-queyras/main/cabane%20Clos%20l%27Henry%201.jpeg" alt="Cabane du Clot l'Henry entourée de pissenlit, mélézin du Queyras">
                             <div class="overlay"><span>🔍</span><span class="img-caption">Cabane du Clot l'Henry avec sa fontaine</span></div>
                         </div>
                         <div class="trail-gallery-item" onclick="openLightbox(this)">
-                            <img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/cabane%20Clos%20l%27Henry%203.jpeg?raw=true" alt="Plaque sculptée Cabane de Clot l'Henry, message des habitants de Molines">
+                            <img src="https://raw.githubusercontent.com/sbrum05/chalet-agnel-queyras/main/cabane%20Clos%20l%27Henry%203.jpeg" alt="Plaque sculptée Cabane de Clot l'Henry">
                             <div class="overlay"><span>🔍</span><span class="img-caption">Gravure bois Cabane du Clot l'Henry</span></div>
                         </div>
                         <div class="trail-gallery-item" onclick="openLightbox(this)">
-                            <img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/cabane%20Clos%20l%27Henry%204.jpeg?raw=true" alt="Intérieur de la cabane du Clot l'Henry : poêle, couchages et murs en pierre">
+                            <img src="https://raw.githubusercontent.com/sbrum05/chalet-agnel-queyras/main/cabane%20Clos%20l%27Henry%204.jpeg" alt="Intérieur de la cabane du Clot l'Henry : poêle, couchages et murs en pierre">
                             <div class="overlay"><span>🔍</span><span class="img-caption">Intérieur de la Cabane du Clot l'Henry</span></div>
                         </div>
                         <div class="trail-gallery-item" onclick="openLightbox(this)">
-                            <img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/Descente%20col%20du%20pr%C3%A9%20fromage%20sur%20la%20Rua.jpeg?raw=true" alt="Descente du col des Prés de Fromage vers le hameau de La Rua, Molines-en-Queyras">
+                            <img src="https://raw.githubusercontent.com/sbrum05/chalet-agnel-queyras/main/Descente%20col%20du%20pr%C3%A9%20fromage%20sur%20la%20Rua.jpeg" alt="Descente du col des Prés de Fromage vers le hameau de La Rua">
                             <div class="overlay"><span>🔍</span><span class="img-caption">Descente par le sentier sur la Rua</span></div>
                         </div>
                         <div class="trail-gallery-item" onclick="openLightbox(this)">
-                            <img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/descente%20col%20du%20pr%C3%A9%20fromage.jpeg?raw=true" alt="Panorama depuis le col des Prés de Fromage sur la vallée de Molines et les sommets du Queyras">
+                            <img src="https://raw.githubusercontent.com/sbrum05/chalet-agnel-queyras/main/descente%20col%20du%20pr%C3%A9%20fromage.jpeg" alt="Panorama depuis le col des Prés de Fromage sur la vallée de Molines">
                             <div class="overlay"><span>🔍</span><span class="img-caption">Descente col du pré fromage, vue sur Molines</span></div>
                         </div>
                     </div>
@@ -421,22 +454,20 @@
                         </div>
                     </div>
 
-                    <!-- Cartes du parcours -->
                     <div class="trail-maps">
                         <h4>🗺️ Carte &amp; Profil du Parcours</h4>
                         <div class="maps-grid">
                             <div class="map-item" onclick="openLightbox(this)">
-                                <img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/parcours%20randonn%C3%A9e%20col%20pr%C3%A9%20fromage%202D.webp?raw=true" alt="Carte 2D du parcours Col des Prés de Fromage depuis La Rua - 6,5km / 500m dénivelé">
+                                <img src="https://raw.githubusercontent.com/sbrum05/chalet-agnel-queyras/main/parcours%20randonn%C3%A9e%20col%20pr%C3%A9%20fromage%202D.webp" alt="Carte 2D du parcours Col des Prés de Fromage depuis La Rua">
                                 <div class="map-label">Vue satellite 2D · Trace GPS</div>
                             </div>
                             <div class="map-item" onclick="openLightbox(this)">
-                                <img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/photo%203D%20col%20pr%C3%A9%20fromage%20la%20rua.webp?raw=true" alt="Vue 3D du parcours Col des Prés de Fromage au départ de La Rua - 8,11km / 501m dénivelé">
+                                <img src="https://raw.githubusercontent.com/sbrum05/chalet-agnel-queyras/main/photo%203D%20col%20pr%C3%A9%20fromage%20la%20rua.webp" alt="Vue 3D du parcours Col des Prés de Fromage au départ de La Rua">
                                 <div class="map-label">Vue 3D · Profil altimétrique</div>
                             </div>
                         </div>
                     </div>
-
-                </div><!-- /trail-body -->
+                </div>
 
                 <div class="trail-footer">
                     <span class="trail-footer-text">Retrouvez la trace GPS complète sur Strava · Balisage jaune PR depuis La Rua</span>
@@ -453,13 +484,12 @@
         <h2>Réservez Votre Séjour</h2>
         <p style="font-size: 1.2rem; margin-bottom: 2rem;">Contactez-nous pour connaître nos disponibilités et tarifs</p>
         <div class="contact-info">
-            <div class="contact-item"><h3>Email</h3><a href="/cdn-cgi/l/email-protection#2e4d41405a4f4d5a6e4d464f424b5a5d034f49404b42035f5b4b575c4f5d00485c"><span class="__cf_email__" data-cfemail="bbd8d4d5cfdad8cffbd8d3dad7decfc896dadcd5ded796cacedec2c9dac895ddc9">[email&#160;protected]</span></a></div>
+            <div class="contact-item"><h3>Email</h3><a href="mailto:chalets.agnel@gmail.com">chalets.agnel@gmail.com</a></div>
             <div class="contact-item"><h3>Adresse</h3><p>32 Rue de Saint Romain<br>La Rua, Molines-en-Queyras<br>05350 Hautes-Alpes</p></div>
             <div class="contact-item"><h3>Tarifs</h3><p>Location à la semaine<br>1 450€ - 3 000€<br><small>Selon saison</small></p></div>
         </div>
     </section>
 
-    <!-- Lightbox — MODIFIÉ : ajout légende pour photos randonnée -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
         <span class="lightbox-close">&times;</span>
         <img id="lightbox-img" src="" alt="">
@@ -470,28 +500,26 @@
         <p>&copy; 2026 Chalets Agnel - Tous droits réservés | Location Grand Confort & Randonnées dans le Queyras</p>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
+        // Menu hamburger
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
         const menuOverlay = document.getElementById('menuOverlay');
-        const body = document.body;
 
         function toggleMenu() {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
             menuOverlay.classList.toggle('active');
-            body.classList.toggle('menu-open');
+            document.body.classList.toggle('menu-open');
         }
 
         hamburger.addEventListener('click', toggleMenu);
         menuOverlay.addEventListener('click', toggleMenu);
-
         document.querySelectorAll('nav ul li a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (navMenu.classList.contains('active')) toggleMenu();
-            });
+            link.addEventListener('click', () => { if (navMenu.classList.contains('active')) toggleMenu(); });
         });
 
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -500,47 +528,36 @@
             });
         });
 
+        // Header scroll
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(255,255,255,0.98)';
-                header.style.boxShadow = '0 2px 25px rgba(0,0,0,0.15)';
-            } else {
-                header.style.background = 'rgba(255,255,255,0.95)';
-                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
-            }
+            header.style.background = window.scrollY > 100 ? 'rgba(255,255,255,0.98)' : 'rgba(255,255,255,0.95)';
+            header.style.boxShadow = window.scrollY > 100 ? '0 2px 25px rgba(0,0,0,0.15)' : '0 2px 20px rgba(0,0,0,0.1)';
         });
 
+        // Lightbox
         function openLightbox(element) {
-            // Remonter au bon conteneur si le clic vient d'un enfant (span, overlay…)
             const container = element.closest('.trail-gallery-item, .map-item, .gallery-item') || element;
             const img = container.querySelector('img');
             if (!img) return;
 
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
-            const lightboxCaption = document.getElementById('lightbox-caption');
+            document.getElementById('lightbox-img').src = img.src;
+            document.getElementById('lightbox-img').alt = img.alt;
 
-            lightboxImg.src = img.src;
-            lightboxImg.alt = img.alt;
-
-            // Légende uniquement pour les photos randonnée et cartes
+            const caption = document.getElementById('lightbox-caption');
             const isTrailPhoto = container.closest('#trailGallery') || container.closest('.maps-grid');
             if (isTrailPhoto) {
-                const urlPath = img.src.split('?')[0];
-                const filename = decodeURIComponent(urlPath.split('/').pop());
-                const label = filename
-                    .replace(/\.[^.]+$/, '')
-                    .replace(/^./, c => c.toUpperCase());
-                lightboxCaption.textContent = label;
-                lightboxCaption.classList.add('visible');
+                const captionEl = container.querySelector('.img-caption, .map-label');
+                caption.textContent = captionEl ? captionEl.textContent : '';
+                caption.classList.toggle('visible', !!captionEl);
             } else {
-                lightboxCaption.textContent = '';
-                lightboxCaption.classList.remove('visible');
+                caption.textContent = '';
+                caption.classList.remove('visible');
             }
 
-            lightbox.classList.add('active');
+            document.getElementById('lightbox').classList.add('active');
         }
+
         function closeLightbox() {
             document.getElementById('lightbox').classList.remove('active');
             document.getElementById('lightbox-img').src = '';
@@ -549,9 +566,7 @@
             caption.classList.remove('visible');
         }
 
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeLightbox();
-        });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
     </script>
 </body>
 </html>
