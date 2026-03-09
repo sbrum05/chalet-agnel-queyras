@@ -512,7 +512,11 @@
         });
 
         function openLightbox(element) {
-            const img = element.querySelector('img');
+            // Remonter au bon conteneur si le clic vient d'un enfant (span, overlay…)
+            const container = element.closest('.trail-gallery-item, .map-item, .gallery-item') || element;
+            const img = container.querySelector('img');
+            if (!img) return;
+
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             const lightboxCaption = document.getElementById('lightbox-caption');
@@ -521,14 +525,13 @@
             lightboxImg.alt = img.alt;
 
             // Légende uniquement pour les photos randonnée et cartes
-            const isTrailPhoto = element.closest('#trailGallery') || element.closest('.maps-grid');
+            const isTrailPhoto = container.closest('#trailGallery') || container.closest('.maps-grid');
             if (isTrailPhoto) {
-                // Extraire nom de fichier sans extension depuis l'URL
                 const urlPath = img.src.split('?')[0];
                 const filename = decodeURIComponent(urlPath.split('/').pop());
                 const label = filename
-                    .replace(/\.[^.]+$/, '')           // supprime extension
-                    .replace(/^./, c => c.toUpperCase()); // majuscule initiale
+                    .replace(/\.[^.]+$/, '')
+                    .replace(/^./, c => c.toUpperCase());
                 lightboxCaption.textContent = label;
                 lightboxCaption.classList.add('visible');
             } else {
@@ -538,3 +541,17 @@
 
             lightbox.classList.add('active');
         }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.getElementById('lightbox-img').src = '';
+            const caption = document.getElementById('lightbox-caption');
+            caption.textContent = '';
+            caption.classList.remove('visible');
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>
