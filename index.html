@@ -28,6 +28,20 @@
         nav a { text-decoration: none; color: var(--primary); font-weight: 500; transition: color 0.3s; font-size: 1rem; }
         nav a:hover { color: var(--accent); }
 
+        /* Dropdown Randonnées */
+        .nav-dropdown { position: relative; padding-bottom: 0.8rem; margin-bottom: -0.8rem; }
+        .nav-dropdown > a { display: flex; align-items: center; gap: 0.4rem; }
+        .nav-dropdown > a::after { content: "▾"; font-size: 0.75rem; transition: transform 0.3s; }
+        .nav-dropdown:hover > a::after { transform: rotate(180deg); }
+        .dropdown-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: white; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.15); min-width: 280px; overflow: hidden; z-index: 100; border-top: 3px solid var(--accent); padding-top: 0.8rem; margin-top: 0; }
+        .dropdown-menu::before { content: ""; display: block; height: 0.8rem; margin-top: -0.8rem; }
+        .nav-dropdown:hover .dropdown-menu { display: block; }
+        .dropdown-menu a { display: block; padding: 1rem 1.5rem; color: var(--primary); text-decoration: none; transition: background 0.2s, color 0.2s; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .dropdown-menu a:last-child { border-bottom: none; }
+        .dropdown-menu a:hover { background: var(--trail-light); color: var(--trail-green); }
+        .dropdown-menu a .drop-title { font-weight: 600; font-size: 0.95rem; display: block; }
+        .dropdown-menu a .drop-sub { font-size: 0.8rem; color: #888; font-style: italic; margin-top: 0.2rem; display: block; font-weight: 400; }
+
         /* Hamburger */
         .hamburger { display: none; flex-direction: column; cursor: pointer; z-index: 1001; width: 30px; height: 24px; position: relative; }
         .hamburger span { width: 100%; height: 3px; background: var(--primary); border-radius: 3px; transition: all 0.3s ease; position: absolute; }
@@ -224,6 +238,9 @@
             .stat-item { padding: 1.2rem 0.8rem; }
             .maps-grid { grid-template-columns: 1fr; }
             .map-item img { height: 200px; }
+            .dropdown-menu { display: block; position: static; transform: none; box-shadow: none; border-radius: 0; border-top: none; border-left: 3px solid var(--accent); margin: 0.5rem 0 0.5rem 1rem; min-width: unset; }
+            .dropdown-menu a { padding: 0.7rem 1rem; }
+            .nav-dropdown > a::after { display: none; }
         }
     </style>
 </head>
@@ -238,7 +255,19 @@
                 <li><a href="#description">Le Chalet</a></li>
                 <li><a href="#galerie">Galerie</a></li>
                 <li><a href="#equipements">Équipements</a></li>
-                <li><a href="#randonnees">Randonnées</a></li>
+                <li class="nav-dropdown">
+                    <a href="#randonnees">Randonnées</a>
+                    <div class="dropdown-menu">
+                        <a href="#randonnee-clot-henry">
+                            <span class="drop-title">🥾 Cabane du Clot l'Henry</span>
+                            <span class="drop-sub">Col des Prés de Fromage · 6,5 km · 500 m D+</span>
+                        </a>
+                        <a href="#randonnee-prats-hauts">
+                            <span class="drop-title">🥾 Boucle par Prats-Hauts</span>
+                            <span class="drop-sub">Via Molines-en-Queyras · 10,6 km · 520 m D+</span>
+                        </a>
+                    </div>
+                </li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -350,7 +379,7 @@
             <p class="section-intro">Le hameau de La Rua est un point de départ idéal pour partir à la découverte du Parc Naturel Régional du Queyras. À deux pas du chalet, des sentiers balisés vous emmènent vers des paysages d'exception, accessibles à tous niveaux.</p>
 
             <!-- RANDONNÉE 1 : Cabane du Clot l'Henry -->
-            <article class="trail-article" itemscope itemtype="https://schema.org/Article">
+            <article id="randonnee-clot-henry" class="trail-article" itemscope itemtype="https://schema.org/Article">
                 <div class="trail-header">
                     <div class="trail-badge">🥾 Randonnée Pédestre · Depuis le Chalet</div>
                     <h3 itemprop="name">Cabane du Clot l'Henry &amp; Col des Prés de Fromage</h3>
@@ -480,7 +509,7 @@
             </article>
 
             <!-- RANDONNÉE 2 : Boucle par Prats-Hauts -->
-            <article class="trail-article" itemscope itemtype="https://schema.org/Article">
+            <article id="randonnee-prats-hauts" class="trail-article" itemscope itemtype="https://schema.org/Article">
                 <div class="trail-header">
                     <div class="trail-badge">🥾 Randonnée Pédestre · Depuis le Chalet</div>
                     <h3 itemprop="name">Boucle par Prats-Hauts</h3>
