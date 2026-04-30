@@ -19,6 +19,38 @@
         body { font-family: 'Georgia', serif; color: var(--text); line-height: 1.6; overflow-x: hidden; }
         body.menu-open { overflow: hidden; }
 
+        /* Language Switcher */
+        .lang-bar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 1100;
+            display: flex;
+            gap: 0;
+            background: rgba(44, 62, 80, 0.92);
+            backdrop-filter: blur(10px);
+            border-bottom-left-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+        }
+        .lang-btn {
+            padding: 0.45rem 0.9rem;
+            border: none;
+            background: transparent;
+            color: rgba(255,255,255,0.65);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-family: 'Georgia', serif;
+            border-right: 1px solid rgba(255,255,255,0.1);
+            text-transform: uppercase;
+        }
+        .lang-btn:last-child { border-right: none; }
+        .lang-btn:hover { color: var(--accent); background: rgba(255,255,255,0.07); }
+        .lang-btn.active { color: var(--accent); background: rgba(212,175,55,0.15); }
+
         /* Header & Nav */
         header { position: fixed; width: 100%; top: 0; z-index: 1000; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); box-shadow: 0 2px 20px rgba(0,0,0,0.1); transition: all 0.3s ease; }
         nav { max-width: 1400px; margin: 0 auto; padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; }
@@ -201,6 +233,7 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .lang-bar { border-bottom-left-radius: 0; width: 100%; justify-content: center; }
             .hamburger { display: flex; }
             .mobile-menu-overlay { display: block; }
             nav { padding: 1rem 1.5rem; }
@@ -245,30 +278,39 @@
     </style>
 </head>
 <body>
+
+    <!-- Language Switcher -->
+    <div class="lang-bar">
+        <button class="lang-btn active" onclick="setLang('fr')">FR</button>
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('es')">ES</button>
+        <button class="lang-btn" onclick="setLang('it')">IT</button>
+    </div>
+
     <header>
         <nav>
             <div class="logo">CHALETS <span>AGNEL</span></div>
             <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
             <ul id="navMenu">
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#decouvrir">Découvrir</a></li>
-                <li><a href="#description">Le Chalet</a></li>
-                <li><a href="#galerie">Galerie</a></li>
-                <li><a href="#equipements">Équipements</a></li>
+                <li><a href="#accueil" data-i18n="nav_home">Accueil</a></li>
+                <li><a href="#decouvrir" data-i18n="nav_discover">Découvrir</a></li>
+                <li><a href="#description" data-i18n="nav_chalet">Le Chalet</a></li>
+                <li><a href="#galerie" data-i18n="nav_gallery">Galerie</a></li>
+                <li><a href="#equipements" data-i18n="nav_equipment">Équipements</a></li>
                 <li class="nav-dropdown">
-                    <a href="#randonnees">Randonnées</a>
+                    <a href="#randonnees" data-i18n="nav_hikes">Randonnées</a>
                     <div class="dropdown-menu">
                         <a href="#randonnee-clot-henry">
-                            <span class="drop-title">🥾 Cabane du Clot l'Henry</span>
-                            <span class="drop-sub">Col des Prés de Fromage · 6,5 km · 500 m D+</span>
+                            <span class="drop-title" data-i18n="drop_clot_title">🥾 Cabane du Clot l'Henry</span>
+                            <span class="drop-sub" data-i18n="drop_clot_sub">Col des Prés de Fromage · 6,5 km · 500 m D+</span>
                         </a>
                         <a href="#randonnee-prats-hauts">
-                            <span class="drop-title">🥾 Boucle par Prats-Hauts</span>
-                            <span class="drop-sub">Via Molines-en-Queyras · 10,6 km · 520 m D+</span>
+                            <span class="drop-title" data-i18n="drop_prats_title">🥾 Boucle par Prats-Hauts</span>
+                            <span class="drop-sub" data-i18n="drop_prats_sub">Via Molines-en-Queyras · 10,6 km · 520 m D+</span>
                         </a>
                     </div>
                 </li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
             </ul>
         </nav>
         <div class="mobile-menu-overlay" id="menuOverlay"></div>
@@ -277,69 +319,75 @@
     <section id="accueil" class="hero">
         <div class="hero-content">
             <h1>CHALETS AGNEL</h1>
-            <p>Authentique, Nature & Sérénité au cœur du Queyras</p>
-            <a href="#contact" class="cta-button">Réserver votre séjour</a>
+            <p data-i18n="hero_subtitle">Authentique, Nature & Sérénité au cœur du Queyras</p>
+            <a href="#contact" class="cta-button" data-i18n="hero_cta">Réserver votre séjour</a>
         </div>
     </section>
 
     <section id="decouvrir" class="intro-section">
-        <h2>Bienvenue au Cœur du Parc Naturel du Queyras</h2>
-        <p class="intro-text">Nichés au cœur du parc naturel du Queyras, les chalets Agnel vous accueillent dans une atmosphère authentique et raffinée, où le confort moderne se mêle à la douceur de la montagne.</p>
+        <h2 data-i18n="intro_title">Bienvenue au Cœur du Parc Naturel du Queyras</h2>
+        <p class="intro-text" data-i18n="intro_text">Nichés au cœur du parc naturel du Queyras, les chalets Agnel vous accueillent dans une atmosphère authentique et raffinée, où le confort moderne se mêle à la douceur de la montagne.</p>
     </section>
 
     <section class="quick-info">
-        <h2>En Bref</h2>
+        <h2 data-i18n="quickinfo_title">En Bref</h2>
         <div class="info-boxes">
-            <div class="info-box"><div class="number">4</div><h3>Chambres</h3><p>Tout confort</p></div>
-            <div class="info-box"><div class="number">8</div><h3>Personnes</h3><p>Capacité d'accueil</p></div>
-            <div class="info-box"><div class="number">1,8</div><h3>Kilomètres</h3><p>Des pistes de ski</p></div>
-            <div class="info-box"><div class="number">★★★★★</div><h3>Grand Confort</h3><p>Équipements premium</p></div>
+            <div class="info-box"><div class="number">4</div><h3 data-i18n="qi_bedrooms">Chambres</h3><p data-i18n="qi_bedrooms_sub">Tout confort</p></div>
+            <div class="info-box"><div class="number">8</div><h3 data-i18n="qi_persons">Personnes</h3><p data-i18n="qi_persons_sub">Capacité d'accueil</p></div>
+            <div class="info-box"><div class="number">1,8</div><h3 data-i18n="qi_km">Kilomètres</h3><p data-i18n="qi_km_sub">Des pistes de ski</p></div>
+            <div class="info-box"><div class="number">★★★★★</div><h3 data-i18n="qi_comfort">Grand Confort</h3><p data-i18n="qi_comfort_sub">Équipements premium</p></div>
         </div>
-        <div class="price-info">Location à la semaine : 1 450€ - 3 000€ selon saison</div>
+        <div class="price-info" data-i18n="price_info">Location à la semaine : 1 450€ - 3 000€ selon saison</div>
     </section>
 
     <section id="description" class="detailed-description">
-        <h2>Votre Havre de Paix Alpin</h2>
+        <h2 data-i18n="desc_title">Votre Havre de Paix Alpin</h2>
         <div class="description-grid">
             <div class="description-card">
-                <h3><span class="icon">🏡</span> Espace de Vie</h3>
-                <p>Dès l'entrée, la grande pièce à vivre invite au partage et à la détente. Le salon, la salle à manger et la cuisine ouverte composent un espace lumineux et convivial, prolongé par une belle terrasse extérieure en mélèze, idéale pour profiter de l'air pur et des paysages alpins.</p>
-                <p style="margin-top: 1rem;">Après une journée au grand air, retrouvez-vous autour du poêle à pellets, ou devant la TV OLED 65 pouces, pour des soirées cocooning inoubliables.</p>
+                <h3><span class="icon">🏡</span> <span data-i18n="card1_title">Espace de Vie</span></h3>
+                <p data-i18n="card1_p1">Dès l'entrée, la grande pièce à vivre invite au partage et à la détente. Le salon, la salle à manger et la cuisine ouverte composent un espace lumineux et convivial, prolongé par une belle terrasse extérieure en mélèze, idéale pour profiter de l'air pur et des paysages alpins.</p>
+                <p style="margin-top: 1rem;" data-i18n="card1_p2">Après une journée au grand air, retrouvez-vous autour du poêle à pellets, ou devant la TV OLED 65 pouces, pour des soirées cocooning inoubliables.</p>
             </div>
             <div class="description-card">
-                <h3><span class="icon">🍽️</span> Cuisine Équipée</h3>
-                <p>La cuisine, entièrement équipée avec des appareils de qualité, a été pensée pour les gourmets comme pour les grandes tablées.</p>
+                <h3><span class="icon">🍽️</span> <span data-i18n="card2_title">Cuisine Équipée</span></h3>
+                <p data-i18n="card2_p1">La cuisine, entièrement équipée avec des appareils de qualité, a été pensée pour les gourmets comme pour les grandes tablées.</p>
                 <ul>
-                    <li>Électroménager SMEG</li><li>Four à pyrolyse</li><li>Plaque à induction</li>
-                    <li>Lave-vaisselle</li><li>Machine Nespresso</li><li>Raclette & fondue</li>
+                    <li data-i18n="card2_li1">Électroménager SMEG</li>
+                    <li data-i18n="card2_li2">Four à pyrolyse</li>
+                    <li data-i18n="card2_li3">Plaque à induction</li>
+                    <li data-i18n="card2_li4">Lave-vaisselle</li>
+                    <li data-i18n="card2_li5">Machine Nespresso</li>
+                    <li data-i18n="card2_li6">Raclette & fondue</li>
                 </ul>
             </div>
             <div class="description-card">
-                <h3><span class="icon">🛏️</span> Chambres Confort</h3>
-                <p>Les chambres offrent un véritable havre de repos. Literie Bultex 5 étoiles 160×200, beaux volumes et rangements soignés garantissent des nuits réparatrices.</p>
+                <h3><span class="icon">🛏️</span> <span data-i18n="card3_title">Chambres Confort</span></h3>
+                <p data-i18n="card3_p1">Les chambres offrent un véritable havre de repos. Literie Bultex 5 étoiles 160×200, beaux volumes et rangements soignés garantissent des nuits réparatrices.</p>
                 <ul>
-                    <li>2 chambres à l'étage avec balcon et vue montagne</li>
-                    <li>1 chambre au rez-de-chaussée lit 160×200</li>
-                    <li>1 chambre avec lits superposés</li>
-                    <li>Vue sur la nature depuis chaque chambre</li>
+                    <li data-i18n="card3_li1">2 chambres à l'étage avec balcon et vue montagne</li>
+                    <li data-i18n="card3_li2">1 chambre au rez-de-chaussée lit 160×200</li>
+                    <li data-i18n="card3_li3">1 chambre avec lits superposés</li>
+                    <li data-i18n="card3_li4">Vue sur la nature depuis chaque chambre</li>
                 </ul>
             </div>
             <div class="description-card">
-                <h3><span class="icon">🚿</span> Salles de Bain</h3>
-                <p>Les salles de bain, élégantes et fonctionnelles, disposent de douches à l'italienne et de doubles vasques, pour un confort optimal, même en tribu.</p>
+                <h3><span class="icon">🚿</span> <span data-i18n="card4_title">Salles de Bain</span></h3>
+                <p data-i18n="card4_p1">Les salles de bain, élégantes et fonctionnelles, disposent de douches à l'italienne et de doubles vasques, pour un confort optimal, même en tribu.</p>
                 <ul>
-                    <li>Douches à l'italienne</li><li>Doubles vasques</li>
-                    <li>Finitions modernes</li><li>2 WC séparés (étage & RDC)</li>
+                    <li data-i18n="card4_li1">Douches à l'italienne</li>
+                    <li data-i18n="card4_li2">Doubles vasques</li>
+                    <li data-i18n="card4_li3">Finitions modernes</li>
+                    <li data-i18n="card4_li4">2 WC séparés (étage & RDC)</li>
                 </ul>
             </div>
         </div>
         <div style="text-align: center; margin-top: 4rem; max-width: 900px; margin-left: auto; margin-right: auto;">
-            <p style="font-size: 1.2rem; line-height: 2; color: var(--text); font-style: italic;">Pensé pour accueillir familles et amis en toute sérénité, le chalet Agnel est une invitation à ralentir, à se retrouver et à vivre pleinement l'expérience unique du Queyras, été comme hiver.</p>
+            <p style="font-size: 1.2rem; line-height: 2; color: var(--text); font-style: italic;" data-i18n="desc_closing">Pensé pour accueillir familles et amis en toute sérénité, le chalet Agnel est une invitation à ralentir, à se retrouver et à vivre pleinement l'expérience unique du Queyras, été comme hiver.</p>
         </div>
     </section>
 
     <section id="galerie">
-        <h2>Découvrez le Chalet</h2>
+        <h2 data-i18n="gallery_title">Découvrez le Chalet</h2>
         <div class="gallery">
             <div class="gallery-item" onclick="openLightbox(this)"><img src="https://raw.githubusercontent.com/sbrum45-boop/chalet-agnel-queyras/main/chalet%20agnel%20cuisine.jpg" alt="Cuisine et salon moderne avec poêle à granulés"></div>
             <div class="gallery-item" onclick="openLightbox(this)"><img src="https://raw.githubusercontent.com/sbrum45-boop/chalet-agnel-queyras/main/chalet%20agnel%20poele%20%C3%A0%20granul%C3%A9s.jpg" alt="Poêle à granulés design"></div>
@@ -350,7 +398,7 @@
             <div class="gallery-item" onclick="openLightbox(this)"><img src="https://raw.githubusercontent.com/sbrum45-boop/chalet-agnel-queyras/main/chalet%20agnel%20douche%20bas.jpg" alt="Douche italienne marbre"></div>
             <div class="gallery-item" onclick="openLightbox(this)"><img src="https://raw.githubusercontent.com/sbrum45-boop/chalet-agnel-queyras/main/chalet%20agnel%20salle%20de%20bain%20haut.jpg" alt="Salle de bain double vasque"></div>
             <div class="gallery-item" onclick="openLightbox(this)"><img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/Chalet%20Agnel%20neuf%20Molines%20en%20Queyras%20La%20Rua%20%C3%A0%20louer%20Sud%20%C3%A9t%C3%A9%202.webp?raw=true" alt="Vue extérieure du chalet"></div>
-            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/Molines%20Valley%20avec%20emplacement%20la%20Rua%20nom%20des%20sommets.webp?raw=true" alt="emplacement du chalet dans la vallée avec noms des sommets alentours"></div>
+            <div class="gallery-item" onclick="openLightbox(this)"><img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/Molines%20Valley%20avec%20emplacement%20la%20Rua%20nom%20des%20sommets.webp?raw=true" alt="Emplacement du chalet dans la vallée"></div>
             <div class="gallery-item" onclick="openLightbox(this)"><img src="https://raw.githubusercontent.com/sbrum05/chalet-agnel-queyras/main/Chalet%20Agnel%20neuf%20Molines%20en%20Queyras%20La%20Rua%20pi%C3%A8ce%20%C3%A0%20vivre.jpg" alt="Pièce à vivre"></div>
             <div class="gallery-item" onclick="openLightbox(this)"><img src="https://raw.githubusercontent.com/sbrum05/chalet-agnel-queyras/main/Chalet%20Agnel%20neuf%20Molines%20en%20Queyras%20La%20Rua%20%C3%A0%20louer%20salon.jpg" alt="Salon chalet"></div>
             <div class="gallery-item" onclick="openLightbox(this)"><img src="https://raw.githubusercontent.com/sbrum05/chalet-agnel-queyras/main/chalet%20neuf%20Molines%20en%20Queyras%20La%20Rua%20%C3%A0%20louer%20Chambre%201.jpg" alt="Chambre 1"></div>
@@ -359,45 +407,42 @@
     </section>
 
     <section id="equipements" class="features">
-        <h2>Équipements & Services</h2>
+        <h2 data-i18n="equip_title">Équipements & Services</h2>
         <div class="features-grid">
-            <div class="feature-card"><div class="feature-icon">🔥</div><h3>Chauffage Premium</h3><p>Poêle à granulés et chauffage au sol pour un confort optimal toute l'année</p></div>
-            <div class="feature-card"><div class="feature-icon">📺</div><h3>TV OLED 65"</h3><p>Écran OLED 65 pouces pour vos soirées cinéma en famille</p></div>
-            <div class="feature-card"><div class="feature-icon">📶</div><h3>WiFi Haut Débit</h3><p>Connexion internet pour rester connecté en pleine montagne</p></div>
-            <div class="feature-card"><div class="feature-icon">🏔️</div><h3>Proximité Pistes</h3><p>À 1,8 km de la station de ski Molines/Saint-Véran</p></div>
-            <div class="feature-card"><div class="feature-icon">🚗</div><h3>Parking Privé</h3><p>4 places de parking sécurisées</p></div>
-            <div class="feature-card"><div class="feature-icon">🛏️</div><h3>Literie 5 Étoiles</h3><p>Matelas Bultex 5 étoiles pour un sommeil parfait</p></div>
-            <div class="feature-card"><div class="feature-icon">🍽️</div><h3>Cuisine SMEG</h3><p>Électroménager haut de gamme, induction, four pyrolyse</p></div>
-            <div class="feature-card"><div class="feature-icon">🌲</div><h3>Mélèze Authentique</h3><p>Construction neuve en bois noble des Alpes</p></div>
-            <div class="feature-card"><div class="feature-icon">☕</div><h3>Machine Nespresso</h3><p>Café de qualité pour bien commencer la journée</p></div>
+            <div class="feature-card"><div class="feature-icon">🔥</div><h3 data-i18n="eq1_title">Chauffage Premium</h3><p data-i18n="eq1_desc">Poêle à granulés et chauffage au sol pour un confort optimal toute l'année</p></div>
+            <div class="feature-card"><div class="feature-icon">📺</div><h3 data-i18n="eq2_title">TV OLED 65"</h3><p data-i18n="eq2_desc">Écran OLED 65 pouces pour vos soirées cinéma en famille</p></div>
+            <div class="feature-card"><div class="feature-icon">📶</div><h3 data-i18n="eq3_title">WiFi Haut Débit</h3><p data-i18n="eq3_desc">Connexion internet pour rester connecté en pleine montagne</p></div>
+            <div class="feature-card"><div class="feature-icon">🏔️</div><h3 data-i18n="eq4_title">Proximité Pistes</h3><p data-i18n="eq4_desc">À 1,8 km de la station de ski Molines/Saint-Véran</p></div>
+            <div class="feature-card"><div class="feature-icon">🚗</div><h3 data-i18n="eq5_title">Parking Privé</h3><p data-i18n="eq5_desc">4 places de parking sécurisées</p></div>
+            <div class="feature-card"><div class="feature-icon">🛏️</div><h3 data-i18n="eq6_title">Literie 5 Étoiles</h3><p data-i18n="eq6_desc">Matelas Bultex 5 étoiles pour un sommeil parfait</p></div>
+            <div class="feature-card"><div class="feature-icon">🍽️</div><h3 data-i18n="eq7_title">Cuisine SMEG</h3><p data-i18n="eq7_desc">Électroménager haut de gamme, induction, four pyrolyse</p></div>
+            <div class="feature-card"><div class="feature-icon">🌲</div><h3 data-i18n="eq8_title">Mélèze Authentique</h3><p data-i18n="eq8_desc">Construction neuve en bois noble des Alpes</p></div>
+            <div class="feature-card"><div class="feature-icon">☕</div><h3 data-i18n="eq9_title">Machine Nespresso</h3><p data-i18n="eq9_desc">Café de qualité pour bien commencer la journée</p></div>
         </div>
     </section>
 
     <div id="randonnees" class="randonnees-section">
         <div class="randonnees-inner">
-            <h2>Randonnées & Activités</h2>
-            <p class="section-intro">Le hameau de La Rua est un point de départ idéal pour partir à la découverte du Parc Naturel Régional du Queyras. À deux pas du chalet, des sentiers balisés vous emmènent vers des paysages d'exception, accessibles à tous niveaux.</p>
+            <h2 data-i18n="hikes_title">Randonnées & Activités</h2>
+            <p class="section-intro" data-i18n="hikes_intro">Le hameau de La Rua est un point de départ idéal pour partir à la découverte du Parc Naturel Régional du Queyras. À deux pas du chalet, des sentiers balisés vous emmènent vers des paysages d'exception, accessibles à tous niveaux.</p>
 
-            <!-- RANDONNÉE 1 : Cabane du Clot l'Henry -->
-            <article id="randonnee-clot-henry" class="trail-article" itemscope itemtype="https://schema.org/Article">
+            <!-- RANDONNÉE 1 -->
+            <article id="randonnee-clot-henry" class="trail-article">
                 <div class="trail-header">
-                    <div class="trail-badge">🥾 Randonnée Pédestre · Depuis le Chalet</div>
-                    <h3 itemprop="name">Cabane du Clot l'Henry &amp; Col des Prés de Fromage</h3>
-                    <p class="trail-subtitle">Une boucle emblématique au cœur du Bois de Saint-Simon, au départ du hameau de La Rua</p>
+                    <div class="trail-badge" data-i18n="t1_badge">🥾 Randonnée Pédestre · Depuis le Chalet</div>
+                    <h3>Cabane du Clot l'Henry &amp; Col des Prés de Fromage</h3>
+                    <p class="trail-subtitle" data-i18n="t1_subtitle">Une boucle emblématique au cœur du Bois de Saint-Simon, au départ du hameau de La Rua</p>
                 </div>
-
                 <div class="trail-stats">
-                    <div class="stat-item"><div class="stat-icon">📍</div><span class="stat-value">6,5 km</span><span class="stat-label">Distance</span></div>
-                    <div class="stat-item"><div class="stat-icon">⬆️</div><span class="stat-value">500 m</span><span class="stat-label">Dénivelé +</span></div>
-                    <div class="stat-item"><div class="stat-icon">⏱️</div><span class="stat-value">3 h</span><span class="stat-label">Durée</span></div>
-                    <div class="stat-item"><div class="stat-icon">🏔️</div><span class="stat-value">2 146 m</span><span class="stat-label">Point haut</span></div>
-                    <div class="stat-item"><div class="stat-icon">🟢</div><span class="stat-value">Facile</span><span class="stat-label">Difficulté</span></div>
-                    <div class="stat-item"><div class="stat-icon">📅</div><span class="stat-value">Juin–Oct.</span><span class="stat-label">Meilleure période</span></div>
+                    <div class="stat-item"><div class="stat-icon">📍</div><span class="stat-value">6,5 km</span><span class="stat-label" data-i18n="stat_distance">Distance</span></div>
+                    <div class="stat-item"><div class="stat-icon">⬆️</div><span class="stat-value">500 m</span><span class="stat-label" data-i18n="stat_elevation">Dénivelé +</span></div>
+                    <div class="stat-item"><div class="stat-icon">⏱️</div><span class="stat-value">3 h</span><span class="stat-label" data-i18n="stat_duration">Durée</span></div>
+                    <div class="stat-item"><div class="stat-icon">🏔️</div><span class="stat-value">2 146 m</span><span class="stat-label" data-i18n="stat_highpoint">Point haut</span></div>
+                    <div class="stat-item"><div class="stat-icon">🟢</div><span class="stat-value" data-i18n="stat_easy">Facile</span><span class="stat-label" data-i18n="stat_difficulty">Difficulté</span></div>
+                    <div class="stat-item"><div class="stat-icon">📅</div><span class="stat-value">Juin–Oct.</span><span class="stat-label" data-i18n="stat_season">Meilleure période</span></div>
                 </div>
-
-                <div class="trail-body" itemprop="articleBody">
-                    <p>Partez directement depuis le chalet, longer l'Aigue Blanche depuis le Pont des Achins, et rejoignez l'un des itinéraires les plus bucoliques du Queyras. Cette randonnée en boucle vous conduit à travers les mélézins dorés du Bois de Saint-Simon jusqu'à la cabane du Clot l'Henry, petite merveille du patrimoine pastoral restaurée avec amour par les habitants de Molines, avant d'atteindre le col des Prés de Fromage et ses panoramas à couper le souffle.</p>
-
+                <div class="trail-body">
+                    <p data-i18n="t1_p1">Partez directement depuis le chalet, longer l'Aigue Blanche depuis le Pont des Achins, et rejoignez l'un des itinéraires les plus bucoliques du Queyras. Cette randonnée en boucle vous conduit à travers les mélézins dorés du Bois de Saint-Simon jusqu'à la cabane du Clot l'Henry, petite merveille du patrimoine pastoral restaurée avec amour par les habitants de Molines, avant d'atteindre le col des Prés de Fromage et ses panoramas à couper le souffle.</p>
                     <div class="trail-gallery" id="trailGallery">
                         <div class="trail-gallery-item" onclick="openLightbox(this)">
                             <img src="https://raw.githubusercontent.com/sbrum05/chalet-agnel-queyras/main/cabane%20Clos%20l%27Henry%202.jpeg" alt="Cabane du Clot l'Henry dans sa clairière fleurie avec vue sur les sommets enneigés">
@@ -424,110 +469,101 @@
                             <div class="overlay"><span>🔍</span><span class="img-caption">Descente col du pré fromage, vue sur Molines</span></div>
                         </div>
                     </div>
-
-                    <p>La cabane du Clot l'Henry est une ancienne bâtisse pastorale, désaffectée depuis les années 80 et réhabilitée en 2009-2010 grâce aux bénévoles de l'association des Amis de Saint-Simon. Nichée à 2 090 mètres d'altitude dans une vaste clairière verdoyante, elle offre une vue imprenable sur la Montagne de Beauregard et la vallée de l'Agnel. Une fontaine, des tables de pique-nique, un barbecue et même quatre couchages en font une étape idéale pour se ressourcer — ou bivouaquer sous les étoiles. L'accès est libre, les dons bienvenus.</p>
-
-                    <p>En poursuivant vers le col des Prés de Fromage (2 146 m), carrefour du GRP® Tour de la Dent de Ratier balisé rouge-jaune, le panorama s'étend sur les sommets emblématiques du Queyras. Les plus aventureux pourront pousser jusqu'au Sommet Bucher et son ancien poste optique, pour un supplément de trente minutes et une vue à 360° qui restera gravée dans les mémoires.</p>
-
+                    <p data-i18n="t1_p2">La cabane du Clot l'Henry est une ancienne bâtisse pastorale, désaffectée depuis les années 80 et réhabilitée en 2009-2010 grâce aux bénévoles de l'association des Amis de Saint-Simon. Nichée à 2 090 mètres d'altitude dans une vaste clairière verdoyante, elle offre une vue imprenable sur la Montagne de Beauregard et la vallée de l'Agnel. Une fontaine, des tables de pique-nique, un barbecue et même quatre couchages en font une étape idéale pour se ressourcer — ou bivouaquer sous les étoiles. L'accès est libre, les dons bienvenus.</p>
+                    <p data-i18n="t1_p3">En poursuivant vers le col des Prés de Fromage (2 146 m), carrefour du GRP® Tour de la Dent de Ratier balisé rouge-jaune, le panorama s'étend sur les sommets emblématiques du Queyras. Les plus aventureux pourront pousser jusqu'au Sommet Bucher et son ancien poste optique, pour un supplément de trente minutes et une vue à 360° qui restera gravée dans les mémoires.</p>
                     <div class="trail-steps">
-                        <h4>🗺️ Itinéraire pas à pas</h4>
+                        <h4 data-i18n="steps_title">🗺️ Itinéraire pas à pas</h4>
                         <ol class="steps-list">
                             <li>
                                 <div class="step-dot start">▶</div>
-                                <div class="step-text"><strong>Départ — Chalet Agnel, La Rua (1 740 m)</strong>Rejoindre le Pont des Achins depuis le chalet. Suivre le balisage jaune PR en direction de la Cabane du Clot l'Henry.</div>
+                                <div class="step-text"><strong data-i18n="t1_s0_title">Départ — Chalet Agnel, La Rua (1 740 m)</strong><span data-i18n="t1_s0_desc">Rejoindre le Pont des Achins depuis le chalet. Suivre le balisage jaune PR en direction de la Cabane du Clot l'Henry.</span></div>
                             </li>
                             <li>
                                 <div class="step-dot">1</div>
-                                <div class="step-text"><strong>Pont du Moulin — bifurcation (1 740 m)</strong>Au niveau du panneau directionnel, prendre la direction Col des Prés de Fromage / Bois de l'Eyssard.</div>
+                                <div class="step-text"><strong data-i18n="t1_s1_title">Pont du Moulin — bifurcation (1 740 m)</strong><span data-i18n="t1_s1_desc">Au niveau du panneau directionnel, prendre la direction Col des Prés de Fromage / Bois de l'Eyssard.</span></div>
                             </li>
                             <li>
                                 <div class="step-dot">2</div>
-                                <div class="step-text"><strong>Montée dans le mélézin</strong>Le sentier s'élève régulièrement à travers la forêt de mélèzes. Sources nombreuses sur le chemin — eau potable disponible tout au long du parcours.</div>
+                                <div class="step-text"><strong data-i18n="t1_s2_title">Montée dans le mélézin</strong><span data-i18n="t1_s2_desc">Le sentier s'élève régulièrement à travers la forêt de mélèzes. Sources nombreuses sur le chemin — eau potable disponible tout au long du parcours.</span></div>
                             </li>
                             <li>
                                 <div class="step-dot">3</div>
-                                <div class="step-text"><strong>Cabane du Clot l'Henry (2 090 m)</strong>Bifurquer à gauche au panneau. La cabane apparaît dans sa clairière après quelques pas. Étape idéale pour un pique-nique face aux montagnes.</div>
+                                <div class="step-text"><strong data-i18n="t1_s3_title">Cabane du Clot l'Henry (2 090 m)</strong><span data-i18n="t1_s3_desc">Bifurquer à gauche au panneau. La cabane apparaît dans sa clairière après quelques pas. Étape idéale pour un pique-nique face aux montagnes.</span></div>
                             </li>
                             <li>
                                 <div class="step-dot">4</div>
-                                <div class="step-text"><strong>Col des Prés de Fromage (2 146 m)</strong>Rejoindre le GRP® (balisage rouge-jaune). Panorama exceptionnel. Option : Sommet Bucher (+30 min, vue 360°).</div>
+                                <div class="step-text"><strong data-i18n="t1_s4_title">Col des Prés de Fromage (2 146 m)</strong><span data-i18n="t1_s4_desc">Rejoindre le GRP® (balisage rouge-jaune). Panorama exceptionnel. Option : Sommet Bucher (+30 min, vue 360°).</span></div>
                             </li>
                             <li>
                                 <div class="step-dot end">⬛</div>
-                                <div class="step-text"><strong>Retour — La Rua / La Chalp</strong>Descente par le Bois de Saint-Simon vers Molines ou retour sur le même sentier. Longer l'Aigue Blanche jusqu'au chalet.</div>
+                                <div class="step-text"><strong data-i18n="t1_s5_title">Retour — La Rua / La Chalp</strong><span data-i18n="t1_s5_desc">Descente par le Bois de Saint-Simon vers Molines ou retour sur le même sentier. Longer l'Aigue Blanche jusqu'au chalet.</span></div>
                             </li>
                         </ol>
                     </div>
-
                     <div class="trail-info-box">
                         <div class="info-card green">
-                            <h4>✅ Points forts</h4>
+                            <h4 data-i18n="highlights_title">✅ Points forts</h4>
                             <ul>
-                                <li>Départ direct depuis le chalet</li>
-                                <li>Sources d'eau tout au long du parcours</li>
-                                <li>Cabane ouverte & gratuite (dons appréciés)</li>
-                                <li>Accessible aux enfants dès 6 ans</li>
-                                <li>Marmottes fréquentes sur le parcours</li>
-                                <li>Balisage clair et entretenu</li>
+                                <li data-i18n="t1_hl1">Départ direct depuis le chalet</li>
+                                <li data-i18n="t1_hl2">Sources d'eau tout au long du parcours</li>
+                                <li data-i18n="t1_hl3">Cabane ouverte & gratuite (dons appréciés)</li>
+                                <li data-i18n="t1_hl4">Accessible aux enfants dès 6 ans</li>
+                                <li data-i18n="t1_hl5">Marmottes fréquentes sur le parcours</li>
+                                <li data-i18n="t1_hl6">Balisage clair et entretenu</li>
                             </ul>
                         </div>
                         <div class="info-card gold">
-                            <h4>💡 Conseils pratiques</h4>
+                            <h4 data-i18n="tips_title">💡 Conseils pratiques</h4>
                             <ul>
-                                <li>Prévoir un pique-nique pour la cabane</li>
-                                <li>Chaussures de randonnée recommandées</li>
-                                <li>Partir tôt en été (forte fréquentation)</li>
-                                <li>Préférer l'intersaison pour la tranquillité</li>
-                                <li>Possible en raquettes l'hiver</li>
-                                <li>Dons bienvenus à la cabane (urne sur place)</li>
+                                <li data-i18n="t1_tip1">Prévoir un pique-nique pour la cabane</li>
+                                <li data-i18n="t1_tip2">Chaussures de randonnée recommandées</li>
+                                <li data-i18n="t1_tip3">Partir tôt en été (forte fréquentation)</li>
+                                <li data-i18n="t1_tip4">Préférer l'intersaison pour la tranquillité</li>
+                                <li data-i18n="t1_tip5">Possible en raquettes l'hiver</li>
+                                <li data-i18n="t1_tip6">Dons bienvenus à la cabane (urne sur place)</li>
                             </ul>
                         </div>
                     </div>
-
                     <div class="trail-maps">
-                        <h4>🗺️ Carte &amp; Profil du Parcours</h4>
+                        <h4 data-i18n="map_title">🗺️ Carte & Profil du Parcours</h4>
                         <div class="maps-grid">
                             <div class="map-item" onclick="openLightbox(this)">
                                 <img src="https://raw.githubusercontent.com/sbrum05/chalet-agnel-queyras/main/parcours%20randonn%C3%A9e%20col%20pr%C3%A9%20fromage%202D.webp" alt="Carte 2D du parcours Col des Prés de Fromage depuis La Rua">
-                                <div class="map-label">Vue satellite 2D · Trace GPS</div>
+                                <div class="map-label" data-i18n="map1_label">Vue satellite 2D · Trace GPS</div>
                             </div>
                             <div class="map-item" onclick="openLightbox(this)">
                                 <img src="https://raw.githubusercontent.com/sbrum05/chalet-agnel-queyras/main/photo%203D%20col%20pr%C3%A9%20fromage%20la%20rua.webp" alt="Vue 3D du parcours Col des Prés de Fromage au départ de La Rua">
-                                <div class="map-label">Vue 3D · Profil altimétrique</div>
+                                <div class="map-label" data-i18n="map2_label">Vue 3D · Profil altimétrique</div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="trail-footer">
-                    <span class="trail-footer-text">Retrouvez la trace GPS complète sur Strava · Balisage jaune PR depuis La Rua</span>
+                    <span class="trail-footer-text" data-i18n="t1_footer">Retrouvez la trace GPS complète sur Strava · Balisage jaune PR depuis La Rua</span>
                     <a href="https://strava.app.link/jsUkRdNTk1b" target="_blank" rel="noopener" class="strava-btn">
                         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0 5 13.827h4.172"/></svg>
-                        Voir la trace sur Strava
+                        <span data-i18n="strava_btn">Voir la trace sur Strava</span>
                     </a>
                 </div>
             </article>
 
-            <!-- RANDONNÉE 2 : Boucle par Prats-Hauts -->
-            <article id="randonnee-prats-hauts" class="trail-article" itemscope itemtype="https://schema.org/Article">
+            <!-- RANDONNÉE 2 -->
+            <article id="randonnee-prats-hauts" class="trail-article">
                 <div class="trail-header">
-                    <div class="trail-badge">🥾 Randonnée Pédestre · Depuis le Chalet</div>
-                    <h3 itemprop="name">Boucle par Prats-Hauts</h3>
-                    <p class="trail-subtitle">Un circuit agréable entre forêt, canal d'irrigation et hameaux perchés</p>
+                    <div class="trail-badge" data-i18n="t2_badge">🥾 Randonnée Pédestre · Depuis le Chalet</div>
+                    <h3>Boucle par Prats-Hauts</h3>
+                    <p class="trail-subtitle" data-i18n="t2_subtitle">Un circuit agréable entre forêt, canal d'irrigation et hameaux perchés</p>
                 </div>
-
                 <div class="trail-stats">
-                    <div class="stat-item"><div class="stat-icon">📍</div><span class="stat-value">10,6 km</span><span class="stat-label">Distance</span></div>
-                    <div class="stat-item"><div class="stat-icon">⬆️</div><span class="stat-value">520 m</span><span class="stat-label">Dénivelé +</span></div>
-                    <div class="stat-item"><div class="stat-icon">⏱️</div><span class="stat-value">3 h 30</span><span class="stat-label">Durée</span></div>
-                    <div class="stat-item"><div class="stat-icon">🏔️</div><span class="stat-value">2 002 m</span><span class="stat-label">Point haut</span></div>
-                    <div class="stat-item"><div class="stat-icon">🟢</div><span class="stat-value">Facile</span><span class="stat-label">Difficulté</span></div>
-                    <div class="stat-item"><div class="stat-icon">📅</div><span class="stat-value">Avr.–Nov.</span><span class="stat-label">Meilleure période</span></div>
+                    <div class="stat-item"><div class="stat-icon">📍</div><span class="stat-value">10,6 km</span><span class="stat-label" data-i18n="stat_distance">Distance</span></div>
+                    <div class="stat-item"><div class="stat-icon">⬆️</div><span class="stat-value">520 m</span><span class="stat-label" data-i18n="stat_elevation">Dénivelé +</span></div>
+                    <div class="stat-item"><div class="stat-icon">⏱️</div><span class="stat-value">3 h 30</span><span class="stat-label" data-i18n="stat_duration">Durée</span></div>
+                    <div class="stat-item"><div class="stat-icon">🏔️</div><span class="stat-value">2 002 m</span><span class="stat-label" data-i18n="stat_highpoint">Point haut</span></div>
+                    <div class="stat-item"><div class="stat-icon">🟢</div><span class="stat-value" data-i18n="stat_easy">Facile</span><span class="stat-label" data-i18n="stat_difficulty">Difficulté</span></div>
+                    <div class="stat-item"><div class="stat-icon">📅</div><span class="stat-value">Avr.–Nov.</span><span class="stat-label" data-i18n="stat_season">Meilleure période</span></div>
                 </div>
-
-                <div class="trail-body" itemprop="articleBody">
-                    <p>Depuis le hameau de La Rua, cette boucle familiale vous entraîne à la découverte de l'un des plus beaux coins entre Molines-en-Queyras et Aiguilles, en passant par le charmant hameau perché de Prats-Hauts. Exposé plein ouest face au Sommet Bucher, ce petit village d'une vingtaine d'âmes offre une vue imprenable sur les crêtes et les alpages qui le dominent, dans un calme absolu propice à la contemplation.</p>
-
+                <div class="trail-body">
+                    <p data-i18n="t2_p1">Depuis le hameau de La Rua, cette boucle familiale vous entraîne à la découverte de l'un des plus beaux coins entre Molines-en-Queyras et Aiguilles, en passant par le charmant hameau perché de Prats-Hauts. Exposé plein ouest face au Sommet Bucher, ce petit village d'une vingtaine d'âmes offre une vue imprenable sur les crêtes et les alpages qui le dominent, dans un calme absolu propice à la contemplation.</p>
                     <div class="trail-gallery" id="trailGallery2">
                         <div class="trail-gallery-item" onclick="openLightbox(this)">
                             <img src="https://github.com/sbrum05/chalet-agnel-queyras/blob/main/randonn%C3%A9e%20pra%20haut%201.jpg?raw=true" alt="Vue sur les alpages et sommets du Queyras depuis le sentier de Prats-Hauts">
@@ -550,82 +586,76 @@
                             <div class="overlay"><span>🔍</span><span class="img-caption">Boucle par Prats-Hauts depuis La Rua</span></div>
                         </div>
                     </div>
-
-                    <p>Le chemin serpente d'abord à travers la forêt de mélèzes, longeant par endroits l'ancien canal d'irrigation qui alimentait autrefois les hameaux alentour — un vestige du génie hydraulique paysan du Queyras. La montée vers Prats-Hauts est régulière et accessible à toute la famille, récompensée par un panorama exceptionnel sur les grandes crêtes du parc et les vallons boisés en contrebas.</p>
-
-                    <p>La descente, elle, vous ramène par les prés en pente douce, traversant une succession de paysages ouverts où la faune alpine est régulièrement observée : écurueils, chevreuils, rapaces planant. Une randonnée parfaite pour une matinée sportive ou une promenade digestive en début d'après-midi.</p>
-
+                    <p data-i18n="t2_p2">Le chemin serpente d'abord à travers la forêt de mélèzes, longeant par endroits l'ancien canal d'irrigation qui alimentait autrefois les hameaux alentour — un vestige du génie hydraulique paysan du Queyras. La montée vers Prats-Hauts est régulière et accessible à toute la famille, récompensée par un panorama exceptionnel sur les grandes crêtes du parc et les vallons boisés en contrebas.</p>
+                    <p data-i18n="t2_p3">La descente, elle, vous ramène par les prés en pente douce, traversant une succession de paysages ouverts où la faune alpine est régulièrement observée : écureuils, chevreuils, rapaces planant. Une randonnée parfaite pour une matinée sportive ou une promenade digestive en début d'après-midi.</p>
                     <div class="trail-steps">
-                        <h4>🗺️ Itinéraire pas à pas</h4>
+                        <h4 data-i18n="steps_title">🗺️ Itinéraire pas à pas</h4>
                         <ol class="steps-list">
                             <li>
                                 <div class="step-dot start">▶</div>
-                                <div class="step-text"><strong>Départ — Chalet Agnel, La Rua (1 740 m)</strong>Rejoindre le bourg de Molines-en-Queyras par la route. Depuis Molines, suivre la direction de Prats-Hauts (panneau directionnel au centre du village).</div>
+                                <div class="step-text"><strong data-i18n="t2_s0_title">Départ — Chalet Agnel, La Rua (1 740 m)</strong><span data-i18n="t2_s0_desc">Rejoindre le bourg de Molines-en-Queyras par la route. Depuis Molines, suivre la direction de Prats-Hauts (panneau directionnel au centre du village).</span></div>
                             </li>
                             <li>
                                 <div class="step-dot">1</div>
-                                <div class="step-text"><strong>Montée vers Gaudissard</strong>Le sentier s'élève progressivement à travers la forêt. Longer par endroits l'ancien canal d'irrigation, témoin du savoir-faire hydraulique des anciens habitants du Queyras.</div>
+                                <div class="step-text"><strong data-i18n="t2_s1_title">Montée vers Gaudissard</strong><span data-i18n="t2_s1_desc">Le sentier s'élève progressivement à travers la forêt. Longer par endroits l'ancien canal d'irrigation, témoin du savoir-faire hydraulique des anciens habitants du Queyras.</span></div>
                             </li>
                             <li>
                                 <div class="step-dot">2</div>
-                                <div class="step-text"><strong>Hameau de Prats-Hauts (1 900 m env.)</strong>Traverser le hameau de Prats-Hauts et rejoindre la petite place carrefour. Fontaine sur place! Vue magnifique plein ouest sur le Sommet Bucher et les crêtes environnantes. Pause panorama recommandée.</div>
+                                <div class="step-text"><strong data-i18n="t2_s2_title">Hameau de Prats-Hauts (1 900 m env.)</strong><span data-i18n="t2_s2_desc">Traverser le hameau de Prats-Hauts et rejoindre la petite place carrefour. Fontaine sur place ! Vue magnifique plein ouest sur le Sommet Bucher et les crêtes environnantes.</span></div>
                             </li>
                             <li>
                                 <div class="step-dot">3</div>
-                                <div class="step-text"><strong>Descente</strong>Descente progressive par les prés et les zones boisées. Joli sentier typique du Queyras au milieu des mélèzes.</div>
+                                <div class="step-text"><strong data-i18n="t2_s3_title">Descente</strong><span data-i18n="t2_s3_desc">Descente progressive par les prés et les zones boisées. Joli sentier typique du Queyras au milieu des mélèzes.</span></div>
                             </li>
                             <li>
                                 <div class="step-dot end">⬛</div>
-                                <div class="step-text"><strong>Retour — La Rua / Chalet Agnel</strong>Rejoindre la Rua par la piste forestière et longer la route jusqu'au hameau de La Rua et au chalet.</div>
+                                <div class="step-text"><strong data-i18n="t2_s4_title">Retour — La Rua / Chalet Agnel</strong><span data-i18n="t2_s4_desc">Rejoindre la Rua par la piste forestière et longer la route jusqu'au hameau de La Rua et au chalet.</span></div>
                             </li>
                         </ol>
                     </div>
-
                     <div class="trail-info-box">
                         <div class="info-card green">
-                            <h4>✅ Points forts</h4>
+                            <h4 data-i18n="highlights_title">✅ Points forts</h4>
                             <ul>
-                                <li>Circuit idéal pour les familles</li>
-                                <li>Découverte de l'architecture typique du Queyras</li>
-                                <li>Vue imprenable sur le Sommet Bucher</li>
-                                <li>Faune alpine abondante (oiseaux, chevreuils, écureuils, rapaces)</li>
-                                <li>Ancien canal d'irrigation historique</li>
-                                <li>Accessible dès le printemps (dès avril)</li>
+                                <li data-i18n="t2_hl1">Circuit idéal pour les familles</li>
+                                <li data-i18n="t2_hl2">Découverte de l'architecture typique du Queyras</li>
+                                <li data-i18n="t2_hl3">Vue imprenable sur le Sommet Bucher</li>
+                                <li data-i18n="t2_hl4">Faune alpine abondante (oiseaux, chevreuils, écureuils, rapaces)</li>
+                                <li data-i18n="t2_hl5">Ancien canal d'irrigation historique</li>
+                                <li data-i18n="t2_hl6">Accessible dès le printemps (dès avril)</li>
                             </ul>
                         </div>
                         <div class="info-card gold">
-                            <h4>💡 Conseils pratiques</h4>
+                            <h4 data-i18n="tips_title">💡 Conseils pratiques</h4>
                             <ul>
-                                <li>Départ recommandé depuis Molines en sens horaire</li>
-                                <li>Chaussures de randonnée conseillées</li>
-                                <li>Sentiers parfois verglacés hors saison estivale</li>
-                                <li>Préférer le matin pour la lumière sur les crêtes</li>
-                                <li>Carte IGN 3637OT recommandée</li>
-                                <li>Possible en raquettes en hiver</li>
+                                <li data-i18n="t2_tip1">Départ recommandé depuis Molines en sens horaire</li>
+                                <li data-i18n="t2_tip2">Chaussures de randonnée conseillées</li>
+                                <li data-i18n="t2_tip3">Sentiers parfois verglacés hors saison estivale</li>
+                                <li data-i18n="t2_tip4">Préférer le matin pour la lumière sur les crêtes</li>
+                                <li data-i18n="t2_tip5">Carte IGN 3637OT recommandée</li>
+                                <li data-i18n="t2_tip6">Possible en raquettes en hiver</li>
                             </ul>
                         </div>
                     </div>
                 </div>
-
                 <div class="trail-footer">
-                    <span class="trail-footer-text">Retrouvez la trace GPS complète sur Strava · Boucle au départ de La Rua via Molines</span>
+                    <span class="trail-footer-text" data-i18n="t2_footer">Retrouvez la trace GPS complète sur Strava · Boucle au départ de La Rua via Molines</span>
                     <a href="https://www.strava.com/activities/17722410161" target="_blank" rel="noopener" class="strava-btn">
                         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0 5 13.827h4.172"/></svg>
-                        Voir la trace sur Strava
+                        <span data-i18n="strava_btn">Voir la trace sur Strava</span>
                     </a>
                 </div>
             </article>
-
         </div>
     </div>
 
     <section id="contact" class="contact">
-        <h2>Réservez Votre Séjour</h2>
-        <p style="font-size: 1.2rem; margin-bottom: 2rem;">Contactez-nous pour connaître nos disponibilités et tarifs</p>
+        <h2 data-i18n="contact_title">Réservez Votre Séjour</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 2rem;" data-i18n="contact_subtitle">Contactez-nous pour connaître nos disponibilités et tarifs</p>
         <div class="contact-info">
-            <div class="contact-item"><h3>Email</h3><a href="mailto:contact@chalets-agnel-queyras.fr">contact@chalets-agnel-queyras.fr</a></div>
-            <div class="contact-item"><h3>Adresse</h3><p>32 Rue de Saint Romain<br>La Rua, Molines-en-Queyras<br>05350 Hautes-Alpes</p></div>
-            <div class="contact-item"><h3>Tarifs</h3><p>Location à la semaine<br>1 450€ - 3 000€<br><small>Selon saison</small></p></div>
+            <div class="contact-item"><h3 data-i18n="contact_email">Email</h3><a href="mailto:contact@chalets-agnel-queyras.fr">contact@chalets-agnel-queyras.fr</a></div>
+            <div class="contact-item"><h3 data-i18n="contact_address">Adresse</h3><p>32 Rue de Saint Romain<br>La Rua, Molines-en-Queyras<br>05350 Hautes-Alpes</p></div>
+            <div class="contact-item"><h3 data-i18n="contact_rates">Tarifs</h3><p data-i18n="contact_rates_detail">Location à la semaine<br>1 450€ - 3 000€<br><small>Selon saison</small></p></div>
         </div>
     </section>
 
@@ -636,76 +666,471 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 Chalets Agnel - Tous droits réservés | Location Grand Confort & Randonnées dans le Queyras</p>
+        <p data-i18n="footer_text">&copy; 2026 Chalets Agnel - Tous droits réservés | Location Grand Confort & Randonnées dans le Queyras</p>
     </footer>
 
     <script>
-        // Menu hamburger
-        const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('navMenu');
-        const menuOverlay = document.getElementById('menuOverlay');
-
-        function toggleMenu() {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            menuOverlay.classList.toggle('active');
-            document.body.classList.toggle('menu-open');
+    // =============================================
+    // TRANSLATIONS
+    // =============================================
+    const translations = {
+        fr: {
+            nav_home: "Accueil", nav_discover: "Découvrir", nav_chalet: "Le Chalet",
+            nav_gallery: "Galerie", nav_equipment: "Équipements", nav_hikes: "Randonnées", nav_contact: "Contact",
+            drop_clot_title: "🥾 Cabane du Clot l'Henry", drop_clot_sub: "Col des Prés de Fromage · 6,5 km · 500 m D+",
+            drop_prats_title: "🥾 Boucle par Prats-Hauts", drop_prats_sub: "Via Molines-en-Queyras · 10,6 km · 520 m D+",
+            hero_subtitle: "Authentique, Nature & Sérénité au cœur du Queyras",
+            hero_cta: "Réserver votre séjour",
+            intro_title: "Bienvenue au Cœur du Parc Naturel du Queyras",
+            intro_text: "Nichés au cœur du parc naturel du Queyras, les chalets Agnel vous accueillent dans une atmosphère authentique et raffinée, où le confort moderne se mêle à la douceur de la montagne.",
+            quickinfo_title: "En Bref",
+            qi_bedrooms: "Chambres", qi_bedrooms_sub: "Tout confort",
+            qi_persons: "Personnes", qi_persons_sub: "Capacité d'accueil",
+            qi_km: "Kilomètres", qi_km_sub: "Des pistes de ski",
+            qi_comfort: "Grand Confort", qi_comfort_sub: "Équipements premium",
+            price_info: "Location à la semaine : 1 450€ - 3 000€ selon saison",
+            desc_title: "Votre Havre de Paix Alpin",
+            card1_title: "Espace de Vie",
+            card1_p1: "Dès l'entrée, la grande pièce à vivre invite au partage et à la détente. Le salon, la salle à manger et la cuisine ouverte composent un espace lumineux et convivial, prolongé par une belle terrasse extérieure en mélèze, idéale pour profiter de l'air pur et des paysages alpins.",
+            card1_p2: "Après une journée au grand air, retrouvez-vous autour du poêle à pellets, ou devant la TV OLED 65 pouces, pour des soirées cocooning inoubliables.",
+            card2_title: "Cuisine Équipée",
+            card2_p1: "La cuisine, entièrement équipée avec des appareils de qualité, a été pensée pour les gourmets comme pour les grandes tablées.",
+            card2_li1: "Électroménager SMEG", card2_li2: "Four à pyrolyse", card2_li3: "Plaque à induction",
+            card2_li4: "Lave-vaisselle", card2_li5: "Machine Nespresso", card2_li6: "Raclette & fondue",
+            card3_title: "Chambres Confort",
+            card3_p1: "Les chambres offrent un véritable havre de repos. Literie Bultex 5 étoiles 160×200, beaux volumes et rangements soignés garantissent des nuits réparatrices.",
+            card3_li1: "2 chambres à l'étage avec balcon et vue montagne", card3_li2: "1 chambre au rez-de-chaussée lit 160×200",
+            card3_li3: "1 chambre avec lits superposés", card3_li4: "Vue sur la nature depuis chaque chambre",
+            card4_title: "Salles de Bain",
+            card4_p1: "Les salles de bain, élégantes et fonctionnelles, disposent de douches à l'italienne et de doubles vasques, pour un confort optimal, même en tribu.",
+            card4_li1: "Douches à l'italienne", card4_li2: "Doubles vasques", card4_li3: "Finitions modernes", card4_li4: "2 WC séparés (étage & RDC)",
+            desc_closing: "Pensé pour accueillir familles et amis en toute sérénité, le chalet Agnel est une invitation à ralentir, à se retrouver et à vivre pleinement l'expérience unique du Queyras, été comme hiver.",
+            gallery_title: "Découvrez le Chalet",
+            equip_title: "Équipements & Services",
+            eq1_title: "Chauffage Premium", eq1_desc: "Poêle à granulés et chauffage au sol pour un confort optimal toute l'année",
+            eq2_title: "TV OLED 65\"", eq2_desc: "Écran OLED 65 pouces pour vos soirées cinéma en famille",
+            eq3_title: "WiFi Haut Débit", eq3_desc: "Connexion internet pour rester connecté en pleine montagne",
+            eq4_title: "Proximité Pistes", eq4_desc: "À 1,8 km de la station de ski Molines/Saint-Véran",
+            eq5_title: "Parking Privé", eq5_desc: "4 places de parking sécurisées",
+            eq6_title: "Literie 5 Étoiles", eq6_desc: "Matelas Bultex 5 étoiles pour un sommeil parfait",
+            eq7_title: "Cuisine SMEG", eq7_desc: "Électroménager haut de gamme, induction, four pyrolyse",
+            eq8_title: "Mélèze Authentique", eq8_desc: "Construction neuve en bois noble des Alpes",
+            eq9_title: "Machine Nespresso", eq9_desc: "Café de qualité pour bien commencer la journée",
+            hikes_title: "Randonnées & Activités",
+            hikes_intro: "Le hameau de La Rua est un point de départ idéal pour partir à la découverte du Parc Naturel Régional du Queyras. À deux pas du chalet, des sentiers balisés vous emmènent vers des paysages d'exception, accessibles à tous niveaux.",
+            t1_badge: "🥾 Randonnée Pédestre · Depuis le Chalet",
+            t1_subtitle: "Une boucle emblématique au cœur du Bois de Saint-Simon, au départ du hameau de La Rua",
+            stat_distance: "Distance", stat_elevation: "Dénivelé +", stat_duration: "Durée",
+            stat_highpoint: "Point haut", stat_easy: "Facile", stat_difficulty: "Difficulté", stat_season: "Meilleure période",
+            t1_p1: "Partez directement depuis le chalet, longer l'Aigue Blanche depuis le Pont des Achins, et rejoignez l'un des itinéraires les plus bucoliques du Queyras. Cette randonnée en boucle vous conduit à travers les mélézins dorés du Bois de Saint-Simon jusqu'à la cabane du Clot l'Henry, petite merveille du patrimoine pastoral restaurée avec amour par les habitants de Molines, avant d'atteindre le col des Prés de Fromage et ses panoramas à couper le souffle.",
+            t1_p2: "La cabane du Clot l'Henry est une ancienne bâtisse pastorale, désaffectée depuis les années 80 et réhabilitée en 2009-2010 grâce aux bénévoles de l'association des Amis de Saint-Simon. Nichée à 2 090 mètres d'altitude dans une vaste clairière verdoyante, elle offre une vue imprenable sur la Montagne de Beauregard et la vallée de l'Agnel. Une fontaine, des tables de pique-nique, un barbecue et même quatre couchages en font une étape idéale pour se ressourcer — ou bivouaquer sous les étoiles. L'accès est libre, les dons bienvenus.",
+            t1_p3: "En poursuivant vers le col des Prés de Fromage (2 146 m), carrefour du GRP® Tour de la Dent de Ratier balisé rouge-jaune, le panorama s'étend sur les sommets emblématiques du Queyras. Les plus aventureux pourront pousser jusqu'au Sommet Bucher et son ancien poste optique, pour un supplément de trente minutes et une vue à 360° qui restera gravée dans les mémoires.",
+            steps_title: "🗺️ Itinéraire pas à pas",
+            t1_s0_title: "Départ — Chalet Agnel, La Rua (1 740 m)", t1_s0_desc: "Rejoindre le Pont des Achins depuis le chalet. Suivre le balisage jaune PR en direction de la Cabane du Clot l'Henry.",
+            t1_s1_title: "Pont du Moulin — bifurcation (1 740 m)", t1_s1_desc: "Au niveau du panneau directionnel, prendre la direction Col des Prés de Fromage / Bois de l'Eyssard.",
+            t1_s2_title: "Montée dans le mélézin", t1_s2_desc: "Le sentier s'élève régulièrement à travers la forêt de mélèzes. Sources nombreuses sur le chemin — eau potable disponible tout au long du parcours.",
+            t1_s3_title: "Cabane du Clot l'Henry (2 090 m)", t1_s3_desc: "Bifurquer à gauche au panneau. La cabane apparaît dans sa clairière après quelques pas. Étape idéale pour un pique-nique face aux montagnes.",
+            t1_s4_title: "Col des Prés de Fromage (2 146 m)", t1_s4_desc: "Rejoindre le GRP® (balisage rouge-jaune). Panorama exceptionnel. Option : Sommet Bucher (+30 min, vue 360°).",
+            t1_s5_title: "Retour — La Rua / La Chalp", t1_s5_desc: "Descente par le Bois de Saint-Simon vers Molines ou retour sur le même sentier. Longer l'Aigue Blanche jusqu'au chalet.",
+            highlights_title: "✅ Points forts", tips_title: "💡 Conseils pratiques",
+            t1_hl1: "Départ direct depuis le chalet", t1_hl2: "Sources d'eau tout au long du parcours",
+            t1_hl3: "Cabane ouverte & gratuite (dons appréciés)", t1_hl4: "Accessible aux enfants dès 6 ans",
+            t1_hl5: "Marmottes fréquentes sur le parcours", t1_hl6: "Balisage clair et entretenu",
+            t1_tip1: "Prévoir un pique-nique pour la cabane", t1_tip2: "Chaussures de randonnée recommandées",
+            t1_tip3: "Partir tôt en été (forte fréquentation)", t1_tip4: "Préférer l'intersaison pour la tranquillité",
+            t1_tip5: "Possible en raquettes l'hiver", t1_tip6: "Dons bienvenus à la cabane (urne sur place)",
+            map_title: "🗺️ Carte & Profil du Parcours",
+            map1_label: "Vue satellite 2D · Trace GPS", map2_label: "Vue 3D · Profil altimétrique",
+            t1_footer: "Retrouvez la trace GPS complète sur Strava · Balisage jaune PR depuis La Rua",
+            strava_btn: "Voir la trace sur Strava",
+            t2_badge: "🥾 Randonnée Pédestre · Depuis le Chalet",
+            t2_subtitle: "Un circuit agréable entre forêt, canal d'irrigation et hameaux perchés",
+            t2_p1: "Depuis le hameau de La Rua, cette boucle familiale vous entraîne à la découverte de l'un des plus beaux coins entre Molines-en-Queyras et Aiguilles, en passant par le charmant hameau perché de Prats-Hauts. Exposé plein ouest face au Sommet Bucher, ce petit village d'une vingtaine d'âmes offre une vue imprenable sur les crêtes et les alpages qui le dominent, dans un calme absolu propice à la contemplation.",
+            t2_p2: "Le chemin serpente d'abord à travers la forêt de mélèzes, longeant par endroits l'ancien canal d'irrigation qui alimentait autrefois les hameaux alentour — un vestige du génie hydraulique paysan du Queyras. La montée vers Prats-Hauts est régulière et accessible à toute la famille, récompensée par un panorama exceptionnel sur les grandes crêtes du parc et les vallons boisés en contrebas.",
+            t2_p3: "La descente, elle, vous ramène par les prés en pente douce, traversant une succession de paysages ouverts où la faune alpine est régulièrement observée : écureuils, chevreuils, rapaces planant. Une randonnée parfaite pour une matinée sportive ou une promenade digestive en début d'après-midi.",
+            t2_s0_title: "Départ — Chalet Agnel, La Rua (1 740 m)", t2_s0_desc: "Rejoindre le bourg de Molines-en-Queyras par la route. Depuis Molines, suivre la direction de Prats-Hauts (panneau directionnel au centre du village).",
+            t2_s1_title: "Montée vers Gaudissard", t2_s1_desc: "Le sentier s'élève progressivement à travers la forêt. Longer par endroits l'ancien canal d'irrigation, témoin du savoir-faire hydraulique des anciens habitants du Queyras.",
+            t2_s2_title: "Hameau de Prats-Hauts (1 900 m env.)", t2_s2_desc: "Traverser le hameau de Prats-Hauts et rejoindre la petite place carrefour. Fontaine sur place ! Vue magnifique plein ouest sur le Sommet Bucher et les crêtes environnantes.",
+            t2_s3_title: "Descente", t2_s3_desc: "Descente progressive par les prés et les zones boisées. Joli sentier typique du Queyras au milieu des mélèzes.",
+            t2_s4_title: "Retour — La Rua / Chalet Agnel", t2_s4_desc: "Rejoindre la Rua par la piste forestière et longer la route jusqu'au hameau de La Rua et au chalet.",
+            t2_hl1: "Circuit idéal pour les familles", t2_hl2: "Découverte de l'architecture typique du Queyras",
+            t2_hl3: "Vue imprenable sur le Sommet Bucher", t2_hl4: "Faune alpine abondante (oiseaux, chevreuils, écureuils, rapaces)",
+            t2_hl5: "Ancien canal d'irrigation historique", t2_hl6: "Accessible dès le printemps (dès avril)",
+            t2_tip1: "Départ recommandé depuis Molines en sens horaire", t2_tip2: "Chaussures de randonnée conseillées",
+            t2_tip3: "Sentiers parfois verglacés hors saison estivale", t2_tip4: "Préférer le matin pour la lumière sur les crêtes",
+            t2_tip5: "Carte IGN 3637OT recommandée", t2_tip6: "Possible en raquettes en hiver",
+            t2_footer: "Retrouvez la trace GPS complète sur Strava · Boucle au départ de La Rua via Molines",
+            contact_title: "Réservez Votre Séjour",
+            contact_subtitle: "Contactez-nous pour connaître nos disponibilités et tarifs",
+            contact_email: "Email", contact_address: "Adresse", contact_rates: "Tarifs",
+            contact_rates_detail: "Location à la semaine<br>1 450€ - 3 000€<br><small>Selon saison</small>",
+            footer_text: "© 2026 Chalets Agnel - Tous droits réservés | Location Grand Confort & Randonnées dans le Queyras"
+        },
+        en: {
+            nav_home: "Home", nav_discover: "Discover", nav_chalet: "The Chalet",
+            nav_gallery: "Gallery", nav_equipment: "Amenities", nav_hikes: "Hiking", nav_contact: "Contact",
+            drop_clot_title: "🥾 Clot l'Henry Cabin", drop_clot_sub: "Col des Prés de Fromage · 6.5 km · 500 m elev.",
+            drop_prats_title: "🥾 Prats-Hauts Loop", drop_prats_sub: "Via Molines-en-Queyras · 10.6 km · 520 m elev.",
+            hero_subtitle: "Authentic, Nature & Serenity in the Heart of Queyras",
+            hero_cta: "Book Your Stay",
+            intro_title: "Welcome to the Heart of the Queyras Nature Park",
+            intro_text: "Nestled in the heart of the Queyras natural park, Chalets Agnel welcome you into an authentic and refined atmosphere, where modern comfort blends with the gentleness of the mountains.",
+            quickinfo_title: "At a Glance",
+            qi_bedrooms: "Bedrooms", qi_bedrooms_sub: "Full comfort",
+            qi_persons: "Guests", qi_persons_sub: "Maximum capacity",
+            qi_km: "Kilometres", qi_km_sub: "From ski slopes",
+            qi_comfort: "Premium Comfort", qi_comfort_sub: "Premium amenities",
+            price_info: "Weekly rental: €1,450 - €3,000 depending on season",
+            desc_title: "Your Alpine Haven",
+            card1_title: "Living Space",
+            card1_p1: "From the moment you enter, the large open living room invites sharing and relaxation. The lounge, dining area and open kitchen create a bright and convivial space, extended by a beautiful larch wood terrace, perfect for enjoying the fresh mountain air and alpine scenery.",
+            card1_p2: "After a day outdoors, gather around the pellet stove or in front of the 65-inch OLED TV for unforgettable cosy evenings.",
+            card2_title: "Fully Equipped Kitchen",
+            card2_p1: "The kitchen, fully equipped with quality appliances, has been designed for food lovers and large groups alike.",
+            card2_li1: "SMEG appliances", card2_li2: "Pyrolytic oven", card2_li3: "Induction hob",
+            card2_li4: "Dishwasher", card2_li5: "Nespresso machine", card2_li6: "Raclette & fondue set",
+            card3_title: "Comfortable Bedrooms",
+            card3_p1: "The bedrooms offer a true haven of rest. 5-star Bultex 160×200 mattresses, generous proportions and thoughtful storage guarantee restful nights.",
+            card3_li1: "2 upstairs bedrooms with balcony and mountain view", card3_li2: "1 ground floor bedroom, 160×200 bed",
+            card3_li3: "1 bedroom with bunk beds", card3_li4: "Natural views from every bedroom",
+            card4_title: "Bathrooms",
+            card4_p1: "The elegant and functional bathrooms feature walk-in showers and double sinks for optimal comfort, even for large groups.",
+            card4_li1: "Walk-in showers", card4_li2: "Double sinks", card4_li3: "Modern finishes", card4_li4: "2 separate WCs (upstairs & ground floor)",
+            desc_closing: "Designed to welcome families and friends in complete serenity, Chalet Agnel is an invitation to slow down, reconnect and fully experience the unique Queyras, summer and winter alike.",
+            gallery_title: "Discover the Chalet",
+            equip_title: "Amenities & Services",
+            eq1_title: "Premium Heating", eq1_desc: "Pellet stove and underfloor heating for year-round comfort",
+            eq2_title: "65\" OLED TV", eq2_desc: "65-inch OLED screen for family movie nights",
+            eq3_title: "High-Speed WiFi", eq3_desc: "Internet connection to stay connected in the mountains",
+            eq4_title: "Close to Slopes", eq4_desc: "1.8 km from Molines/Saint-Véran ski resort",
+            eq5_title: "Private Parking", eq5_desc: "4 secure parking spaces",
+            eq6_title: "5-Star Bedding", eq6_desc: "5-star Bultex mattresses for perfect sleep",
+            eq7_title: "SMEG Kitchen", eq7_desc: "Premium appliances, induction, pyrolytic oven",
+            eq8_title: "Authentic Larch", eq8_desc: "New build in noble Alpine wood",
+            eq9_title: "Nespresso Machine", eq9_desc: "Quality coffee to start the day right",
+            hikes_title: "Hiking & Activities",
+            hikes_intro: "The hamlet of La Rua is an ideal starting point for exploring the Queyras Regional Natural Park. Just steps from the chalet, marked trails lead you to exceptional landscapes, accessible to all levels.",
+            t1_badge: "🥾 Hiking Trail · From the Chalet",
+            t1_subtitle: "An iconic loop through the Saint-Simon Forest, departing from the hamlet of La Rua",
+            stat_distance: "Distance", stat_elevation: "Elevation +", stat_duration: "Duration",
+            stat_highpoint: "Highest Point", stat_easy: "Easy", stat_difficulty: "Difficulty", stat_season: "Best Season",
+            t1_p1: "Set off directly from the chalet, follow the Aigue Blanche from the Pont des Achins, and join one of the most bucolic routes in the Queyras. This loop hike takes you through the golden larch forests of the Bois de Saint-Simon to the Clot l'Henry cabin, a small pastoral heritage gem lovingly restored by the people of Molines, before reaching the Col des Prés de Fromage and its breathtaking panoramas.",
+            t1_p2: "The Clot l'Henry cabin is a former pastoral building, abandoned since the 1980s and rehabilitated in 2009-2010 by volunteers from the Amis de Saint-Simon association. Nestled at 2,090 metres altitude in a vast green clearing, it offers an unobstructed view of the Beauregard mountain and the Agnel valley. A fountain, picnic tables, a barbecue and even four sleeping places make it an ideal stop to recharge — or bivouac under the stars. Access is free, donations welcome.",
+            t1_p3: "Continuing to the Col des Prés de Fromage (2,146 m), a junction on the GRP® Tour de la Dent de Ratier marked in red and yellow, the panorama extends over the emblematic summits of the Queyras. The most adventurous can push on to the Sommet Bucher and its former optical post, for an extra thirty minutes and a 360° view that will remain etched in memory.",
+            steps_title: "🗺️ Step-by-Step Route",
+            t1_s0_title: "Start — Chalet Agnel, La Rua (1,740 m)", t1_s0_desc: "Head to the Pont des Achins from the chalet. Follow the yellow PR markings towards the Clot l'Henry cabin.",
+            t1_s1_title: "Pont du Moulin — junction (1,740 m)", t1_s1_desc: "At the directional sign, take the route towards Col des Prés de Fromage / Bois de l'Eyssard.",
+            t1_s2_title: "Climb through the larch forest", t1_s2_desc: "The trail rises steadily through the larch forest. Many springs along the way — drinking water available throughout the route.",
+            t1_s3_title: "Clot l'Henry cabin (2,090 m)", t1_s3_desc: "Turn left at the sign. The cabin appears in its clearing after a few steps. Ideal stop for a picnic facing the mountains.",
+            t1_s4_title: "Col des Prés de Fromage (2,146 m)", t1_s4_desc: "Join the GRP® (red-yellow markings). Exceptional panorama. Option: Sommet Bucher (+30 min, 360° view).",
+            t1_s5_title: "Return — La Rua / La Chalp", t1_s5_desc: "Descent through the Bois de Saint-Simon towards Molines or return along the same trail. Follow the Aigue Blanche back to the chalet.",
+            highlights_title: "✅ Highlights", tips_title: "💡 Practical Tips",
+            t1_hl1: "Direct start from the chalet", t1_hl2: "Water springs throughout the route",
+            t1_hl3: "Cabin open & free (donations appreciated)", t1_hl4: "Accessible to children from age 6",
+            t1_hl5: "Marmots frequently spotted on the route", t1_hl6: "Clear and well-maintained markings",
+            t1_tip1: "Pack a picnic for the cabin", t1_tip2: "Hiking boots recommended",
+            t1_tip3: "Set off early in summer (busy trail)", t1_tip4: "Off-season for a quieter experience",
+            t1_tip5: "Possible on snowshoes in winter", t1_tip6: "Donations welcome at the cabin (box on site)",
+            map_title: "🗺️ Map & Route Profile",
+            map1_label: "2D Satellite View · GPS Track", map2_label: "3D View · Elevation Profile",
+            t1_footer: "Full GPS track available on Strava · Yellow PR markings from La Rua",
+            strava_btn: "View on Strava",
+            t2_badge: "🥾 Hiking Trail · From the Chalet",
+            t2_subtitle: "A pleasant circuit through forest, irrigation canal and perched hamlets",
+            t2_p1: "From the hamlet of La Rua, this family loop takes you to discover one of the most beautiful areas between Molines-en-Queyras and Aiguilles, passing through the charming perched hamlet of Prats-Hauts. Facing due west towards the Sommet Bucher, this small village of around twenty souls offers an unobstructed view of the ridges and alpine pastures above, in absolute silence perfect for contemplation.",
+            t2_p2: "The path first winds through the larch forest, at times following the old irrigation canal that once supplied the surrounding hamlets — a relic of the Queyras peasants' hydraulic ingenuity. The climb towards Prats-Hauts is steady and accessible to the whole family, rewarded by an exceptional panorama over the great ridges of the park and the wooded valleys below.",
+            t2_p3: "The descent brings you back through gently sloping meadows, crossing a succession of open landscapes where alpine wildlife is regularly spotted: squirrels, roe deer, soaring birds of prey. A perfect hike for a sporty morning or a leisurely afternoon stroll.",
+            t2_s0_title: "Start — Chalet Agnel, La Rua (1,740 m)", t2_s0_desc: "Head to the village of Molines-en-Queyras by road. From Molines, follow signs to Prats-Hauts (directional sign in the village centre).",
+            t2_s1_title: "Climb towards Gaudissard", t2_s1_desc: "The trail rises gradually through the forest. At times follow the old irrigation canal, a testament to the hydraulic expertise of the Queyras people.",
+            t2_s2_title: "Hamlet of Prats-Hauts (approx. 1,900 m)", t2_s2_desc: "Walk through Prats-Hauts hamlet and reach the small crossroads square. Fountain on site! Magnificent westward view towards the Sommet Bucher and surrounding ridges.",
+            t2_s3_title: "Descent", t2_s3_desc: "Gradual descent through meadows and wooded areas. Beautiful trail typical of the Queyras through larch trees.",
+            t2_s4_title: "Return — La Rua / Chalet Agnel", t2_s4_desc: "Return to La Rua via the forest track and follow the road back to the La Rua hamlet and the chalet.",
+            t2_hl1: "Ideal circuit for families", t2_hl2: "Discover typical Queyras architecture",
+            t2_hl3: "Stunning view of the Sommet Bucher", t2_hl4: "Abundant alpine wildlife (birds, roe deer, squirrels, raptors)",
+            t2_hl5: "Historic irrigation canal", t2_hl6: "Accessible from spring (from April)",
+            t2_tip1: "Recommended clockwise from Molines", t2_tip2: "Hiking boots advised",
+            t2_tip3: "Trails may be icy outside summer season", t2_tip4: "Morning departure for best light on the ridges",
+            t2_tip5: "IGN map 3637OT recommended", t2_tip6: "Possible on snowshoes in winter",
+            t2_footer: "Full GPS track available on Strava · Loop departing from La Rua via Molines",
+            contact_title: "Book Your Stay",
+            contact_subtitle: "Contact us to check availability and rates",
+            contact_email: "Email", contact_address: "Address", contact_rates: "Rates",
+            contact_rates_detail: "Weekly rental<br>€1,450 - €3,000<br><small>Depending on season</small>",
+            footer_text: "© 2026 Chalets Agnel - All rights reserved | Premium Chalet Rental & Hiking in the Queyras"
+        },
+        es: {
+            nav_home: "Inicio", nav_discover: "Descubrir", nav_chalet: "El Chalet",
+            nav_gallery: "Galería", nav_equipment: "Equipamiento", nav_hikes: "Senderismo", nav_contact: "Contacto",
+            drop_clot_title: "🥾 Cabaña del Clot l'Henry", drop_clot_sub: "Col des Prés de Fromage · 6,5 km · 500 m D+",
+            drop_prats_title: "🥾 Bucle por Prats-Hauts", drop_prats_sub: "Vía Molines-en-Queyras · 10,6 km · 520 m D+",
+            hero_subtitle: "Auténtico, Naturaleza & Serenidad en el corazón del Queyras",
+            hero_cta: "Reservar su estancia",
+            intro_title: "Bienvenido al Corazón del Parque Natural del Queyras",
+            intro_text: "Enclavados en el corazón del parque natural del Queyras, los Chalets Agnel le acogen en una atmósfera auténtica y refinada, donde el confort moderno se mezcla con la suavidad de la montaña.",
+            quickinfo_title: "En Resumen",
+            qi_bedrooms: "Habitaciones", qi_bedrooms_sub: "Todo confort",
+            qi_persons: "Personas", qi_persons_sub: "Capacidad máxima",
+            qi_km: "Kilómetros", qi_km_sub: "De las pistas de esquí",
+            qi_comfort: "Gran Confort", qi_comfort_sub: "Equipamiento premium",
+            price_info: "Alquiler semanal: 1.450€ - 3.000€ según temporada",
+            desc_title: "Su Refugio Alpino",
+            card1_title: "Espacio de Vida",
+            card1_p1: "Desde la entrada, la gran sala de estar invita a compartir y relajarse. El salón, el comedor y la cocina abierta forman un espacio luminoso y acogedor, prolongado por una hermosa terraza exterior de alerce, ideal para disfrutar del aire puro y los paisajes alpinos.",
+            card1_p2: "Tras un día al aire libre, reúnanse alrededor de la estufa de pellets o frente a la TV OLED de 65 pulgadas para veladas acogedoras e inolvidables.",
+            card2_title: "Cocina Equipada",
+            card2_p1: "La cocina, completamente equipada con electrodomésticos de calidad, ha sido diseñada tanto para gourmets como para grupos numerosos.",
+            card2_li1: "Electrodomésticos SMEG", card2_li2: "Horno pirolítico", card2_li3: "Placa de inducción",
+            card2_li4: "Lavavajillas", card2_li5: "Máquina Nespresso", card2_li6: "Raclette y fondue",
+            card3_title: "Habitaciones Confort",
+            card3_p1: "Las habitaciones ofrecen un verdadero refugio de descanso. Colchones Bultex 5 estrellas 160×200, generosos espacios y almacenaje cuidado garantizan noches reparadoras.",
+            card3_li1: "2 habitaciones en el piso superior con balcón y vista a la montaña", card3_li2: "1 habitación en planta baja con cama 160×200",
+            card3_li3: "1 habitación con literas", card3_li4: "Vista a la naturaleza desde cada habitación",
+            card4_title: "Baños",
+            card4_p1: "Los baños, elegantes y funcionales, disponen de duchas a ras de suelo y dobles lavabos para un confort óptimo, incluso en grupo.",
+            card4_li1: "Duchas a ras de suelo", card4_li2: "Dobles lavabos", card4_li3: "Acabados modernos", card4_li4: "2 aseos separados (planta alta y baja)",
+            desc_closing: "Diseñado para acoger a familias y amigos con total tranquilidad, el Chalet Agnel es una invitación a reducir el ritmo, reencontrarse y vivir plenamente la experiencia única del Queyras, tanto en verano como en invierno.",
+            gallery_title: "Descubra el Chalet",
+            equip_title: "Equipamiento & Servicios",
+            eq1_title: "Calefacción Premium", eq1_desc: "Estufa de pellets y suelo radiante para un confort óptimo todo el año",
+            eq2_title: "TV OLED 65\"", eq2_desc: "Pantalla OLED de 65 pulgadas para sus noches de cine en familia",
+            eq3_title: "WiFi de Alta Velocidad", eq3_desc: "Conexión a internet para mantenerse conectado en plena montaña",
+            eq4_title: "Cerca de las Pistas", eq4_desc: "A 1,8 km de la estación de esquí Molines/Saint-Véran",
+            eq5_title: "Aparcamiento Privado", eq5_desc: "4 plazas de aparcamiento seguras",
+            eq6_title: "Ropa de Cama 5 Estrellas", eq6_desc: "Colchones Bultex 5 estrellas para un sueño perfecto",
+            eq7_title: "Cocina SMEG", eq7_desc: "Electrodomésticos de alta gama, inducción, horno pirolítico",
+            eq8_title: "Alerce Auténtico", eq8_desc: "Construcción nueva en madera noble de los Alpes",
+            eq9_title: "Máquina Nespresso", eq9_desc: "Café de calidad para empezar bien el día",
+            hikes_title: "Senderismo & Actividades",
+            hikes_intro: "La aldea de La Rua es un punto de partida ideal para descubrir el Parque Natural Regional del Queyras. A pasos del chalet, senderos señalizados le llevan hacia paisajes de excepción, accesibles a todos los niveles.",
+            t1_badge: "🥾 Senderismo · Desde el Chalet",
+            t1_subtitle: "Un bucle emblemático en el corazón del Bosque de Saint-Simon, partiendo de la aldea de La Rua",
+            stat_distance: "Distancia", stat_elevation: "Desnivel +", stat_duration: "Duración",
+            stat_highpoint: "Punto alto", stat_easy: "Fácil", stat_difficulty: "Dificultad", stat_season: "Mejor época",
+            t1_p1: "Parta directamente desde el chalet, siga el Aigue Blanche desde el Pont des Achins y únase a uno de los itinerarios más bucólicos del Queyras. Este recorrido circular le lleva a través de los dorados bosques de alerce del Bois de Saint-Simon hasta la cabaña del Clot l'Henry, pequeña joya del patrimonio pastoral restaurada con amor por los habitantes de Molines, antes de alcanzar el Col des Prés de Fromage y sus panoramas impresionantes.",
+            t1_p2: "La cabaña del Clot l'Henry es una antigua construcción pastoril, abandonada desde los años 80 y rehabilitada en 2009-2010 gracias a los voluntarios de la asociación Amis de Saint-Simon. Ubicada a 2.090 metros de altitud en un vasto claro verde, ofrece una vista impresionante del macizo de Beauregard y el valle del Agnel. Una fuente, mesas de picnic, una barbacoa e incluso cuatro literas la convierten en una etapa ideal para recargar energías — o vivaquear bajo las estrellas. El acceso es libre, se agradecen los donativos.",
+            t1_p3: "Continuando hacia el Col des Prés de Fromage (2.146 m), cruce del GRP® Tour de la Dent de Ratier señalizado en rojo y amarillo, el panorama se extiende sobre las cimas emblemáticas del Queyras. Los más aventureros podrán llegar hasta el Sommet Bucher y su antiguo puesto óptico, para treinta minutos extra y una vista de 360° que quedará grabada en la memoria.",
+            steps_title: "🗺️ Itinerario paso a paso",
+            t1_s0_title: "Salida — Chalet Agnel, La Rua (1.740 m)", t1_s0_desc: "Llegar al Pont des Achins desde el chalet. Seguir la señalización amarilla PR hacia la Cabaña del Clot l'Henry.",
+            t1_s1_title: "Pont du Moulin — bifurcación (1.740 m)", t1_s1_desc: "En el panel indicador, tomar dirección Col des Prés de Fromage / Bois de l'Eyssard.",
+            t1_s2_title: "Ascenso por el bosque de alerce", t1_s2_desc: "El sendero sube regularmente a través del bosque de alerces. Numerosas fuentes en el camino — agua potable disponible a lo largo de todo el recorrido.",
+            t1_s3_title: "Cabaña del Clot l'Henry (2.090 m)", t1_s3_desc: "Girar a la izquierda en el panel. La cabaña aparece en su claro tras unos pasos. Parada ideal para un picnic con vistas a las montañas.",
+            t1_s4_title: "Col des Prés de Fromage (2.146 m)", t1_s4_desc: "Unirse al GRP® (señalización rojo-amarillo). Panorama excepcional. Opción: Sommet Bucher (+30 min, vista 360°).",
+            t1_s5_title: "Regreso — La Rua / La Chalp", t1_s5_desc: "Descenso por el Bois de Saint-Simon hacia Molines o regreso por el mismo sendero. Seguir el Aigue Blanche hasta el chalet.",
+            highlights_title: "✅ Puntos fuertes", tips_title: "💡 Consejos prácticos",
+            t1_hl1: "Salida directa desde el chalet", t1_hl2: "Fuentes de agua a lo largo del recorrido",
+            t1_hl3: "Cabaña abierta y gratuita (donativos apreciados)", t1_hl4: "Accesible a niños desde 6 años",
+            t1_hl5: "Marmotas frecuentes en el recorrido", t1_hl6: "Señalización clara y bien mantenida",
+            t1_tip1: "Llevar un picnic para la cabaña", t1_tip2: "Botas de senderismo recomendadas",
+            t1_tip3: "Salir temprano en verano (mucha afluencia)", t1_tip4: "Preferir la entresemana para más tranquilidad",
+            t1_tip5: "Posible con raquetas en invierno", t1_tip6: "Donativos bienvenidos en la cabaña (urna en el lugar)",
+            map_title: "🗺️ Mapa & Perfil del Recorrido",
+            map1_label: "Vista satélite 2D · Traza GPS", map2_label: "Vista 3D · Perfil altimétrico",
+            t1_footer: "Traza GPS completa disponible en Strava · Señalización amarilla PR desde La Rua",
+            strava_btn: "Ver la traza en Strava",
+            t2_badge: "🥾 Senderismo · Desde el Chalet",
+            t2_subtitle: "Un circuito agradable entre bosque, canal de riego y aldeas encaramadas",
+            t2_p1: "Desde la aldea de La Rua, este bucle familiar le lleva a descubrir uno de los rincones más bellos entre Molines-en-Queyras y Aiguilles, pasando por el encantador pueblo encaramado de Prats-Hauts. Orientado al oeste frente al Sommet Bucher, este pequeño pueblo de unas veinte almas ofrece una vista impresionante sobre las crestas y los pastos alpinos que lo dominan, en un silencio absoluto propicio a la contemplación.",
+            t2_p2: "El camino serpentea primero a través del bosque de alerces, bordeando en algunos tramos el antiguo canal de riego que antaño abastecía las aldeas de alrededor — un vestigio del ingenio hidráulico campesino del Queyras. El ascenso hacia Prats-Hauts es regular y accesible para toda la familia, recompensado por un panorama excepcional sobre las grandes crestas del parque y los valles boscosos que se extienden abajo.",
+            t2_p3: "El descenso le devuelve por prados de pendiente suave, atravesando una sucesión de paisajes abiertos donde la fauna alpina se observa regularmente: ardillas, corzos, rapaces planeando. Un recorrido perfecto para una mañana deportiva o un paseo digestivo a primera hora de la tarde.",
+            t2_s0_title: "Salida — Chalet Agnel, La Rua (1.740 m)", t2_s0_desc: "Llegar al pueblo de Molines-en-Queyras por carretera. Desde Molines, seguir la dirección de Prats-Hauts (señal en el centro del pueblo).",
+            t2_s1_title: "Ascenso hacia Gaudissard", t2_s1_desc: "El sendero sube progresivamente a través del bosque. Bordear en algunos tramos el antiguo canal de riego, testigo del saber hacer hidráulico de los antiguos habitantes del Queyras.",
+            t2_s2_title: "Aldea de Prats-Hauts (aprox. 1.900 m)", t2_s2_desc: "Atravesar la aldea de Prats-Hauts y llegar a la pequeña plaza. ¡Fuente en el lugar! Vista magnífica al oeste sobre el Sommet Bucher y las crestas circundantes.",
+            t2_s3_title: "Descenso", t2_s3_desc: "Descenso progresivo por prados y zonas boscosas. Bonito sendero típico del Queyras entre alerces.",
+            t2_s4_title: "Regreso — La Rua / Chalet Agnel", t2_s4_desc: "Regresar a La Rua por la pista forestal y seguir la carretera hasta la aldea de La Rua y el chalet.",
+            t2_hl1: "Circuito ideal para familias", t2_hl2: "Descubrimiento de la arquitectura típica del Queyras",
+            t2_hl3: "Vista impresionante del Sommet Bucher", t2_hl4: "Abundante fauna alpina (aves, corzos, ardillas, rapaces)",
+            t2_hl5: "Antiguo canal de riego histórico", t2_hl6: "Accesible desde primavera (desde abril)",
+            t2_tip1: "Salida recomendada desde Molines en sentido horario", t2_tip2: "Botas de senderismo aconsejadas",
+            t2_tip3: "Senderos a veces helados fuera de la temporada estival", t2_tip4: "Preferir la mañana para la luz sobre las crestas",
+            t2_tip5: "Mapa IGN 3637OT recomendado", t2_tip6: "Posible con raquetas en invierno",
+            t2_footer: "Traza GPS completa disponible en Strava · Bucle desde La Rua vía Molines",
+            contact_title: "Reserve Su Estancia",
+            contact_subtitle: "Contáctenos para conocer disponibilidades y tarifas",
+            contact_email: "Email", contact_address: "Dirección", contact_rates: "Tarifas",
+            contact_rates_detail: "Alquiler semanal<br>1.450€ - 3.000€<br><small>Según temporada</small>",
+            footer_text: "© 2026 Chalets Agnel - Todos los derechos reservados | Alquiler de Gran Confort & Senderismo en el Queyras"
+        },
+        it: {
+            nav_home: "Home", nav_discover: "Scoprire", nav_chalet: "Lo Chalet",
+            nav_gallery: "Galleria", nav_equipment: "Dotazioni", nav_hikes: "Escursioni", nav_contact: "Contatti",
+            drop_clot_title: "🥾 Rifugio del Clot l'Henry", drop_clot_sub: "Col des Prés de Fromage · 6,5 km · 500 m D+",
+            drop_prats_title: "🥾 Anello per Prats-Hauts", drop_prats_sub: "Via Molines-en-Queyras · 10,6 km · 520 m D+",
+            hero_subtitle: "Autentico, Natura & Serenità nel cuore del Queyras",
+            hero_cta: "Prenota il tuo soggiorno",
+            intro_title: "Benvenuti nel Cuore del Parco Naturale del Queyras",
+            intro_text: "Immersi nel cuore del parco naturale del Queyras, gli Chalets Agnel vi accolgono in un'atmosfera autentica e raffinata, dove il comfort moderno si mescola alla dolcezza della montagna.",
+            quickinfo_title: "In Breve",
+            qi_bedrooms: "Camere", qi_bedrooms_sub: "Tutto comfort",
+            qi_persons: "Persone", qi_persons_sub: "Capacità massima",
+            qi_km: "Chilometri", qi_km_sub: "Dalle piste da sci",
+            qi_comfort: "Grande Comfort", qi_comfort_sub: "Dotazioni premium",
+            price_info: "Affitto settimanale: 1.450€ - 3.000€ a seconda della stagione",
+            desc_title: "Il Vostro Rifugio Alpino",
+            card1_title: "Spazio Living",
+            card1_p1: "Fin dall'ingresso, l'ampio soggiorno invita alla condivisione e al relax. Il salotto, la sala da pranzo e la cucina aperta compongono uno spazio luminoso e conviviale, prolungato da una bella terrazza esterna in larice, ideale per godere dell'aria pura e dei paesaggi alpini.",
+            card1_p2: "Dopo una giornata all'aria aperta, ritrovatevi intorno alla stufa a pellet o davanti al TV OLED da 65 pollici per serate accoglienti e indimenticabili.",
+            card2_title: "Cucina Attrezzata",
+            card2_p1: "La cucina, completamente attrezzata con elettrodomestici di qualità, è stata pensata sia per i buongustai che per i grandi gruppi.",
+            card2_li1: "Elettrodomestici SMEG", card2_li2: "Forno pirolitico", card2_li3: "Piano a induzione",
+            card2_li4: "Lavastoviglie", card2_li5: "Macchina Nespresso", card2_li6: "Raclette e fonduta",
+            card3_title: "Camere Confort",
+            card3_p1: "Le camere offrono un vero rifugio di riposo. Materassi Bultex 5 stelle 160×200, bei spazi e ripostigli curati garantiscono notti riparatrici.",
+            card3_li1: "2 camere al piano superiore con balcone e vista montagna", card3_li2: "1 camera al piano terra letto 160×200",
+            card3_li3: "1 camera con letti a castello", card3_li4: "Vista sulla natura da ogni camera",
+            card4_title: "Bagni",
+            card4_p1: "I bagni, eleganti e funzionali, dispongono di docce a filo pavimento e doppi lavabi per un comfort ottimale, anche in famiglia numerosa.",
+            card4_li1: "Docce a filo pavimento", card4_li2: "Doppi lavabi", card4_li3: "Finiture moderne", card4_li4: "2 WC separati (piano superiore e piano terra)",
+            desc_closing: "Pensato per accogliere famiglie e amici in tutta serenità, lo Chalet Agnel è un invito a rallentare, a ritrovarsi e a vivere pienamente l'esperienza unica del Queyras, estate come inverno.",
+            gallery_title: "Scoprite lo Chalet",
+            equip_title: "Dotazioni & Servizi",
+            eq1_title: "Riscaldamento Premium", eq1_desc: "Stufa a pellet e riscaldamento a pavimento per un comfort ottimale tutto l'anno",
+            eq2_title: "TV OLED 65\"", eq2_desc: "Schermo OLED da 65 pollici per le vostre serate cinema in famiglia",
+            eq3_title: "WiFi ad Alta Velocità", eq3_desc: "Connessione internet per restare connessi in piena montagna",
+            eq4_title: "Vicino alle Piste", eq4_desc: "A 1,8 km dalla stazione sciistica Molines/Saint-Véran",
+            eq5_title: "Parcheggio Privato", eq5_desc: "4 posti auto riservati",
+            eq6_title: "Biancheria 5 Stelle", eq6_desc: "Materassi Bultex 5 stelle per un sonno perfetto",
+            eq7_title: "Cucina SMEG", eq7_desc: "Elettrodomestici di alta gamma, induzione, forno pirolitico",
+            eq8_title: "Larice Autentico", eq8_desc: "Costruzione nuova in pregiato legno alpino",
+            eq9_title: "Macchina Nespresso", eq9_desc: "Caffè di qualità per iniziare bene la giornata",
+            hikes_title: "Escursioni & Attività",
+            hikes_intro: "La borgata di La Rua è un punto di partenza ideale per scoprire il Parco Naturale Regionale del Queyras. A due passi dallo chalet, sentieri segnalati vi conducono verso paesaggi d'eccezione, accessibili a tutti i livelli.",
+            t1_badge: "🥾 Escursione a piedi · Dallo Chalet",
+            t1_subtitle: "Un anello emblematico nel cuore del Bosco di Saint-Simon, con partenza dalla borgata di La Rua",
+            stat_distance: "Distanza", stat_elevation: "Dislivello +", stat_duration: "Durata",
+            stat_highpoint: "Punto più alto", stat_easy: "Facile", stat_difficulty: "Difficoltà", stat_season: "Periodo migliore",
+            t1_p1: "Partite direttamente dallo chalet, seguite l'Aigue Blanche dal Pont des Achins e raggiungete uno degli itinerari più bucolici del Queyras. Questo anello vi conduce attraverso i dorati boschi di larici del Bois de Saint-Simon fino al rifugio del Clot l'Henry, piccola meraviglia del patrimonio pastorale restaurata con amore dagli abitanti di Molines, prima di raggiungere il Col des Prés de Fromage e i suoi panorami mozzafiato.",
+            t1_p2: "Il rifugio del Clot l'Henry è un'antica costruzione pastorale, abbandonata dagli anni '80 e riabilitata nel 2009-2010 grazie ai volontari dell'associazione Amis de Saint-Simon. Immerso a 2.090 metri di altitudine in una vasta radura verdeggiante, offre una vista impareggiabile sul massiccio di Beauregard e sulla vallata dell'Agnel. Una fontana, tavoli da picnic, un barbecue e persino quattro posti letto ne fanno una tappa ideale per ricaricarsi — o bivaccare sotto le stelle. L'accesso è libero, le donazioni ben accette.",
+            t1_p3: "Proseguendo verso il Col des Prés de Fromage (2.146 m), incrocio del GRP® Tour de la Dent de Ratier segnalato in rosso e giallo, il panorama si estende sulle cime emblematiche del Queyras. I più avventurosi potranno spingersi fino al Sommet Bucher e al suo antico posto ottico, per trenta minuti in più e una vista a 360° che resterà impressa nella memoria.",
+            steps_title: "🗺️ Itinerario passo dopo passo",
+            t1_s0_title: "Partenza — Chalet Agnel, La Rua (1.740 m)", t1_s0_desc: "Raggiungere il Pont des Achins dallo chalet. Seguire la segnaletica gialla PR in direzione del Rifugio del Clot l'Henry.",
+            t1_s1_title: "Pont du Moulin — bivio (1.740 m)", t1_s1_desc: "Al pannello direzionale, prendere la direzione Col des Prés de Fromage / Bois de l'Eyssard.",
+            t1_s2_title: "Salita nel bosco di larici", t1_s2_desc: "Il sentiero sale regolarmente attraverso la foresta di larici. Numerose sorgenti lungo il percorso — acqua potabile disponibile per tutto il tragitto.",
+            t1_s3_title: "Rifugio del Clot l'Henry (2.090 m)", t1_s3_desc: "Svoltare a sinistra al pannello. Il rifugio appare nella sua radura dopo pochi passi. Tappa ideale per un picnic con vista sulle montagne.",
+            t1_s4_title: "Col des Prés de Fromage (2.146 m)", t1_s4_desc: "Raggiungere il GRP® (segnaletica rosso-giallo). Panorama eccezionale. Opzione: Sommet Bucher (+30 min, vista 360°).",
+            t1_s5_title: "Ritorno — La Rua / La Chalp", t1_s5_desc: "Discesa attraverso il Bois de Saint-Simon verso Molines o ritorno per lo stesso sentiero. Seguire l'Aigue Blanche fino allo chalet.",
+            highlights_title: "✅ Punti di forza", tips_title: "💡 Consigli pratici",
+            t1_hl1: "Partenza diretta dallo chalet", t1_hl2: "Sorgenti d'acqua lungo tutto il percorso",
+            t1_hl3: "Rifugio aperto e gratuito (donazioni apprezzate)", t1_hl4: "Accessibile ai bambini dai 6 anni",
+            t1_hl5: "Marmotte frequenti lungo il percorso", t1_hl6: "Segnaletica chiara e ben mantenuta",
+            t1_tip1: "Portare un picnic per il rifugio", t1_tip2: "Scarpe da trekking consigliate",
+            t1_tip3: "Partire presto in estate (molto frequentato)", t1_tip4: "Preferire la mezza stagione per più tranquillità",
+            t1_tip5: "Possibile con racchette da neve in inverno", t1_tip6: "Donazioni benvenute al rifugio (urna sul posto)",
+            map_title: "🗺️ Carta & Profilo del Percorso",
+            map1_label: "Vista satellitare 2D · Traccia GPS", map2_label: "Vista 3D · Profilo altimetrico",
+            t1_footer: "Traccia GPS completa disponibile su Strava · Segnaletica gialla PR da La Rua",
+            strava_btn: "Vedi la traccia su Strava",
+            t2_badge: "🥾 Escursione a piedi · Dallo Chalet",
+            t2_subtitle: "Un circuito piacevole tra foresta, canale d'irrigazione e borghi arroccati",
+            t2_p1: "Dalla borgata di La Rua, questo anello familiare vi porta alla scoperta di uno degli angoli più belli tra Molines-en-Queyras e Aiguilles, passando per l'incantevole borgo arroccato di Prats-Hauts. Esposto a pieno ovest verso il Sommet Bucher, questo piccolo paese di una ventina di anime offre una vista impareggiabile sui crinalini e gli alpeggi che lo dominano, in un silenzio assoluto propizio alla contemplazione.",
+            t2_p2: "Il cammino serpeggia dapprima attraverso la foresta di larici, costeggiando in alcuni tratti l'antico canale d'irrigazione che un tempo riforniva le borgate vicine — una reliquia dell'ingegno idraulico contadino del Queyras. La salita verso Prats-Hauts è regolare e accessibile a tutta la famiglia, ricompensata da un panorama eccezionale sulle grandi creste del parco e le valli boscose sottostanti.",
+            t2_p3: "La discesa vi riporta attraverso prati in dolce pendenza, attraversando una successione di paesaggi aperti dove la fauna alpina si osserva regolarmente: scoiattoli, caprioli, rapaci in volo. Un'escursione perfetta per una mattinata sportiva o una passeggiata digestiva nel primo pomeriggio.",
+            t2_s0_title: "Partenza — Chalet Agnel, La Rua (1.740 m)", t2_s0_desc: "Raggiungere il borgo di Molines-en-Queyras sulla strada. Da Molines, seguire la direzione Prats-Hauts (cartello nel centro del paese).",
+            t2_s1_title: "Salita verso Gaudissard", t2_s1_desc: "Il sentiero sale progressivamente attraverso la foresta. Costeggiare in alcuni tratti l'antico canale d'irrigazione, testimone del know-how idraulico degli antichi abitanti del Queyras.",
+            t2_s2_title: "Borgata di Prats-Hauts (circa 1.900 m)", t2_s2_desc: "Attraversare la borgata di Prats-Hauts e raggiungere la piccola piazza. Fontana sul posto! Magnifica vista ad ovest sul Sommet Bucher e le creste circostanti.",
+            t2_s3_title: "Discesa", t2_s3_desc: "Discesa progressiva attraverso prati e zone boschive. Bel sentiero tipico del Queyras tra i larici.",
+            t2_s4_title: "Ritorno — La Rua / Chalet Agnel", t2_s4_desc: "Raggiungere La Rua per la pista forestale e seguire la strada fino alla borgata di La Rua e allo chalet.",
+            t2_hl1: "Circuito ideale per le famiglie", t2_hl2: "Scoperta dell'architettura tipica del Queyras",
+            t2_hl3: "Vista mozzafiato sul Sommet Bucher", t2_hl4: "Fauna alpina abbondante (uccelli, caprioli, scoiattoli, rapaci)",
+            t2_hl5: "Antico canale d'irrigazione storico", t2_hl6: "Accessibile dalla primavera (da aprile)",
+            t2_tip1: "Partenza consigliata da Molines in senso orario", t2_tip2: "Scarpe da trekking consigliate",
+            t2_tip3: "Sentieri a volte ghiacciati fuori dalla stagione estiva", t2_tip4: "Preferire la mattina per la luce sulle creste",
+            t2_tip5: "Carta IGN 3637OT consigliata", t2_tip6: "Possibile con racchette da neve in inverno",
+            t2_footer: "Traccia GPS completa disponibile su Strava · Anello con partenza da La Rua via Molines",
+            contact_title: "Prenota il Tuo Soggiorno",
+            contact_subtitle: "Contattateci per conoscere disponibilità e tariffe",
+            contact_email: "Email", contact_address: "Indirizzo", contact_rates: "Tariffe",
+            contact_rates_detail: "Affitto settimanale<br>1.450€ - 3.000€<br><small>A seconda della stagione</small>",
+            footer_text: "© 2026 Chalets Agnel - Tutti i diritti riservati | Affitto di Gran Comfort & Escursioni nel Queyras"
         }
+    };
 
-        hamburger.addEventListener('click', toggleMenu);
-        menuOverlay.addEventListener('click', toggleMenu);
-        document.querySelectorAll('nav ul li a').forEach(link => {
-            link.addEventListener('click', () => { if (navMenu.classList.contains('active')) toggleMenu(); });
-        });
+    let currentLang = 'fr';
 
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        });
+    function setLang(lang) {
+        currentLang = lang;
+        document.documentElement.lang = lang;
 
-        // Header scroll
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            header.style.background = window.scrollY > 100 ? 'rgba(255,255,255,0.98)' : 'rgba(255,255,255,0.95)';
-            header.style.boxShadow = window.scrollY > 100 ? '0 2px 25px rgba(0,0,0,0.15)' : '0 2px 20px rgba(0,0,0,0.1)';
-        });
+        // Update active button
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
 
-        // Lightbox
-        function openLightbox(element) {
-            const container = element.closest('.trail-gallery-item, .map-item, .gallery-item') || element;
-            const img = container.querySelector('img');
-            if (!img) return;
-
-            document.getElementById('lightbox-img').src = img.src;
-            document.getElementById('lightbox-img').alt = img.alt;
-
-            const caption = document.getElementById('lightbox-caption');
-            const isTrailPhoto = container.closest('#trailGallery') || container.closest('#trailGallery2') || container.closest('.maps-grid');
-            if (isTrailPhoto) {
-                const captionEl = container.querySelector('.img-caption, .map-label');
-                caption.textContent = captionEl ? captionEl.textContent : '';
-                caption.classList.toggle('visible', !!captionEl);
-            } else {
-                caption.textContent = '';
-                caption.classList.remove('visible');
+        // Update all translatable elements
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[lang] && translations[lang][key]) {
+                el.innerHTML = translations[lang][key];
             }
+        });
+    }
 
-            document.getElementById('lightbox').classList.add('active');
-        }
+    // =============================================
+    // MENU HAMBURGER
+    // =============================================
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
 
-        function closeLightbox() {
-            document.getElementById('lightbox').classList.remove('active');
-            document.getElementById('lightbox-img').src = '';
-            const caption = document.getElementById('lightbox-caption');
+    function toggleMenu() {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        menuOverlay.classList.toggle('active');
+        document.body.classList.toggle('menu-open');
+    }
+
+    hamburger.addEventListener('click', toggleMenu);
+    menuOverlay.addEventListener('click', toggleMenu);
+    document.querySelectorAll('nav ul li a').forEach(link => {
+        link.addEventListener('click', () => { if (navMenu.classList.contains('active')) toggleMenu(); });
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+
+    // Header scroll
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        header.style.background = window.scrollY > 100 ? 'rgba(255,255,255,0.98)' : 'rgba(255,255,255,0.95)';
+        header.style.boxShadow = window.scrollY > 100 ? '0 2px 25px rgba(0,0,0,0.15)' : '0 2px 20px rgba(0,0,0,0.1)';
+    });
+
+    // Lightbox
+    function openLightbox(element) {
+        const container = element.closest('.trail-gallery-item, .map-item, .gallery-item') || element;
+        const img = container.querySelector('img');
+        if (!img) return;
+
+        document.getElementById('lightbox-img').src = img.src;
+        document.getElementById('lightbox-img').alt = img.alt;
+
+        const caption = document.getElementById('lightbox-caption');
+        const isTrailPhoto = container.closest('#trailGallery') || container.closest('#trailGallery2') || container.closest('.maps-grid');
+        if (isTrailPhoto) {
+            const captionEl = container.querySelector('.img-caption, .map-label');
+            caption.textContent = captionEl ? captionEl.textContent : '';
+            caption.classList.toggle('visible', !!captionEl);
+        } else {
             caption.textContent = '';
             caption.classList.remove('visible');
         }
 
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+        document.getElementById('lightbox').classList.add('active');
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('active');
+        document.getElementById('lightbox-img').src = '';
+        const caption = document.getElementById('lightbox-caption');
+        caption.textContent = '';
+        caption.classList.remove('visible');
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
     </script>
 </body>
 </html>
