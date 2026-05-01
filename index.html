@@ -50,7 +50,7 @@
             align-items: center;
             gap: 0.35rem;
         }
-        .lang-btn svg { width: 20px; height: 14px; border-radius: 2px; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+        /* SVG flags styled inline */
         .lang-btn:last-child { border-right: none; }
         .lang-btn:hover { color: var(--accent); background: rgba(255,255,255,0.07); }
         .lang-btn.active { color: var(--accent); background: rgba(212,175,55,0.15); }
@@ -296,10 +296,10 @@
 
     <!-- Language Switcher -->
     <div class="lang-bar">
-        <button class="lang-btn active" onclick="setLang('fr')"><svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="14" fill="#ED2939"/><rect width="13.3" height="14" fill="#fff"/><rect width="6.67" height="14" fill="#002395"/></svg>FR</button>
-        <button class="lang-btn" onclick="setLang('en')"><svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="14" fill="#012169"/><path d="M0,0 L20,14 M20,0 L0,14" stroke="#fff" stroke-width="2.8"/><path d="M0,0 L20,14 M20,0 L0,14" stroke="#C8102E" stroke-width="1.8"/><path d="M10,0 V14 M0,7 H20" stroke="#fff" stroke-width="4.7"/><path d="M10,0 V14 M0,7 H20" stroke="#C8102E" stroke-width="2.8"/></svg>EN</button>
-        <button class="lang-btn" onclick="setLang('es')"><svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="14" fill="#c60b1e"/><rect y="3.15" width="20" height="7.7" fill="#ffc400"/></svg>ES</button>
-        <button class="lang-btn" onclick="setLang('it')"><svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="14" fill="#CE2B37"/><rect width="13.3" height="14" fill="#fff"/><rect width="6.67" height="14" fill="#009246"/></svg>IT</button>
+        <button class="lang-btn active" onclick="setLang('fr')"><svg width="22" height="15" viewBox="0 0 22 15" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;box-shadow:0 1px 3px rgba(0,0,0,0.4);flex-shrink:0"><rect width="22" height="15" fill="#ED2939"/><rect width="14.67" height="15" fill="#fff"/><rect width="7.33" height="15" fill="#002395"/></svg>FR</button>
+        <button class="lang-btn" onclick="setLang('en')"><svg width="22" height="15" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;box-shadow:0 1px 3px rgba(0,0,0,0.4);flex-shrink:0"><rect width="60" height="40" fill="#012169"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#fff" stroke-width="8"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#C8102E" stroke-width="5" stroke-dasharray="none"/><path d="M30,0 V40 M0,20 H60" stroke="#fff" stroke-width="13"/><path d="M30,0 V40 M0,20 H60" stroke="#C8102E" stroke-width="8"/></svg>EN</button>
+        <button class="lang-btn" onclick="setLang('es')"><svg width="22" height="15" viewBox="0 0 22 15" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;box-shadow:0 1px 3px rgba(0,0,0,0.4);flex-shrink:0"><rect width="22" height="15" fill="#AA151B"/><rect y="3.75" width="22" height="7.5" fill="#F1BF00"/></svg>ES</button>
+        <button class="lang-btn" onclick="setLang('it')"><svg width="22" height="15" viewBox="0 0 22 15" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;box-shadow:0 1px 3px rgba(0,0,0,0.4);flex-shrink:0"><rect width="22" height="15" fill="#CE2B37"/><rect width="14.67" height="15" fill="#fff"/><rect width="7.33" height="15" fill="#009246"/></svg>IT</button>
     </div>
 
     <header>
