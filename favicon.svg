@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Fond carré arrondi -->
+  <rect width="100" height="100" rx="16" fill="#2c3e50"/>
+  <!-- Toit de chalet qui déborde en haut -->
+  <polygon points="-4,32 50,2 104,32 104,38 -4,38" fill="#d4af37"/>
+  <!-- Épaisseur/ombre du toit -->
+  <rect x="-4" y="32" width="108" height="5" fill="#b8932a" opacity="0.55"/>
+  <!-- Petites fenêtres de lucarne sous le toit -->
+  <rect x="34" y="10" width="9" height="7" rx="1.5" fill="white" opacity="0.65"/>
+  <rect x="57" y="10" width="9" height="7" rx="1.5" fill="white" opacity="0.45"/>
+  <!-- C en or -->
+  <text x="6" y="88" font-family="Georgia, serif" font-size="64" font-weight="bold" fill="#d4af37">C</text>
+  <!-- A en blanc -->
+  <text x="52" y="88" font-family="Georgia, serif" font-size="64" font-weight="bold" fill="white">A</text>
+</svg>
