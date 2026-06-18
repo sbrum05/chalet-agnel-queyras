@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chalets Agnel | Restaurants, Boutiques & Visites - Queyras</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #2c3e50; --secondary: #8b7355; --accent: #d4af37;
+            --light: #f8f6f3; --white: #ffffff; --text: #333;
+            --trail-green: #4a7c59; --trail-light: #f0f5f1;
+        }
+        body { font-family: 'Georgia', serif; color: var(--text); line-height: 1.6; overflow-x: hidden; }
+
+        .lang-bar {
+            position: fixed; top: 0; right: 0; z-index: 1100;
+            display: flex; background: rgba(44,62,80,0.92); backdrop-filter: blur(10px);
+            border-bottom-left-radius: 10px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+        }
+        .lang-btn {
+            padding: 0.45rem 0.85rem; border: none; background: transparent;
+            color: rgba(255,255,255,0.65); font-size: 0.75rem; font-weight: 600;
+            letter-spacing: 0.5px; cursor: pointer; transition: all 0.25s;
+            font-family: 'Georgia', serif; border-right: 1px solid rgba(255,255,255,0.1);
+            text-transform: uppercase; display: flex; align-items: center; gap: 0.35rem;
+        }
+        .lang-btn:last-child { border-right: none; }
+        .lang-btn:hover { color: var(--accent); background: rgba(255,255,255,0.07); }
+        .lang-btn.active { color: var(--accent); background: rgba(212,175,55,0.15); }
+
+        header { position: fixed; width: 100%; top: 0; z-index: 1000; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); box-shadow: 0 2px 20px rgba(0,0,0,0.1); transition: all 0.3s ease; }
+        nav { max-width: 1400px; margin: 0 auto; padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.8rem; font-weight: bold; color: var(--primary); letter-spacing: 2px; }
+        .logo span { color: var(--accent); }
+        nav ul { display: flex; list-style: none; gap: 2.5rem; }
+        nav a { text-decoration: none; color: var(--primary); font-weight: 500; transition: color 0.3s; font-size: 1rem; }
+        nav a:hover { color: var(--accent); }
+        nav a.active-link { color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: 2px; }
+
+        .hamburger { display: none; flex-direction: column; cursor: pointer; z-index: 1001; width: 30px; height: 24px; position: relative; }
+        .hamburger span { width: 100%; height: 3px; background: var(--primary); border-radius: 3px; transition: all 0.3s ease; position: absolute; }
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+        .hamburger span:nth-child(3) { bottom: 0; }
+        .hamburger.active span:nth-child(1) { top: 50%; transform: translateY(-50%) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { bottom: 50%; transform: translateY(50%) rotate(-45deg); }
+        .mobile-menu-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 999; opacity: 0; transition: opacity 0.3s ease; }
+        .mobile-menu-overlay.active { opacity: 1; }
+        body.menu-open { overflow: hidden; }
+
+        .hero {
+            height: 55vh; min-height: 400px;
+            background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.45)),
+                url('https://github.com/sbrum05/chalet-agnel-queyras/blob/main/Molines%20en%20queyras%20La%20Rua%20Chalet%20Agnel%20%C3%A9t%C3%A9%201.webp?raw=true');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            display: flex; align-items: center; justify-content: center; text-align: center; color: white;
+            padding-top: 80px;
+        }
+        .hero-content { max-width: 800px; padding: 2rem; animation: fadeInUp 1s ease; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; font-weight: 300; letter-spacing: 3px; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); }
+        .hero p { font-size: 1.3rem; font-weight: 300; opacity: 0.92; }
+
+        .tab-nav {
+            background: var(--primary); padding: 0; display: flex; justify-content: center;
+            position: sticky; top: 80px; z-index: 500; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            flex-wrap: wrap;
+        }
+        .tab-nav a {
+            color: rgba(255,255,255,0.75); text-decoration: none; padding: 1.1rem 2rem;
+            font-size: 0.95rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+            transition: all 0.3s; border-bottom: 3px solid transparent;
+        }
+        .tab-nav a:hover { color: white; background: rgba(255,255,255,0.08); }
+        .tab-nav a.active { color: var(--accent); border-bottom-color: var(--accent); background: rgba(212,175,55,0.1); }
+
+        .page-section { padding: 5rem 2rem; max-width: 1400px; margin: 0 auto; }
+        h2 { font-size: 2.8rem; margin-bottom: 3rem; text-align: center; color: var(--primary); font-weight: 300; letter-spacing: 2px; }
+
+        .section-intro { text-align: center; max-width: 800px; margin: 0 auto 4rem; font-size: 1.1rem; color: #555; line-height: 1.9; font-style: italic; }
+
+        .village-block { margin-bottom: 4rem; }
+        .village-title {
+            display: flex; align-items: center; gap: 1rem;
+            font-size: 1.6rem; color: var(--primary); margin-bottom: 2rem;
+            padding-bottom: 1rem; border-bottom: 3px solid var(--accent);
+        }
+        .village-icon { font-size: 2rem; }
+
+        .resto-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+        .resto-card {
+            background: var(--light); border-radius: 12px; padding: 1.8rem;
+            border-left: 4px solid var(--accent); box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .resto-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.12); }
+        .resto-card h4 { font-size: 1.15rem; color: var(--primary); margin-bottom: 0.5rem; }
+        .resto-card .address { font-size: 0.9rem; color: #777; margin-bottom: 0.5rem; font-style: italic; }
+        .resto-card .phone {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            color: var(--trail-green); font-weight: 600; font-size: 0.95rem; text-decoration: none;
+            margin-top: 0.5rem; transition: color 0.2s;
+        }
+        .resto-card .phone:hover { color: var(--accent); }
+
+        .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem; }
+        .shop-item {
+            background: white; border-radius: 10px; padding: 1.4rem 1.6rem;
+            display: flex; align-items: flex-start; gap: 1rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07); transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .shop-item:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
+        .shop-icon { font-size: 1.8rem; flex-shrink: 0; margin-top: 0.1rem; }
+        .shop-item-text h4 { font-size: 1rem; color: var(--primary); margin-bottom: 0.25rem; }
+        .shop-item-text p { font-size: 0.88rem; color: #777; font-style: italic; line-height: 1.5; }
+
+        .visit-article {
+            background: var(--light); border-radius: 20px; overflow: hidden;
+            box-shadow: 0 6px 30px rgba(0,0,0,0.09); margin-bottom: 3rem;
+        }
+        .visit-header {
+            background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
+            color: white; padding: 2.5rem 3rem; position: relative; overflow: hidden;
+        }
+        .visit-header::before { content: attr(data-emoji); position: absolute; right: 2.5rem; top: 50%; transform: translateY(-50%); font-size: 7rem; opacity: 0.12; }
+        .visit-badge { display: inline-block; background: rgba(255,255,255,0.18); color: white; padding: 0.35rem 1rem; border-radius: 50px; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.8rem; border: 1px solid rgba(255,255,255,0.25); }
+        .visit-header h3 { font-size: 1.9rem; font-weight: 400; margin-bottom: 0.4rem; letter-spacing: 0.5px; }
+        .visit-header .visit-sub { font-size: 1rem; opacity: 0.82; font-style: italic; }
+
+        .visit-stats { display: flex; flex-wrap: wrap; border-bottom: 1px solid #eee; background: white; }
+        .vstat { flex: 1; min-width: 130px; padding: 1.4rem 1.2rem; text-align: center; border-right: 1px solid #eee; }
+        .vstat:last-child { border-right: none; }
+        .vstat-icon { font-size: 1.4rem; margin-bottom: 0.3rem; }
+        .vstat-value { font-size: 1.1rem; font-weight: bold; color: var(--primary); display: block; }
+        .vstat-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.8px; color: #999; }
+
+        .visit-body { padding: 2.5rem 3rem; background: white; }
+        .visit-body p { font-size: 1.05rem; line-height: 1.9; color: #444; margin-bottom: 1.2rem; }
+
+        .visit-steps { background: var(--trail-light); border-radius: 14px; padding: 2rem; margin: 2rem 0; }
+        .visit-steps h4 { font-size: 1.2rem; color: var(--primary); margin-bottom: 1.2rem; }
+        .steps-list { list-style: none; position: relative; }
+        .steps-list::before { content: ""; position: absolute; left: 17px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(to bottom, var(--trail-green), var(--accent)); }
+        .steps-list li { display: flex; align-items: flex-start; gap: 1rem; padding: 0.7rem 0; }
+        .step-dot { width: 36px; height: 36px; min-width: 36px; border-radius: 50%; background: var(--trail-green); color: white; display: flex; align-items: center; justify-content: center; font-size: 0.82rem; font-weight: bold; z-index: 1; }
+        .step-dot.start { background: var(--accent); }
+        .step-dot.end { background: var(--primary); }
+        .step-text { padding-top: 0.35rem; font-size: 0.98rem; line-height: 1.6; color: #444; }
+        .step-text strong { color: var(--primary); display: block; margin-bottom: 0.15rem; }
+
+        .visit-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; }
+        .info-card { border-radius: 12px; padding: 1.6rem; }
+        .info-card.green { background: var(--trail-green); color: white; }
+        .info-card.gold { background: var(--accent); color: white; }
+        .info-card h4 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; opacity: 0.85; }
+        .info-card ul { list-style: none; }
+        .info-card li { padding: 0.3rem 0; padding-left: 1.1rem; position: relative; font-size: 0.9rem; line-height: 1.5; }
+        .info-card li::before { content: "→"; position: absolute; left: 0; opacity: 0.7; }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--primary), #34495e);
+            color: white; border-radius: 14px; padding: 2rem 2.5rem; margin: 2rem 0;
+        }
+        .highlight-box p { color: rgba(255,255,255,0.9); margin: 0; }
+        .highlight-box strong { color: var(--accent); }
+
+        .activity-card {
+            background: white; border-radius: 16px; padding: 2.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08); margin-bottom: 2.5rem;
+        }
+        .activity-card h3 { color: var(--primary); font-size: 1.5rem; margin-bottom: 1rem; }
+        .activity-card p { font-size: 1.05rem; line-height: 1.85; color: #444; margin-bottom: 1rem; }
+        .activity-card ul { list-style: none; margin: 1rem 0; }
+        .activity-card li { padding: 0.35rem 0 0.35rem 1.5rem; position: relative; font-size: 0.98rem; }
+        .activity-card li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: bold; }
+
+        .link-btn {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            background: var(--trail-green); color: white; text-decoration: none;
+            padding: 0.8rem 1.8rem; border-radius: 50px; font-size: 0.95rem; font-weight: 600;
+            transition: all 0.3s; box-shadow: 0 4px 12px rgba(74,124,89,0.35); margin-top: 1rem;
+        }
+        .link-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(74,124,89,0.5); background: #3a6648; }
+        .link-btn.gold-btn { background: var(--accent); box-shadow: 0 4px 12px rgba(212,175,55,0.35); }
+        .link-btn.gold-btn:hover { background: #b8941e; box-shadow: 0 6px 20px rgba(212,175,55,0.5); }
+
+        .back-bar { background: var(--primary); padding: 1rem 2rem; text-align: center; }
+        .back-bar a { color: var(--accent); text-decoration: none; font-size: 0.95rem; font-weight: 600; letter-spacing: 0.5px; transition: opacity 0.2s; }
+        .back-bar a:hover { opacity: 0.8; }
+
+        footer { background: var(--primary); color: rgba(255,255,255,0.7); text-align: center; padding: 2rem; border-top: 1px solid rgba(255,255,255,0.1); }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 768px) {
+            .lang-bar { top: auto; bottom: 0; left: 0; right: 0; width: 100%; border-radius: 0; justify-content: center; border-top: 1px solid rgba(255,255,255,0.1); }
+            .lang-btn { padding: 0.6rem 1.2rem; font-size: 0.82rem; }
+            .hamburger { display: flex; }
+            .mobile-menu-overlay { display: block; }
+            nav { padding: 1rem 1.5rem; }
+            nav ul { position: fixed; top: 0; right: -100%; height: 100vh; width: 75%; max-width: 350px; background: var(--white); flex-direction: column; gap: 0; padding: 6rem 2rem 2rem; box-shadow: -5px 0 25px rgba(0,0,0,0.2); transition: right 0.3s ease; overflow-y: auto; }
+            nav ul.active { right: 0; }
+            nav ul li { width: 100%; border-bottom: 1px solid rgba(0,0,0,0.05); }
+            nav ul li a { display: block; padding: 1.2rem 0; font-size: 1.1rem; }
+            .logo { font-size: 1.3rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero { background-attachment: scroll; }
+            .tab-nav { top: 65px; }
+            .tab-nav a { padding: 0.8rem 1rem; font-size: 0.78rem; }
+            h2 { font-size: 2rem; }
+            .page-section { padding: 4rem 1.5rem; }
+            .resto-grid { grid-template-columns: 1fr; }
+            .shop-grid { grid-template-columns: 1fr; }
+            .visit-header { padding: 2rem; }
+            .visit-header h3 { font-size: 1.4rem; }
+            .visit-header::before { display: none; }
+            .visit-body { padding: 1.8rem; }
+            .visit-info-grid { grid-template-columns: 1fr; }
+            .vstat { min-width: 90px; padding: 1rem 0.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="lang-bar">
+    <button class="lang-btn active" onclick="setLang('fr')"><svg width="22" height="15" viewBox="0 0 22 15" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;box-shadow:0 1px 3px rgba(0,0,0,0.4);flex-shrink:0"><rect width="22" height="15" fill="#ED2939"/><rect width="14.67" height="15" fill="#fff"/><rect width="7.33" height="15" fill="#002395"/></svg>FR</button>
+    <button class="lang-btn" onclick="setLang('en')"><svg width="22" height="15" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;box-shadow:0 1px 3px rgba(0,0,0,0.4);flex-shrink:0"><rect width="60" height="40" fill="#012169"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#fff" stroke-width="8"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#C8102E" stroke-width="5"/><path d="M30,0 V40 M0,20 H60" stroke="#fff" stroke-width="13"/><path d="M30,0 V40 M0,20 H60" stroke="#C8102E" stroke-width="8"/></svg>EN</button>
+    <button class="lang-btn" onclick="setLang('es')"><svg width="22" height="15" viewBox="0 0 22 15" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;box-shadow:0 1px 3px rgba(0,0,0,0.4);flex-shrink:0"><rect width="22" height="15" fill="#AA151B"/><rect y="3.75" width="22" height="7.5" fill="#F1BF00"/></svg>ES</button>
+    <button class="lang-btn" onclick="setLang('it')"><svg width="22" height="15" viewBox="0 0 22 15" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;box-shadow:0 1px 3px rgba(0,0,0,0.4);flex-shrink:0"><rect width="22" height="15" fill="#CE2B37"/><rect width="14.67" height="15" fill="#fff"/><rect width="7.33" height="15" fill="#009246"/></svg>IT</button>
+</div>
+
+<header>
+    <nav>
+        <div class="logo">CHALETS <span>AGNEL</span></div>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+        <ul id="navMenu">
+            <li><a href="index.html" data-i18n="nav_home">Accueil</a></li>
+            <li><a href="index.html#description" data-i18n="nav_chalet">Le Chalet</a></li>
+            <li><a href="index.html#galerie" data-i18n="nav_gallery">Galerie</a></li>
+            <li><a href="index.html#randonnees" data-i18n="nav_hikes">Randonnées</a></li>
+            <li><a href="restauration-boutiques-visites.html" class="active-link" data-i18n="nav_local">Aux alentours</a></li>
+            <li><a href="index.html#contact" data-i18n="nav_contact">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="mobile-menu-overlay" id="menuOverlay"></div>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1 data-i18n="hero_title">Aux Alentours</h1>
+        <p data-i18n="hero_sub">Restaurants, boutiques, visites &amp; activités dans le Queyras</p>
+    </div>
+</section>
+
+<nav class="tab-nav">
+    <a href="#restauration" class="active" data-i18n="tab_resto">🍽️ Restauration</a>
+    <a href="#boutiques" data-i18n="tab_shop">🛒 Boutiques</a>
+    <a href="#visites" data-i18n="tab_visit">🏔️ Visites en voiture</a>
+    <a href="#activites" data-i18n="tab_activ">🚵 Randos &amp; Vélo</a>
+</nav>
+
+<!-- RESTAURATION -->
+<section id="restauration" class="page-section">
+    <h2 data-i18n="resto_title">Restauration</h2>
+    <p class="section-intro" data-i18n="resto_intro">Autour du chalet, vous trouverez une belle sélection de restaurants et pizzerias, de la cuisine montagnarde conviviale aux adresses plus intimistes. Voici notre sélection par village.</p>
+
+    <div class="village-block">
+        <h3 class="village-title"><span class="village-icon">📍</span> Molines-en-Queyras</h3>
+        <div class="resto-grid">
+            <div class="resto-card"><h4>🍕 Pizzeria La Bonne Franquette</h4><div class="address">Rue du Temple</div><a class="phone" href="tel:0625841642">📞 06 25 84 16 42</a></div>
+            <div class="resto-card"><h4>🐻 Restaurant Pizzeria L'Ours Blanc</h4><div class="address">267 impasse des Taoures, Clôt la Chalpe</div><a class="phone" href="tel:0492558462">📞 04 92 55 84 62</a></div>
+            <div class="resto-card"><h4>🦌 Hôtel Restaurant le Chamois</h4><div class="address">Centre village</div><a class="phone" href="tel:0492458371">📞 04 92 45 83 71</a></div>
+            <div class="resto-card"><h4>❤️ Le Chalet des Amoureux</h4><div class="address">Bois des Amoureux</div><a class="phone" href="tel:0492458435">📞 04 92 45 84 35</a></div>
+        </div>
+    </div>
+
+    <div class="village-block">
+        <h3 class="village-title"><span class="village-icon">📍</span> Saint-Véran</h3>
+        <div class="resto-grid">
+            <div class="resto-card"><h4>🌿 La Fougagno</h4><div class="address">Rue du Châtelet</div><a class="phone" href="tel:0492589358">📞 04 92 58 93 58</a></div>
+            <div class="resto-card"><h4>🏔️ Rocca Bianca</h4><div class="address">149 Rue des Forannes</div><a class="phone" href="tel:0625880466">📞 06 25 88 04 66</a></div>
+            <div class="resto-card"><h4>🦫 La Marmotte</h4><div class="address">15 rue des Forannes</div><a class="phone" href="tel:0492458477">📞 04 92 45 84 77</a></div>
+        </div>
+    </div>
+
+    <div class="village-block">
+        <h3 class="village-title"><span class="village-icon">📍</span> Château-Ville-Vieille</h3>
+        <div class="resto-grid">
+            <div class="resto-card"><h4>🏰 Restaurant Le Guilazur</h4><div class="address">Centre village</div><a class="phone" href="tel:0492467409">📞 04 92 46 74 09</a></div>
+        </div>
+    </div>
+
+    <div class="village-block">
+        <h3 class="village-title"><span class="village-icon">📍</span> Arvieux</h3>
+        <div class="resto-grid">
+            <div class="resto-card"><h4>🌄 La Belle Échappée</h4><div class="address">3730 route du Col d'Izoard, le village</div><a class="phone" href="tel:0644311247">📞 06 44 31 12 47</a></div>
+            <div class="resto-card"><h4>🍖 Le Jamberoute</h4><div class="address">Brunissard</div><a class="phone" href="tel:0492468100">📞 04 92 46 81 00</a></div>
+            <div class="resto-card"><h4>⛰️ Refuge Napoléon du Col d'Izoard</h4><div class="address">Col d'Izoard (2 362 m)</div><a class="phone" href="tel:0492211742">📞 04 92 21 17 42</a></div>
+        </div>
+    </div>
+
+    <div class="village-block">
+        <h3 class="village-title"><span class="village-icon">📍</span> Aiguilles</h3>
+        <div class="resto-grid">
+            <div class="resto-card"><h4>☕ Le Bô – Bar</h4><div class="address">Rue centrale</div><a class="phone" href="tel:0680260617">📞 06 80 26 06 17</a></div>
+        </div>
+    </div>
+
+    <div class="village-block">
+        <h3 class="village-title"><span class="village-icon">📍</span> Abriès</h3>
+        <div class="resto-grid">
+            <div class="resto-card"><h4>🍷 Lou Goustaroun</h4><div class="address">8 Rue du Haut Guil</div><a class="phone" href="tel:0492467647">📞 04 92 46 76 47</a></div>
+        </div>
+    </div>
+</section>
+
+<!-- BOUTIQUES -->
+<div id="boutiques" style="background: var(--light); padding: 5rem 2rem;">
+    <div style="max-width: 1400px; margin: 0 auto;">
+        <h2 data-i18n="shop_title">Boutiques &amp; Services</h2>
+        <p class="section-intro" data-i18n="shop_intro">Boulangeries, épiceries, fromages, artisanat local… le Queyras regorge de petits commerces où l'authenticité est de mise.</p>
+
+        <div class="village-block">
+            <h3 class="village-title"><span class="village-icon">📍</span> Molines-en-Queyras — Centre village</h3>
+            <div class="shop-grid">
+                <div class="shop-item"><span class="shop-icon">🥖</span><div class="shop-item-text"><h4>Boulangerie LE PAIN DES CIMES 1800</h4><p>Pain artisanal et viennoiseries en altitude</p></div></div>
+                <div class="shop-item"><span class="shop-icon">🛒</span><div class="shop-item-text"><h4>PROXI Épicerie</h4><p>Épicerie de proximité, produits du quotidien</p></div></div>
+                <div class="shop-item"><span class="shop-icon">🥩</span><div class="shop-item-text"><h4>Boucherie-Charcuterie</h4><p>En cours de réouverture</p></div></div>
+                <div class="shop-item"><span class="shop-icon">🍸</span><div class="shop-item-text"><h4>Distillerie Saint-Véran</h4><p>Vodka, Gin, fabrication locale — visite guidée possible</p></div></div>
+            </div>
+        </div>
+
+        <div class="village-block">
+            <h3 class="village-title"><span class="village-icon">📍</span> Château-Ville-Vieille</h3>
+            <div class="shop-grid">
+                <div class="shop-item"><span class="shop-icon">🏪</span><div class="shop-item-text"><h4>Relais Intermarché</h4><p>Supermarché de la vallée, courses complètes</p></div></div>
+                <div class="shop-item"><span class="shop-icon">🧀</span><div class="shop-item-text"><h4>Fromagerie de Château-Queyras</h4><p>Fromages artisanaux de la région</p></div></div>
+                <div class="shop-item"><span class="shop-icon">🥖</span><div class="shop-item-text"><h4>Le Pain des Cimes 1400</h4><p>Boulangerie artisanale</p></div></div>
+                <div class="shop-item"><span class="shop-icon">ℹ️</span><div class="shop-item-text"><h4>Office du Tourisme</h4><p>Cartes, topoguides, infos locales</p></div></div>
+                <div class="shop-item"><span class="shop-icon">🪵</span><div class="shop-item-text"><h4>Maison de l'Artisanat</h4><p>Artisanat traditionnel du Queyras</p></div></div>
+                <div class="shop-item"><span class="shop-icon">🍪</span><div class="shop-item-text"><h4>Biscuiterie des Cimes</h4><p>Biscuits et gourmandises locales</p></div></div>
+                <div class="shop-item"><span class="shop-icon">🫙</span><div class="shop-item-text"><h4>Le Plantivore</h4><p>Confitures, boissons et productions locales</p></div></div>
+                <div class="shop-item"><span class="shop-icon">🛍️</span><div class="shop-item-text"><h4>La Maison de Marguerite</h4><p>Drugstore — plein de produits !</p></div></div>
+                <div class="shop-item"><span class="shop-icon">🍱</span><div class="shop-item-text"><h4>Le Refuge du Goût</h4><p>Traiteur local</p></div></div>
+                <div class="shop-item"><span class="shop-icon">🍝</span><div class="shop-item-text"><h4>Gio Pasta</h4><p>Fabrication artisanale de pâtes fraîches</p></div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- VISITES -->
+<section id="visites" class="page-section">
+    <h2 data-i18n="visit_title">Visites en voiture</h2>
+    <p class="section-intro" data-i18n="visit_intro">Le Queyras regorge de sites exceptionnels accessibles en quelques minutes de voiture depuis les chalets. Cols mythiques, fortifications, villages perchés…</p>
+
+    <div class="visit-article">
+        <div class="visit-header" data-emoji="⛰️">
+            <div class="visit-badge">🚗 25 min depuis le chalet</div>
+            <h3>Col Agnel — 2 744 m</h3>
+            <p class="visit-sub">Le col le plus haut de la route franco-italienne des Alpes du Sud</p>
+        </div>
+        <div class="visit-stats">
+            <div class="vstat"><div class="vstat-icon">⏱️</div><span class="vstat-value">25 mn</span><span class="vstat-label">En voiture</span></div>
+            <div class="vstat"><div class="vstat-icon">🏔️</div><span class="vstat-value">2 744 m</span><span class="vstat-label">Altitude</span></div>
+            <div class="vstat"><div class="vstat-icon">🇮🇹</div><span class="vstat-value">Italie</span><span class="vstat-label">Possible +25 mn</span></div>
+            <div class="vstat"><div class="vstat-icon">🥾</div><span class="vstat-value">30 mn</span><span class="vstat-label">Rando Col Vieux</span></div>
+        </div>
+        <div class="visit-body">
+            <p>Le Col Agnel est l'un des plus hauts cols routiers des Alpes françaises et offre un panorama à couper le souffle sur les sommets franco-italiens. Depuis le chalet, comptez 25 minutes de route dans un paysage qui devient de plus en plus grandiose à mesure que l'on prend de l'altitude.</p>
+            <div class="visit-info-grid">
+                <div class="info-card green"><h4>✅ À ne pas manquer</h4><ul><li>Panorama à 360° sur les Alpes franco-italiennes</li><li>Possibilité de passer en Italie (+25 mn) : Lac de Pontechianale</li><li>Petite randonnée vers le Col Vieux (30 mn)</li><li>Refuge Agnel (2 580 m) pour une pause ou nuit</li></ul></div>
+                <div class="info-card gold"><h4>💡 Conseils</h4><ul><li>Emmener des vêtements chauds même en été</li><li>Route ouverte de juin à octobre</li><li>Liaison possible avec la Tête de Caramantran (3 025 m)</li><li>Prévoir pièce d'identité pour passer en Italie</li></ul></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="visit-article">
+        <div class="visit-header" data-emoji="🚴">
+            <div class="visit-badge">🚗 34 min depuis le chalet</div>
+            <h3>Col d'Izoard — 2 362 m</h3>
+            <p class="visit-sub">Col mythique du Tour de France — Casse Déserte et ambiance lunaire</p>
+        </div>
+        <div class="visit-stats">
+            <div class="vstat"><div class="vstat-icon">⏱️</div><span class="vstat-value">34 mn</span><span class="vstat-label">En voiture</span></div>
+            <div class="vstat"><div class="vstat-icon">🏔️</div><span class="vstat-value">2 362 m</span><span class="vstat-label">Altitude</span></div>
+            <div class="vstat"><div class="vstat-icon">🚴</div><span class="vstat-value">Tour de France</span><span class="vstat-label">Col mythique</span></div>
+            <div class="vstat"><div class="vstat-icon">🌑</div><span class="vstat-value">Lunaire</span><span class="vstat-label">La Casse Déserte</span></div>
+        </div>
+        <div class="visit-body">
+            <p>Inscrit dans la légende du Tour de France, le Col d'Izoard est un incontournable du Queyras. La route en lacets traverse des paysages superbes avant d'atteindre la célèbre Casse Déserte — un univers lunaire de pinacles rocheux et d'éboulis qui impressionne toujours autant.</p>
+            <div class="visit-info-grid">
+                <div class="info-card green"><h4>✅ Points forts</h4><ul><li>La Casse Déserte : paysage unique et spectaculaire</li><li>Stèles Coppi et Bobet, légendes du Tour de France</li><li>Refuge Napoléon au sommet (04 92 21 17 42)</li><li>Vue sur Briançon côté nord</li></ul></div>
+                <div class="info-card gold"><h4>💡 Conseils</h4><ul><li>Route parfois fermée par la neige hors saison</li><li>Très fréquenté par les cyclistes en été</li><li>Idéal à l'heure dorée (matin ou fin d'après-midi)</li><li>Combinaison possible avec Briançon</li></ul></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="visit-article">
+        <div class="visit-header" data-emoji="🏰">
+            <div class="visit-badge">🚗 Château-Ville-Vieille</div>
+            <h3>Fort Queyras</h3>
+            <p class="visit-sub">Monument historique médiéval remanié par Vauban, symbole de la vallée</p>
+        </div>
+        <div class="visit-body" style="padding-top: 2rem;">
+            <p>Situé au carrefour des vallées menant vers Arvieux, Saint-Véran et Abriès, ce château fort médiéval perché sur son verrou rocheux surplombe le Guil de façon spectaculaire. Remanié au XVII<sup>e</sup> siècle par le grand ingénieur militaire Vauban, il est le monument historique emblématique du Queyras.</p>
+            <div class="highlight-box"><p>📌 <strong>À savoir :</strong> Le fort est visible depuis la route principale de la vallée. Des visites guidées sont organisées en saison. Renseignements à l'Office du Tourisme de Château-Ville-Vieille.</p></div>
+        </div>
+    </div>
+
+    <div class="visit-article">
+        <div class="visit-header" data-emoji="🏛️">
+            <div class="visit-badge">🚗 Saint-Véran</div>
+            <h3>Le Musée du Soum</h3>
+            <p class="visit-sub">Arts et traditions populaires dans la plus ancienne maison de Saint-Véran (1641)</p>
+        </div>
+        <div class="visit-body" style="padding-top: 2rem;">
+            <p>Installé dans la plus ancienne maison du village (datant de 1641), ce musée d'arts et traditions populaires témoigne de la vie quotidienne d'autrefois, de l'artisanat du bois et de l'adaptation des Queyrassins à la rudesse des hivers en haute altitude.</p>
+        </div>
+    </div>
+
+    <div class="visit-article">
+        <div class="visit-header" data-emoji="🦅">
+            <div class="visit-badge">🚶 Promenade · Ristolas</div>
+            <h3>La Roche Écroulée</h3>
+            <p class="visit-sub">Vue grandiose sur le Mont Viso depuis la Réserve Naturelle de Ristolas</p>
+        </div>
+        <div class="visit-stats">
+            <div class="vstat"><div class="vstat-icon">📍</div><span class="vstat-value">3 km</span><span class="vstat-label">Boucle complète</span></div>
+            <div class="vstat"><div class="vstat-icon">⏱️</div><span class="vstat-value">1 h 15</span><span class="vstat-label">Boucle / 25 mn A/R</span></div>
+            <div class="vstat"><div class="vstat-icon">🟢</div><span class="vstat-value">Facile</span><span class="vstat-label">Difficulté</span></div>
+            <div class="vstat"><div class="vstat-icon">⛰️</div><span class="vstat-value">Mont Viso</span><span class="vstat-label">Vue face N-O</span></div>
+        </div>
+        <div class="visit-body">
+            <p>Au fond de la vallée vers le Viso, dans la Réserve Naturelle Nationale de Ristolas - Mont Viso, cette promenade facile offre un superbe point de vue sur la face nord-ouest du Mont Viso (3 841 m). La boucle complète de 3 km passe par un sentier pédagogique sous les mélèzes (environ 1h15). Vous pouvez aussi faire l'aller-retour sur piste en seulement 25 minutes.</p>
+        </div>
+    </div>
+
+    <div class="visit-article">
+        <div class="visit-header" data-emoji="🏞️">
+            <div class="visit-badge">🚶 Promenade · Abriès</div>
+            <h3>Valpréveyre</h3>
+            <p class="visit-sub">Joli hameau de montagne et promenade le long du torrent du Bouchet</p>
+        </div>
+        <div class="visit-body" style="padding-top: 2rem;">
+            <p>Depuis Abriès, Valpréveyre est un joli petit hameau de montagne authentique avec une promenade possible le long du torrent du Bouchet — idéale pour une sortie tranquille en famille, loin de la foule, dans un cadre préservé.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ACTIVITES -->
+<div id="activites" style="background: var(--trail-light); padding: 5rem 2rem;">
+    <div style="max-width: 1400px; margin: 0 auto;">
+        <h2 data-i18n="activ_title">Randonnées &amp; Vélo</h2>
+        <p class="section-intro" data-i18n="activ_intro">Le Queyras est un haut-lieu de la randonnée et du vélo. De la balade au sommet du Viso à 3 841 m, il y en a pour tous les goûts et tous les niveaux.</p>
+
+        <div class="activity-card">
+            <h3>🥾 Randonnées pédestres au départ du chalet</h3>
+            <p>Le hameau de La Rua est un point de départ idéal pour de nombreuses randonnées sans prendre la voiture. Retrouvez nos itinéraires détaillés — Cabane du Clot l'Henry, Boucle par Prats-Hauts et bien d'autres — directement sur notre site.</p>
+            <a href="https://chalets-agnel-queyras.fr/#randonnees" class="link-btn" target="_blank" rel="noopener">🔗 Voir les randonnées depuis le chalet</a>
+        </div>
+
+        <div class="visit-article">
+            <div class="visit-header" data-emoji="🏔️">
+                <div class="visit-badge">🥾 Randonnée · Facile · Sur piste — Saint-Véran</div>
+                <h3>Lac de la Blanche &amp; Refuge de la Blanche</h3>
+                <p class="visit-sub">Au pied de la Tête des Toillies — accès navette en saison</p>
+            </div>
+            <div class="visit-stats">
+                <div class="vstat"><div class="vstat-icon">🚌</div><span class="vstat-value">Navette</span><span class="vstat-label">21/06 au 6/09</span></div>
+                <div class="vstat"><div class="vstat-icon">⏱️</div><span class="vstat-value">45 mn</span><span class="vstat-label">Chapelle → Refuge</span></div>
+                <div class="vstat"><div class="vstat-icon">⬆️</div><span class="vstat-value">+250 m</span><span class="vstat-label">Vers Lac Blanchet</span></div>
+                <div class="vstat"><div class="vstat-icon">🟢</div><span class="vstat-value">Facile</span><span class="vstat-label">Difficulté</span></div>
+            </div>
+            <div class="visit-body">
+                <p>Depuis Saint-Véran, prenez la navette (du 21/06 au 6/09, sauf le 16/07) jusqu'à proximité de la chapelle de Clausis. Il reste 45 minutes de marche tranquille pour atteindre le refuge, qui propose une excellente restauration dans un cadre magnifique au pied de la Tête des Toillies.</p>
+                <p>Pour les plus motivés : <strong>Lac Blanchet Inférieur</strong> (+250 m, 1,2 km, ~45 mn) et <strong>Lac Blanchet Supérieur</strong> (+15 mn supplémentaires), niché au pied de l'imposante Tête des Toillies — un panorama absolument grandiose.</p>
+            </div>
+        </div>
+
+        <div class="visit-article">
+            <div class="visit-header" data-emoji="🏔️">
+                <div class="visit-badge">🥾 Randonnée · Facile–Moyenne · Depuis Col Agnel</div>
+                <h3>Tête de Caramantran — 3 025 m</h3>
+                <p class="visit-sub">L'un des 3 000 m les plus accessibles des Alpes occidentales</p>
+            </div>
+            <div class="visit-stats">
+                <div class="vstat"><div class="vstat-icon">📍</div><span class="vstat-value">6–6,5 km</span><span class="vstat-label">Aller-Retour</span></div>
+                <div class="vstat"><div class="vstat-icon">⬆️</div><span class="vstat-value">400–450 m</span><span class="vstat-label">Dénivelé +</span></div>
+                <div class="vstat"><div class="vstat-icon">⏱️</div><span class="vstat-value">2h30–3h</span><span class="vstat-label">Durée totale</span></div>
+                <div class="vstat"><div class="vstat-icon">🏔️</div><span class="vstat-value">3 025 m</span><span class="vstat-label">Sommet</span></div>
+                <div class="vstat"><div class="vstat-icon">🟡</div><span class="vstat-value">Facile–Moyen</span><span class="vstat-label">Difficulté</span></div>
+            </div>
+            <div class="visit-body">
+                <p>L'ascension de la Tête de Caramantran depuis le Col Agnel est l'un des itinéraires de plus de 3 000 mètres les plus faciles et accessibles de toutes les Alpes occidentales. Une magnifique randonnée sur sentier, idéale pour profiter d'un panorama grandiose sans difficulté technique. Accès au départ : 25 mn en voiture depuis le chalet.</p>
+                <div class="visit-steps">
+                    <h4>🗺️ Itinéraire pas à pas</h4>
+                    <ol class="steps-list">
+                        <li><div class="step-dot start">▶</div><div class="step-text"><strong>Départ — Refuge Agnel (2 580 m) ou parking Col Agnel (~2 620 m)</strong>Emprunter le sentier balisé blanc et rouge du GR 58 (Tour du Queyras). Montée régulière au milieu des alpages, vue superbe sur le Pain de Sucre.</div></li>
+                        <li><div class="step-dot">1</div><div class="step-text"><strong>Col de Chamoussière (2 884 m) — environ 1 h</strong>Vue magnifique sur la vallée de l'Aigue Blanche et la Tête des Toillies. Quitter le GR 58 au col, prendre à gauche direction sud.</div></li>
+                        <li><div class="step-dot">2</div><div class="step-text"><strong>Montée finale sur la crête (sentier cairné)</strong>Chemin bien marqué de cairns sur la frontière franco-italienne. Sans passage vertigineux ni technique.</div></li>
+                        <li><div class="step-dot end">⛰️</div><div class="step-text"><strong>Sommet — Tête de Caramantran (3 025 m)</strong>Vue à 360° : Mont Viso, Pain de Sucre, Pic d'Asti, Tête des Toillies, Écrins. Chamois et bouquetins fréquents côté Italie !</div></li>
+                    </ol>
+                </div>
+                <div class="visit-info-grid">
+                    <div class="info-card green"><h4>✅ Points forts</h4><ul><li>Le plus accessible des 3 000 m des Alpes du Sud</li><li>Panorama 360° exceptionnel</li><li>Chamois et bouquetins côté Italie</li><li>Sentier bien balisé, aucune difficulté technique</li><li>Option boucle via Col de Saint-Véran</li></ul></div>
+                    <div class="info-card gold"><h4>💡 Conseils pratiques</h4><ul><li>Partir tôt le matin (orages possibles l'après-midi)</li><li>Vêtements chauds et coupe-vent indispensables</li><li>Jumelles recommandées pour observer la faune</li><li>Accessible dès juillet selon enneigement</li><li>Départ : 25 mn depuis le chalet en voiture</li></ul></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="activity-card" style="margin-top: 1rem;">
+            <h3>🚵 Vélo — Route, Gravel &amp; VTT</h3>
+            <p>Route, gravel ou VTT, vous avez le choix ! Le Queyras dispose d'un réseau exceptionnel pour tous les niveaux, depuis les grandes routes des cols jusqu'aux singles techniques en sous-bois.</p>
+            <ul>
+                <li><strong>71 itinéraires balisés FFC</strong> (vert à noir) — carte disponible à l'Office du Tourisme de Château-Ville-Vieille</li>
+                <li><strong>Bike Park d'Abriès-Ristolas</strong> — pistes DH/Enduro desservies par remontées mécaniques en été</li>
+                <li><strong>Grands cols cyclo</strong> — Col d'Izoard, Col Agnel, montée de Saint-Véran : brochure gratuite à l'OT</li>
+                <li><strong>Tour du Queyras en VTT</strong> (GR 58) — l'équivalent MTB du célèbre tour pédestre</li>
+            </ul>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="https://sitesvtt.ffc.fr/sites/guillestrois-queyras-6/" class="link-btn" target="_blank" rel="noopener">🗺️ Carte VTT FFC en ligne</a>
+                <a href="https://www.cheminsdesparcs.fr/search?practices=1" class="link-btn gold-btn" target="_blank" rel="noopener">📱 App Chemins des Parcs</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="back-bar">
+    <a href="index.html">← Retour au site Chalets Agnel</a>
+</div>
+
+<footer>
+    <p>&copy; 2026 Chalets Agnel — Tous droits réservés | Location Grand Confort &amp; Randonnées dans le Queyras</p>
+</footer>
+
+<script>
+const t = {
+    fr: { nav_home:"Accueil", nav_chalet:"Le Chalet", nav_gallery:"Galerie", nav_hikes:"Randonnées", nav_local:"Aux alentours", nav_contact:"Contact", hero_title:"Aux Alentours", hero_sub:"Restaurants, boutiques, visites & activités dans le Queyras", tab_resto:"🍽️ Restauration", tab_shop:"🛒 Boutiques", tab_visit:"🏔️ Visites en voiture", tab_activ:"🚵 Randos & Vélo", resto_title:"Restauration", resto_intro:"Autour du chalet, vous trouverez une belle sélection de restaurants et pizzerias, de la cuisine montagnarde conviviale aux adresses plus intimistes. Voici notre sélection par village.", shop_title:"Boutiques & Services", shop_intro:"Boulangeries, épiceries, fromages, artisanat local… le Queyras regorge de petits commerces où l'authenticité est de mise.", visit_title:"Visites en voiture", visit_intro:"Le Queyras regorge de sites exceptionnels accessibles en quelques minutes de voiture depuis les chalets. Cols mythiques, fortifications, villages perchés…", activ_title:"Randonnées & Vélo", activ_intro:"Le Queyras est un haut-lieu de la randonnée et du vélo. De la balade au sommet du Viso à 3 841 m, il y en a pour tous les goûts et tous les niveaux." },
+    en: { nav_home:"Home", nav_chalet:"The Chalet", nav_gallery:"Gallery", nav_hikes:"Hiking", nav_local:"Around us", nav_contact:"Contact", hero_title:"Around the Chalet", hero_sub:"Restaurants, shops, sightseeing & activities in the Queyras", tab_resto:"🍽️ Restaurants", tab_shop:"🛒 Shops", tab_visit:"🏔️ Sightseeing by car", tab_activ:"🚵 Hiking & Cycling", resto_title:"Restaurants", resto_intro:"Around the chalet you'll find a great selection of restaurants and pizzerias, from convivial mountain cooking to more intimate addresses.", shop_title:"Shops & Services", shop_intro:"Bakeries, grocery stores, cheese shops, local crafts… the Queyras is full of authentic small shops.", visit_title:"Sightseeing by car", visit_intro:"The Queyras is full of exceptional sites reachable in just a few minutes by car. Mythical passes, fortifications, perched villages…", activ_title:"Hiking & Cycling", activ_intro:"The Queyras is a top destination for hiking and cycling. From gentle walks to the summit of Monte Viso at 3,841 m." },
+    es: { nav_home:"Inicio", nav_chalet:"El Chalet", nav_gallery:"Galería", nav_hikes:"Senderismo", nav_local:"Alrededores", nav_contact:"Contacto", hero_title:"Alrededores", hero_sub:"Restaurantes, tiendas, visitas y actividades en el Queyras", tab_resto:"🍽️ Restauración", tab_shop:"🛒 Tiendas", tab_visit:"🏔️ Visitas en coche", tab_activ:"🚵 Senderismo & Bici", resto_title:"Restauración", resto_intro:"Alrededor del chalet encontrará una excelente selección de restaurantes y pizzerías, de la cocina de montaña a las direcciones más íntimas.", shop_title:"Tiendas & Servicios", shop_intro:"Panaderías, tiendas, quesos, artesanía local… el Queyras está lleno de pequeños comercios auténticos.", visit_title:"Visitas en coche", visit_intro:"El Queyras está lleno de sitios excepcionales a pocos minutos en coche. Puertos míticos, fortificaciones, pueblos encaramados…", activ_title:"Senderismo & Ciclismo", activ_intro:"El Queyras es un destino de referencia para el senderismo y el ciclismo, desde paseos hasta la cumbre del Mont Viso a 3 841 m." },
+    it: { nav_home:"Home", nav_chalet:"Lo Chalet", nav_gallery:"Galleria", nav_hikes:"Escursioni", nav_local:"Dintorni", nav_contact:"Contatti", hero_title:"I Dintorni", hero_sub:"Ristoranti, negozi, visite e attività nel Queyras", tab_resto:"🍽️ Ristorazione", tab_shop:"🛒 Negozi", tab_visit:"🏔️ Visite in auto", tab_activ:"🚵 Escursioni & Bici", resto_title:"Ristorazione", resto_intro:"Intorno allo chalet troverete una bella selezione di ristoranti e pizzerie, dalla cucina montana conviviale agli indirizzi più intimi.", shop_title:"Negozi & Servizi", shop_intro:"Panetterie, alimentari, formaggi, artigianato locale… il Queyras è pieno di piccoli negozi autentici.", visit_title:"Visite in auto", visit_intro:"Il Queyras è pieno di siti eccezionali raggiungibili in pochi minuti d'auto. Valichi mitici, fortificazioni, paesi arroccati…", activ_title:"Escursioni & Ciclismo", activ_intro:"Il Queyras è una destinazione d'eccellenza per escursioni e ciclismo, dalle passeggiate alla vetta del Monte Viso a 3 841 m." }
+};
+
+let lang = 'fr';
+function setLang(l) {
+    lang = l;
+    document.documentElement.lang = l;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('.lang-btn[onclick="setLang(\''+l+'\')"]').classList.add('active');
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const k = el.getAttribute('data-i18n');
+        if (t[l] && t[l][k]) el.innerHTML = t[l][k];
+    });
+}
+
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('navMenu');
+const menuOverlay = document.getElementById('menuOverlay');
+function toggleMenu() {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+    menuOverlay.classList.toggle('active');
+    document.body.classList.toggle('menu-open');
+}
+hamburger.addEventListener('click', toggleMenu);
+menuOverlay.addEventListener('click', toggleMenu);
+document.querySelectorAll('nav ul li a').forEach(link => {
+    link.addEventListener('click', () => { if (navMenu.classList.contains('active')) toggleMenu(); });
+});
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+});
+
+const tabLinks = document.querySelectorAll('.tab-nav a');
+const sectionIds = ['restauration','boutiques','visites','activites'];
+window.addEventListener('scroll', () => {
+    let current = '';
+    sectionIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && window.scrollY >= el.offsetTop - 200) current = id;
+    });
+    tabLinks.forEach(a => {
+        a.classList.remove('active');
+        if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+    });
+    const header = document.querySelector('header');
+    header.style.background = window.scrollY > 100 ? 'rgba(255,255,255,0.98)' : 'rgba(255,255,255,0.95)';
+    header.style.boxShadow = window.scrollY > 100 ? '0 2px 25px rgba(0,0,0,0.15)' : '0 2px 20px rgba(0,0,0,0.1)';
+});
+</script>
+</body>
+</html>
